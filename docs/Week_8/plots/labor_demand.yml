@@ -1,0 +1,51 @@
+params:
+  - name: w
+    value: 8
+    min: 6
+    max: 20
+    round: 0.1
+calcs:
+  L: (864/(params.w*params.w))
+layout:
+  OneGraphPlusSidebar:
+    graph:
+      xAxis:
+        title: Labor ($L$)
+        max: 30
+      yAxis:
+        title: Wage Rate ($w$)
+        max: 22
+      objects:
+        - Curve:
+            fn: sqrt(864/(x))
+            color: blue
+            label:
+              text: \text{Labor Demand when }p = 36
+              x: 4
+              position: bl
+              bgColor: none
+        - Line:
+            yIntercept: params.w
+            drag:
+              - vertical: w
+            color: green
+            label:
+              text: \text{Market wage, }w
+              x: 29
+              position: tr
+        - Point:
+            coordinates: [ calcs.L, params.w ]
+            droplines:
+              vertical: "`L^*(${params.w.toFixed(1)}) = ${calcs.L.toFixed(1)}`"
+              horizontal: params.w.toFixed(1)
+
+    sidebar:
+      controls:
+        - title: Demand for Labor
+          description:
+          sliders:
+            - param: w
+              label: w
+          divs:
+            - html: "`Derived from $f(L,K) = L^{1/3}K^{1/3}$ with $p = 36$ and $r = 2$.`"
+            - html: "`At a wage rate of $w = ${params.w.toFixed(1)}$, the firm's labor demand is$$L^*(${params.w.toFixed(1)}) = {864 \\\\over ${params.w.toFixed(1)}^2} = ${calcs.L.toFixed(1)}$$`"

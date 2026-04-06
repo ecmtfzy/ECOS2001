@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>EconGraph Exercises | A page for collectively working on problems</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="EconGraph Exercises" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A page for collectively working on problems" />
+<meta property="og:description" content="A page for collectively working on problems" />
+<link rel="canonical" href="/404.html" />
+<meta property="og:url" content="/404.html" />
+<meta property="og:site_name" content="EconGraph Exercises" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="EconGraph Exercises" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A page for collectively working on problems","headline":"EconGraph Exercises","url":"/404.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="EconGraph Exercises" /></head>
+<body><section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <img src="/images/site/title-logo.svg"
+                        style="width: 100%; padding-top: 20px; padding-bottom: 50px">
+                        <p class="lead text-muted">Interactive graphs and explanations
+                            <br/>about key economic concepts<br/>for use in teaching and exploring</p>
+                        <div class="subtitle">
+  <a href="#graphs">Graphs & Explanations</a> |
+  <a href="#textbooks">Textbooks</a> |
+  <a href="#courses">Courses</a> |
+  <a href="#about">About</a> |
+  <a href="#usage">Usage</a>
+</div>
+                    </div>
+                </div>
+            </section><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <style type="text/css" media="screen">
+  .container {
+    margin: 10px auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  h1 {
+    margin: 30px 0;
+    font-size: 4em;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+</style>
+
+<div class="container">
+  <h1>404</h1>
+
+  <p><strong>Page not found :(</strong></p>
+  <p>The requested page could not be found.</p>
+</div>
+
+      </div>
+    </main><footer class="text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">&copy; 2015-2023 Christopher Makler</p>
+    </div>
+</footer>
+
+</body>
+
+</html>

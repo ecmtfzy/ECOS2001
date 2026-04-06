@@ -1,0 +1,15 @@
+# Ignore everything by default
+*
+
+# Allow docs/ (published slides for GitHub Pages)
+!docs/
+!docs/**
+
+# Allow git config files
+!.gitignore
+
+# Deny sensitive/build files even inside docs/
+*.aux
+*.log
+*.synctex.gz
+.DS_Store

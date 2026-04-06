@@ -1,0 +1,36 @@
+schema: EconSchema
+layout:
+  OneGraphPlusSidebar:
+    graph:
+      xAxis:
+        max: 100
+        ticks: 10
+        title: Labor ($L$)
+      yAxis:
+        max: 100
+        ticks: 10
+        title: Capital ($K$)
+      objects:
+
+      # Point object at coordinates (6,4)
+      - EconIndifferenceMap:
+          name: X
+          utilityFunction:
+            CobbDouglas:
+              coefficients: [1]
+              exponents: [0.5,0.5]
+            samplePoints: 500
+          levels: [16,32,48,64]
+          showMapLevels: true
+          color: blue
+          stroke: blue
+          label:
+            color: blue
+            bgcolor: white
+
+    sidebar:
+      controls:
+      - title: Isoquants
+        description:
+        divs:
+        - html: This diagram shows isoquants for $q =16$, 32, 48, and 64 units of output for the production function $$f(L,K)=\sqrt{LK}$$

@@ -1,0 +1,182 @@
+schema: EconSchema
+colors:
+  marginalCost: colors.orange
+  averageCost: colors.purple
+  totalCost: colors.red
+params:
+  - name: p
+    value: 36
+    min: 12
+    max: 60
+calcs:
+  q: (params.p*params.p/144)
+  tc: (8*calcs.q^1.5)
+  mc: (12*sqrt(calcs.q))
+  ac: (8*sqrt(calcs.q))
+  tr: (calcs.q * params.p)
+  profit: (calcs.tr - calcs.tc)
+layout:
+  TwoVerticalGraphsPlusSidebar:
+    topGraph:
+      yAxis:
+        title: Dollars
+        max: 1100
+        min: -100
+        ticks: 1
+      xAxis:
+        max: 25
+        ticks: 0
+      objects:
+
+        # Total Cost
+        - Curve:
+            fn: 8*(x)^1.5
+            color: shortRun
+            label:
+              text: TC
+              x: 25
+              position: bl
+              bgcolor: none
+
+        - Point:
+            coordinates: [ calcs.q, calcs.tc ]
+            color: shortRun
+            droplines:
+              vertical:
+              horizontal: calcs.tc.toFixed(0)
+
+        # Total revenue
+        - Line:
+            slope: params.p
+            drag:
+              - directions: y
+                param: p
+                expression: (drag.y/drag.x)
+            color: green
+            label:
+              text: TR
+              x: 20
+              position: tl
+
+        - Point:
+            coordinates: [ calcs.q, calcs.tr ]
+            color: green
+            droplines:
+              vertical:
+              horizontal: calcs.tr.toFixed(0)
+
+        # Total profit
+        - Curve:
+            fn: params.p*(x) - 8*(x)^1.5
+            color: purple
+            label:
+              text: \text{Profit/Loss}
+              x: min(22,calcs.q+4)
+              position: bl
+              bgcolor: none
+
+        - Point:
+            coordinates: [ calcs.q, calcs.profit ]
+            color: purple
+            droplines:
+              vertical: calcs.q.toFixed(1)
+              horizontal: calcs.profit.toFixed(0)
+
+
+    bottomGraph:
+      yAxis:
+        title: Dollars per Unit
+        max: 70
+        ticks: 1
+      xAxis:
+        title: Output ($q$)
+        max: 25
+        ticks: 0
+      objects:
+
+        # Average cost
+        - Curve:
+            fn: 8*sqrt(x)
+            color: averageCost
+            label:
+              text: AC
+              x: 25
+              position: bl
+              bgcolor: none
+
+        - Point:
+            coordinates: [ calcs.q, calcs.ac ]
+            color: averageCost
+            droplines:
+              vertical:
+              horizontal: calcs.ac.toFixed(1)
+
+        # Marginal cost
+        - Curve:
+            fn: 12*sqrt(x)
+            color: marginalCost
+            label:
+              text: MC
+              x: 25
+              position: tl
+
+        - Point:
+            coordinates: [ calcs.q, calcs.mc ]
+            color: marginalCost
+            droplines:
+              vertical:
+              horizontal: calcs.mc.toFixed(0)
+
+        # Average revenue
+        - Line:
+            yIntercept: params.p
+            color: demand
+            drag:
+              - vertical: p
+            label:
+              text: D = AR = MR
+              x: 25
+              position: br
+              bgcolor: none
+
+        - Point:
+            coordinates: [ calcs.q, params.p ]
+            color: demand
+            drag:
+              - vertical: p
+            droplines:
+              vertical: calcs.q.toFixed(1)
+              horizontal: "`p = ${params.p.toFixed(0)}`"
+
+        ## Profit
+
+        - Rectangle:
+            x1: 0
+            y1: calcs.ac
+            x2: calcs.q
+            y2: params.p
+            color: profit
+            show: (calcs.profit > 0)
+            label:
+              text: "`\\\\text{Profit = ${calcs.profit.toFixed(0)}}`"
+
+        - Rectangle:
+            x1: 0
+            y1: calcs.ac
+            x2: calcs.q
+            y2: params.p
+            color: loss
+            show: (calcs.profit < 0)
+            label:
+              text: "`\\\\text{Loss = ${-calcs.profit.toFixed(0)}}`"
+
+
+
+    sidebar:
+      controls:
+        - title: Optimal Quantity as a Function of Price
+          divs:
+            - html: "`From $p = MC = 12\\\\sqrt{q}$, the supply function is $q^*(p) = p^2/144$.`"
+          sliders:
+            - param: p
+              label: p

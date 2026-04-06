@@ -1,0 +1,136 @@
+schema: EconSchema
+version: 1
+params:
+  - name: q
+    value: 20
+    min: 0
+    max: 100
+    round: 1
+calcs:
+  x: params.q
+layout:
+  MathboxPlusGraphPlusSidebar:
+    mathbox:
+      xAxis:
+        min: 0
+        max: 100
+        step: 20
+        title: L
+      yAxis:
+        min: 0
+        max: 100
+        step: 20
+        title: K
+      zAxis:
+        min: 0
+        max: 100
+        step: 20
+        title: q
+      objects:
+        # Horizontal plane at height q (blue)
+        - MathboxPlane:
+            z: params.q
+            fill: blue
+            opacity: 0.5
+        # Production surface z = sqrt(LK)
+        - MathboxFunctionSurface:
+            fn:
+              fn: "sqrt(x*y)"
+              samplePoints: 20
+            shaded: true
+            fill: purple
+            opacity: 0.4
+        # Isoquant on the surface (parameterized by L)
+        - MathboxCurve:
+            fn:
+              fn: "(params.q*params.q)/(x)"
+              fnZ: params.q
+            strokeWidth: 10
+            stroke: purple
+            opacity: 0.4
+        # Isoquant on the surface (parameterized by K)
+        - MathboxCurve:
+            fn:
+              fn: "(params.q*params.q)/(y)"
+              fnZ: params.q
+              ind: y
+            strokeWidth: 10
+            stroke: purple
+            opacity: 0.4
+        # Isoquant projection on the floor (parameterized by L)
+        - MathboxCurve:
+            fn:
+              fn: "(params.q*params.q)/(x)"
+              fnZ: 0
+            strokeWidth: 3
+            stroke: purple
+            opacity: 0.4
+        # Isoquant projection on the floor (parameterized by K)
+        - MathboxCurve:
+            fn:
+              fn: "(params.q*params.q)/(y)"
+              fnZ: 0
+              ind: y
+            strokeWidth: 3
+            stroke: purple
+            opacity: 0.4
+        # Dotted line from floor to surface at K=100
+        - MathboxLine:
+            x1: (params.q*params.q/100)
+            x2: (params.q*params.q/100)
+            y1: 100
+            y2: 100
+            z2: params.q
+            linestyle: dotted
+        # Dotted line from floor to surface at L=100
+        - MathboxLine:
+            x1: 100
+            x2: 100
+            y1: (params.q*params.q/100)
+            y2: (params.q*params.q/100)
+            z2: params.q
+            linestyle: dotted
+    graph:
+      xAxis:
+        min: 0
+        max: 100
+        title: Labor ($L$)
+      yAxis:
+        min: 0
+        max: 100
+        title: Capital ($K$)
+      objects:
+        # Highlighted isoquant at current q
+        - Contour:
+            fn: "sqrt(x*y)"
+            level: params.q
+            color: purple
+            xMax: 110
+            yMax: 110
+            strokeWidth: 5
+        # Background contour map
+        - ContourMap:
+            levels: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            fn: "sqrt(x*y)"
+            xMax: 110
+            yMax: 110
+        - Label:
+            coordinates: [calcs.x + 2, calcs.x]
+            text: "`\\\\text{Isoquant for } q=${params.q}`"
+            color: purple
+        - Label:
+            coordinates: [100, 0]
+            text: L
+            yPixelOffset: -30
+        - Label:
+            coordinates: [0, 100]
+            text: K
+            xPixelOffset: -30
+    sidebar:
+      controls:
+        - title: Isoquants and Isoquant Maps
+          sliders:
+            - param: q
+              label: q
+          divs:
+            - html: "Isoquants for $$f(L,K) = \\sqrt{LK}$$ The 3D surface shows output as a function of inputs. The blue plane at height $q$ intersects the surface; the projection onto the $L$-$K$ plane is the isoquant."
