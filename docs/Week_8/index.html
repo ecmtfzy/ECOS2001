@@ -173,7 +173,7 @@ Fangzhou Yu
     </div>
 </div>
 
-  <p class="date">Mar 2026</p>
+  <p class="date">2026 S1</p>
 </section>
 <section id="motivation" class="slide level2">
 <h2>Motivation</h2>
@@ -385,13 +385,6 @@ Fangzhou Yu
 <p>The solution depends on the <strong>market structure</strong>.</p>
 </div>
 </section>
-<section id="two-step-decomposition" class="slide level2">
-<h2>Two-Step Decomposition</h2>
-<ol type="1">
-<li class="fragment"><p><strong>Cost Minimisation (Production Department):</strong> <span class="math display">\[\min_{L,K} \; wL + rK \quad \text{s.t.} \; f(L,K) = q\]</span> → Conditional demands <span class="math inline">\(L^c(q), K^c(q)\)</span>; cost function <span class="math inline">\(c(q) = wL^c + rK^c\)</span></p></li>
-<li class="fragment"><p><strong>Profit Maximisation (Marketing Department):</strong> <span class="math display">\[\max_q \; p \cdot q - c(q)\]</span> → Optimal output <span class="math inline">\(q^*\)</span>; supply function <span class="math inline">\(q(p)\)</span></p></li>
-</ol>
-</section>
 <section id="market-structures" class="slide level2">
 <h2>Market Structures</h2>
 <div title="Definition">
@@ -419,6 +412,13 @@ Fangzhou Yu
 <div class="fragment">
 <p>For the rest of this unit, we focus on the <strong>competitive (price-taking) firm</strong>.</p>
 </div>
+</section>
+<section id="two-step-decomposition" class="slide level2">
+<h2>Two-Step Decomposition</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Cost Minimisation (Production Department):</strong> <span class="math display">\[\min_{L,K} \; wL + rK \quad \text{s.t.} \; f(L,K) = q\]</span> → Conditional demands <span class="math inline">\(L^c(q), K^c(q)\)</span>; cost function <span class="math inline">\(c(q) = wL^c + rK^c\)</span></p></li>
+<li class="fragment"><p><strong>Profit Maximisation (Marketing Department):</strong> <span class="math display">\[\max_q \; p \cdot q - c(q)\]</span> → Optimal output <span class="math inline">\(q^*\)</span>; supply function <span class="math inline">\(q(p)\)</span></p></li>
+</ol>
 </section>
 <section id="running-example-flk-l13k13" class="slide level2">
 <h2>Running Example: <span class="math inline">\(f(L,K) = L^{1/3}K^{1/3}\)</span></h2>
@@ -456,14 +456,14 @@ Fangzhou Yu
 <div class="fragment">
 <p><strong>FOCs:</strong></p>
 <ul>
-<li><span class="math inline">\(w = \lambda \cdot MP_L\)</span>, <span class="math inline">\(\quad r = \lambda \cdot MP_K\)</span>, <span class="math inline">\(\quad q = f(L,K)\)</span></li>
+<li><span class="math inline">\(w = \lambda^* \cdot MP_L^*\)</span>, <span class="math inline">\(\quad r = \lambda^* \cdot MP_K^*\)</span>, <span class="math inline">\(\quad q = f(L^*, K^*)\)</span></li>
 </ul>
 </div>
 <div class="fragment">
-<p><strong>Tangency condition:</strong> <span class="math inline">\(\;\frac{MP_L}{MP_K} = \frac{w}{r}\)</span>, i.e., <span class="math inline">\(MRTS = w/r\)</span>.</p>
+<p><strong>Tangency condition:</strong> <span class="math inline">\(\;\frac{MP_L^*}{MP_K^*} = \frac{w}{r}\)</span>, i.e., <span class="math inline">\(MRTS^* = w/r\)</span>.</p>
 </div>
 <div class="fragment">
-<p><strong>Interpretation of <span class="math inline">\(\lambda\)</span>:</strong> marginal cost of producing one more unit (<span class="math inline">\(\lambda = w/MP_L = r/MP_K\)</span>).</p>
+<p><strong>Interpretation of <span class="math inline">\(\lambda^*\)</span>:</strong> marginal cost of producing one more unit (<span class="math inline">\(\lambda^* = w/MP_L^* = r/MP_K^*\)</span>).</p>
 </div>
 </section>
 <section id="cost-minimisation-along-an-isoquant" class="slide level2">
@@ -507,7 +507,7 @@ Fangzhou Yu
 <p>The marketing department receives <span class="math inline">\(c(q)\)</span> and solves:</p>
 <p><span class="math display">\[\max_q \; p \cdot q - c(q)\]</span></p>
 <div class="fragment">
-<p><strong>FOC:</strong> <span class="math inline">\(\;\frac{d}{dq}[pq - c(q)] = 0 \;\Rightarrow\; p = MC\)</span></p>
+<p><strong>FOC:</strong> <span class="math inline">\(\;\frac{d}{dq}[pq - c(q)] = 0 \;\Rightarrow\; p = MC(q^*)\)</span></p>
 </div>
 <div class="fragment">
 <div title="Key Result: Competitive Supply">
@@ -520,7 +520,7 @@ Fangzhou Yu
 <p><strong>Key Result: Competitive Supply</strong></p>
 </div>
 <div class="callout-content">
-<p>A competitive firm sets <strong>price equal to marginal cost</strong>: <span class="math inline">\(p = MC\)</span>.</p>
+<p>A competitive firm produces where <strong>marginal cost equals price</strong>: <span class="math inline">\(MC(q) = p\)</span>.</p>
 </div>
 </div>
 </div>
@@ -545,8 +545,8 @@ Fangzhou Yu
 <p>Instead of two steps, solve profit maximisation directly over inputs:</p>
 <p><span class="math display">\[\max_{\mathbf{x}} \; p \cdot f(\mathbf{x}) - \mathbf{w} \cdot \mathbf{x}\]</span></p>
 <div class="fragment">
-<p><strong>FOC:</strong> <span class="math inline">\(\;p \cdot MP_i = w_i\)</span> for each <span class="math inline">\(i\)</span></p>
-<p><span class="math display">\[\underbrace{p \cdot MP_i}_{\text{value of marginal product}} = \underbrace{w_i}_{\text{input price}}\]</span></p>
+<p><strong>FOC:</strong> <span class="math inline">\(\;p \cdot MP_i(\mathbf{x}^*) = w_i\)</span> for each <span class="math inline">\(i\)</span></p>
+<p><span class="math display">\[\underbrace{p \cdot MP_i(\mathbf{x}^*)}_{\text{value of marginal product}} = \underbrace{w_i}_{\text{input price}}\]</span></p>
 </div>
 <div class="fragment">
 <p><strong>SOC:</strong> Hessian of <span class="math inline">\(f(\cdot)\)</span> must be negative semi-definite — i.e., <span class="math inline">\(f\)</span> must be <strong>concave</strong>. This holds under DRS (as in our running example), but fails under CRS and IRS.</p>

@@ -6,17 +6,17 @@ colors:
   totalCost: colors.red
 params:
   - name: p
-    value: 8.5
-    min: 8
+    value: 10
+    min: 6
     max: 25
-    round: 0.5
+    round: 0.25
 calcs:
-  q: (4 + sqrt(2*params.p - 16))
-  qLow: (4 - sqrt(2*params.p - 16))
-  tc: (81 + 16*calcs.q-2*(calcs.q)^2+(1/6)*(calcs.q)^3)
-  tcLow: (81 + 16*calcs.qLow-2*(calcs.qLow)^2+(1/6)*(calcs.qLow)^3)
-  mc: (16 - 4*calcs.q + 0.5*calcs.q*calcs.q)
-  vc: (calcs.tc - 81)
+  q: ((10 + sqrt(12*params.p - 68))/6)
+  qLow: ((10 - sqrt(12*params.p - 68))/6)
+  tc: (5 + 14*calcs.q - 5*(calcs.q)^2 + (calcs.q)^3)
+  tcLow: (5 + 14*calcs.qLow - 5*(calcs.qLow)^2 + (calcs.qLow)^3)
+  mc: (14 - 10*calcs.q + 3*calcs.q*calcs.q)
+  vc: (calcs.tc - 5)
   ac: (calcs.tc/calcs.q)
   avc: (calcs.vc/calcs.q)
   tr: (calcs.q * params.p)
@@ -28,19 +28,19 @@ layout:
       yAxis:
         title: Dollars
         max: 150
-        min: -150
+        min: -50
       xAxis:
-        max: 12
+        max: 8
         ticks: 0
       objects:
 
         # Variable Cost
         - Curve:
-            fn: 16*(x)-2*(x)*(x)+(x)*(x)*(x)/6
+            fn: 14*(x) - 5*(x)^2 + (x)^3
             color: variableCost
             label:
               text: VC
-              x: 10.8
+              x: 7
               position: bl
               bgcolor: none
 
@@ -57,7 +57,7 @@ layout:
             color: green
             label:
               text: TR
-              x: 11
+              x: 7
               position: tl
 
         - Point:
@@ -67,30 +67,22 @@ layout:
             droplines:
               vertical:
 
-        - Label:
-            coordinates: [(125/params.p), 125]
-            text: TR
-            color: green
-            position: br
-            show: (params.p >= 14)
-
         # Profit
-
         - Curve:
-            fn: params.p*(x) - (81 + 16*(x)-2*(x)*(x)+(x)*(x)*(x)/6)
+            fn: params.p*(x) - (5 + 14*(x) - 5*(x)^2 + (x)^3)
             color: purple
             label:
               text: \text{Profit/Loss}
-              x: max(9.5, calcs.q + 2)
+              x: max(6, calcs.q + 1)
               position: bl
               bgcolor: none
 
         - Point:
-            coordinates: [12, -81]
+            coordinates: [8, -5]
             color: purple
             r: 0
             droplines:
-              horizontal: -F
+              horizontal: -FC
             label:
               text: \text{Loss if shut down}
               position: r
@@ -110,27 +102,27 @@ layout:
         max: 25
       xAxis:
         title: Output ($q$)
-        max: 12
-        ticks: 12
+        max: 8
+        ticks: 8
       objects:
 
         # Average variable cost
         - Curve:
-            fn: 16-2*(x)+(1/6)*(x)*(x)
+            fn: 14 - 5*(x) + (x)^2
             color: variableCost
             label:
               text: AVC
-              x: 2
+              x: 1.5
               position: bl
               bgcolor: none
 
         # Marginal cost
         - Curve:
-            fn: 16 - 4*(x)+0.5*(x)*(x)
+            fn: 14 - 10*(x) + 3*(x)^2
             color: marginalCost
             label:
               text: MC
-              x: 9.83
+              x: 7
               position: bl
               bgcolor: none
 
@@ -142,7 +134,7 @@ layout:
               - vertical: p
             label:
               text: MR = AR
-              x: 12
+              x: 8
               position: tr
               bgcolor: none
 
@@ -160,7 +152,10 @@ layout:
 
     sidebar:
       controls:
-        - title: Variable cost and the shutdown condition
+        - title: Shutdown Condition
+          description: Lower the price to see when the firm should shut down.
           sliders:
             - param: p
               label: p
+          divs:
+            - html: "`$c(q) = 5 + 14q - 5q^2 + q^3$. Shutdown price: $\\\\min AVC = 7.75$ at $q = 2.5$.`"

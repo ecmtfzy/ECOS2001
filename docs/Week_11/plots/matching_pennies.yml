@@ -101,7 +101,7 @@ layout:
 
     leftControls:
       title: Player 1 (win if match)
-      description: This diagram shows indifference curves for player 1 for the strategies Heads, Tails, or Heads with probability <em>p</em>, given that player 2 is playing Heads with probability <em>q</em>.
+      description: Indifference curves for player 1. Higher payoffs are up and to the right.
 
       sliders:
         - param: p
@@ -145,7 +145,7 @@ layout:
     middleControls:
       title: Best Responses
       divs:
-        - html: The blue curve shows the row player's best response to q, while the red curve shows the column player's best response as a function of p.
+        - html: "Blue: Player 1's BR to <em>q</em>. Red: Player 2's BR to <em>p</em>."
 
     rightGraph:
       xAxis:
@@ -231,7 +231,7 @@ layout:
 
     rightControls:
       title: Player 2 (win if don't match)
-      description: This diagram shows indifference curves for player 2 for the strategies Heads, Tails, or Heads with probability <em>q</em>, given that player 1 is playing Heads with probability <em>p</em>.
+      description: Indifference curves for player 2. Higher payoffs are up and to the right.
       sliders:
         - param: q
           label: q

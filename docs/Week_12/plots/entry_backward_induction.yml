@@ -1,0 +1,116 @@
+schema: EconSchema
+version: 1
+params:
+  - name: step
+    value: 0
+    min: 0
+    max: 2
+    round: 1
+layout:
+  OneTreePlusSidebar:
+    tree:
+      objects:
+        # Player labels (always shown)
+        - Label:
+            coordinates: [12, 21.4]
+            text: "'E'"
+            fontSize: 14
+            color: red
+        - Label:
+            coordinates: [20, 11.4]
+            text: "'I'"
+            fontSize: 14
+            color: blue
+
+        # Terminal payoff labels (always shown)
+        - Label:
+            coordinates: [4, 8.8]
+            text: "'\\\\color{#d62728}{(0}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{2})'"
+            fontSize: 12
+        - Label:
+            coordinates: [14, 0.8]
+            text: "'\\\\color{#d62728}{(2}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{1})'"
+            fontSize: 12
+        - Label:
+            coordinates: [24, 0.8]
+            text: "'\\\\color{#d62728}{(-1}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{-1})'"
+            fontSize: 12
+
+        # --- Step 1: Highlight I's optimal choice (Accommodate) ---
+        # Green segment over the Accommodate edge
+        - Segment:
+            a: [20, 10]
+            b: [14, 2]
+            color: green
+            strokeWidth: 4
+            show: (params.step >= 1)
+        # Comparison annotation near I's node
+        - Label:
+            coordinates: [24.5, 8]
+            text: "'\\\\color{#2ca02c}{1 > -1}'"
+            fontSize: 11
+            show: (params.step >= 1)
+        # Reduced payoff label replacing I's subtree
+        - Label:
+            coordinates: [20, 8.6]
+            text: "'\\\\color{#2ca02c}{\\\\Rightarrow (2,\\\\!1)}'"
+            fontSize: 11
+            show: (params.step >= 1)
+
+        # --- Step 2: Highlight E's optimal choice (In) ---
+        # Green segment over the In edge
+        - Segment:
+            a: [12, 20]
+            b: [20, 10]
+            color: green
+            strokeWidth: 4
+            show: (params.step >= 2)
+        # Comparison annotation near E's node
+        - Label:
+            coordinates: [5, 16]
+            text: "'\\\\color{#2ca02c}{2 > 0}'"
+            fontSize: 11
+            show: (params.step >= 2)
+
+      nodes:
+        - name: entrant
+          x: 12
+          y: 20
+          color: red
+          children:
+            - name: out
+              x: 4
+              y: 10
+              color: red
+              edgeLabel: "'Out'"
+            - name: incumbent
+              x: 20
+              y: 10
+              color: blue
+              edgeLabel: "'In'"
+              children:
+                - name: accommodate
+                  x: 14
+                  y: 2
+                  color: blue
+                  edgeLabel: "'Accommodate'"
+                - name: fight
+                  x: 24
+                  y: 2
+                  color: blue
+                  edgeLabel: "'Fight'"
+    sidebar:
+      controls:
+        - title: Backward Induction
+          sliders:
+            - param: step
+              label: Step
+          divs:
+            - html: "`Use the slider to step through backward induction.`"
+              show: (params.step == 0)
+            - html: "`$\\\\textbf{Step 1:}$ At $\\\\textcolor{#1f77b4}{\\\\text{I}}$'s node, compare: Accommodate gives $1$, Fight gives $-1$. Since $1 > -1$, $\\\\textcolor{#1f77b4}{\\\\text{I}}$ chooses Accommodate.`"
+              show: (params.step >= 1)
+            - html: "`$\\\\textbf{Step 2:}$ $\\\\textcolor{#d62728}{\\\\text{E}}$ knows $\\\\textcolor{#1f77b4}{\\\\text{I}}$ will Accommodate. Out gives $0$, In gives $2$. Since $2 > 0$, $\\\\textcolor{#d62728}{\\\\text{E}}$ chooses In.`"
+              show: (params.step >= 2)
+            - html: "`$\\\\textbf{SPNE:}$ (In, Accommodate) with payoffs $(2, 1)$.`"
+              show: (params.step >= 2)

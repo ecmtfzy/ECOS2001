@@ -4,15 +4,14 @@ params:
 - {name: m, value: 100, min: 10, max: 200, round: 10}
 - {name: NC, value: 64, min: 10, max: 100}
 - {name: w, value: 4, min: 1, max: 10}
-- {name: r, value: 4, min: 1, max: 10}
+- {name: r, value: 2, min: 1, max: 10}
 - {name: K, value: 2, min: 1, max: 10}
 - {name: NF, value: 16, min: 1, max: 25}
-- {name: p, value: 10, min: 10, max: 30, round: 0.25}
 calcs:
-  p: (sqrt(2*(params.NC/params.NF)*params.a*params.m*params.w/params.K))
+  p: ((9*params.NC*params.a*params.m*params.w*params.w/(4*params.NF*params.K))^(1/3))
   x: (params.a*params.m/calcs.p)
   Q: (calcs.x*params.NC)
-  q: (0.5*params.K*calcs.p/params.w)
+  q: (4*params.K*calcs.p*calcs.p/(9*params.w*params.w))
 layout:
   ThreeHorizontalGraphs:
     leftGraph:
@@ -94,12 +93,11 @@ layout:
             position: bl
             bgcolor: none
 
-      - Line:
+      - Curve:
+          fn: (1.5*params.w)*sqrt((x)/(params.NF*params.K))
           color: supply
-          point: [calcs.Q, calcs.p]
-          ind: y
           label:
-            y: 36
+            x: 190
             text: S(p)
             position: tl
             bgcolor: none
@@ -120,13 +118,13 @@ layout:
           label: N_F
 
       divs:
-        - html: "`$$\\\\begin{aligned}S(p^*) &= N_F \\\\times q(p^*) = ${params.NF} \\\\times ${calcs.q.toFixed(2)} = ${calcs.Q.toFixed(2)}\\\\\\\\\\\\\\\\D(p^*) &= N_C \\\\times d(p^*)= ${params.NC} \\\\times ${calcs.x.toFixed(2)} = ${calcs.Q.toFixed(2)}\\\\end{aligned}$$`"
+        - html: "`$$\\\\begin{aligned}S(p^*) &= N_F \\\\times s(p^*) = ${params.NF} \\\\times ${calcs.q.toFixed(2)} = ${calcs.Q.toFixed(2)}\\\\\\\\\\\\\\\\D(p^*) &= N_C \\\\times d(p^*)= ${params.NC} \\\\times ${calcs.x.toFixed(2)} = ${calcs.Q.toFixed(2)}\\\\end{aligned}$$`"
 
 
     middleGraph:
       xAxis:
         ticks: 0
-        max: 10
+        max: 15
       yAxis:
         max: 40
         ticks: 0
@@ -137,12 +135,12 @@ layout:
           text: p
 
       - Label:
-          coordinates: [10, AXIS]
+          coordinates: [15, AXIS]
           text: q^j
 
-      - Line:
+      - Curve:
+          fn: (1.5*params.w/sqrt(params.K))*sqrt(x)
           color: supply
-          point: [calcs.q, calcs.p]
           label:
             y: 36
             text: s(p)
@@ -168,4 +166,5 @@ layout:
         - param: K
           label: \overline K
       divs:
-      - html: "`$$\\\\begin{aligned}s(p^*) &= {\\\\overline K p^* \\\\over 2w}\\\\\\\\ &= {${params.K.toFixed(0)} \\\\times ${calcs.p.toFixed(2)} \\\\over 2 \\\\times ${params.w.toFixed(0)}} \\\\\\\\ &=${calcs.q.toFixed(2)}\\\\end{aligned}$$`"
+      - html: "`From $f(L,K) = L^{2/3}K^{1/3}$:`"
+      - html: "`$$\\\\begin{aligned}s(p^*) &= {4\\\\overline{K} \\\\over 9w^2} (p^*)^2\\\\\\\\ &= {4 \\\\times ${params.K.toFixed(0)} \\\\over 9 \\\\times ${params.w.toFixed(0)}^2} \\\\times ${calcs.p.toFixed(2)}^2 \\\\\\\\ &=${calcs.q.toFixed(2)}\\\\end{aligned}$$`"

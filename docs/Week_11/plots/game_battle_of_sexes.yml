@@ -1,0 +1,14 @@
+schema: EconSchema
+version: 1
+layout:
+  GameMatrixLayout:
+    gameMatrix:
+      players:
+        - Wife
+        - Husband
+      strategies:
+        - [Ballet, Football]
+        - [Ballet, Football]
+      payoffs:
+        - [["'\\\\underline{3}'","'\\\\underline{2}'"],[1,1]]
+        - [[0,0],["'\\\\underline{2}'","'\\\\underline{3}'"]]

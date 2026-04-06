@@ -6,7 +6,7 @@
 <script src="slides_13_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_13_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_13_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_13_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="slides_13_files/libs/quarto-html/quarto-syntax-highlighting-0407d11e67cd6f69fbc5989002fb0851.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Fangzhou Yu">
@@ -122,6 +122,15 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+    .reveal .slides section {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .reveal .slides section > h2 { flex: none; }
+    .reveal .slides section > h2 + * { margin-top: auto !important; }
+    .reveal .slides section > *:last-child { margin-bottom: auto !important; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -142,16 +151,12 @@ Fangzhou Yu
     </div>
 </div>
 
-  <p class="date">Mar 2026</p>
+  <p class="date">2026 S1</p>
 </section>
 <section>
 <section id="math-recap" class="title-slide slide level1 center">
 <h1>Math Recap</h1>
 
-</section>
-<section id="asymmetric-information" class="slide level2">
-<h2>Asymmetric Information</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/rMz7JBRbmNo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 </section>
 <section id="math-recap-bayes-rule" class="slide level2">
 <h2>Math Recap: Bayes’ Rule</h2>
@@ -162,6 +167,21 @@ Fangzhou Yu
 <p><span class="math display">\[P(A_{j}|B)=\frac{P(B|A_{j})P(A_{j})}{P(B)}=\frac{P(B|A_{j})P(A_{j})}{\sum_{i=1}^{n}P(B|A_{i})P(A_{i})}\]</span></p>
 </div>
 </section>
+<section id="bayes-rule-running-example" class="slide level2">
+<h2>Bayes’ Rule: Running Example</h2>
+<p>Two types of workers’ productivity: H (high) and L (low). Two types of job: W (white collar) and B (blue collar).</p>
+<ul>
+<li><span class="math inline">\(P(H)=\tfrac{1}{4}\)</span>, <span class="math inline">\(\quad P(W)=\tfrac{1}{3}\)</span>, <span class="math inline">\(\quad P(W|H)=\tfrac{5}{6}\)</span></li>
+<li>A randomly chosen individual has a white collar job. What is <span class="math inline">\(P(H|W)\)</span>?</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[P(H|W)=\frac{P(W|H)\,P(H)}{P(W)}=\frac{\tfrac{5}{6}\times\tfrac{1}{4}}{\tfrac{1}{3}}=\frac{5}{8}\]</span></p>
+</div>
+<div class="fragment">
+<p>Now suppose we do not know <span class="math inline">\(P(W)\)</span>, but instead have <span class="math inline">\(P(W|L)=\tfrac{1}{6}\)</span>. Using the law of total probability:</p>
+<p><span class="math display">\[P(H|W)=\frac{P(W|H)\,P(H)}{P(W|H)\,P(H)+P(W|L)\,P(L)}=\frac{\tfrac{5}{6}\times\tfrac{1}{4}}{\tfrac{5}{6}\times\tfrac{1}{4}+\tfrac{1}{6}\times\tfrac{3}{4}}=\frac{5}{8}\]</span></p>
+</div>
+</section>
 <section id="math-recap-conditional-expectation-discrete" class="slide level2">
 <h2>Math Recap: Conditional Expectation (Discrete)</h2>
 <p>Suppose that a random variable <span class="math inline">\(X\)</span> takes values <span class="math inline">\(x_{1},x_{2},\dots,x_{n}\)</span> with probabilities <span class="math inline">\(P(X=x_{i})=p_{i}\)</span> for any <span class="math inline">\(i=1,2,\dots,n\)</span>. Then, its expectation is</p>
@@ -169,6 +189,36 @@ Fangzhou Yu
 <div class="fragment">
 <p>Now consider some condition <span class="math inline">\(A\)</span> (e.g., <span class="math inline">\(X&lt;10\)</span>), then the conditional expectation given <span class="math inline">\(A\)</span> is</p>
 <p><span class="math display">\[\mathbb{E}[X|A]=\sum_{i=1}^{n}x_{i}\,P(X=x_{i}|A)\]</span></p>
+</div>
+</section>
+<section id="discrete-expectation-running-example-setup" class="slide level2">
+<h2>Discrete Expectation: Running Example (Setup)</h2>
+<p>Denote salary as <span class="math inline">\(w\)</span> and productivity as <span class="math inline">\(\theta\)</span>. Three types of workers:</p>
+<ul>
+<li><span class="math inline">\(\theta_{H}=7\)</span> with <span class="math inline">\(P(\theta=7)=0.25\)</span>: earns <span class="math inline">\(w\in\{7,8\}\)</span> with equal probability</li>
+<li><span class="math inline">\(\theta_{M}=4\)</span> with <span class="math inline">\(P(\theta=4)=0.5\)</span>: earns <span class="math inline">\(w\in\{5,6\}\)</span> with equal probability</li>
+<li><span class="math inline">\(\theta_{L}=2\)</span> with <span class="math inline">\(P(\theta=2)=0.25\)</span>: earns <span class="math inline">\(w\in\{2,3,4\}\)</span> with equal probability</li>
+</ul>
+<p>Each worker rejects any offer with salary lower than their productivity.</p>
+<div class="fragment">
+<p><strong>Question:</strong> A randomly chosen worker earns no more than $5 per hour. What is <span class="math inline">\(\mathbb{E}[\theta\mid w\leq 5]\)</span>?</p>
+</div>
+</section>
+<section id="discrete-expectation-solution-steps-12" class="slide level2">
+<h2>Discrete Expectation: Solution (Steps 1–2)</h2>
+<p><strong>Step 1:</strong> High type workers always reject <span class="math inline">\(w\leq 5\)</span> (since <span class="math inline">\(\theta_{H}=7&gt;5\)</span>), so <span class="math inline">\(P(\theta=7\mid w\leq 5)=0\)</span>.</p>
+<div class="fragment">
+<p><strong>Step 2:</strong> Find <span class="math inline">\(P(w\leq 5)\)</span> by the law of total probability:</p>
+<p><span class="math display">\[P(w\leq 5)=\underbrace{1}_{P(w\leq 5|\theta=2)}\times\tfrac{1}{4}+\underbrace{\tfrac{1}{2}}_{P(w\leq 5|\theta=4)}\times\tfrac{1}{2}+\underbrace{0}_{P(w\leq 5|\theta=7)}\times\tfrac{1}{4}=\frac{1}{2}\]</span></p>
+</div>
+</section>
+<section id="discrete-expectation-solution-steps-34" class="slide level2">
+<h2>Discrete Expectation: Solution (Steps 3–4)</h2>
+<p><strong>Step 3:</strong> Posterior probabilities (using Bayes’ rule):</p>
+<p><span class="math display">\[P(\theta=4\mid w\leq 5)=\frac{P(w\leq 5|\theta=4)\,P(\theta=4)}{P(w\leq 5)}=\frac{\frac{1}{2}\times\frac{1}{2}}{\frac{1}{2}}=\frac{1}{2}\]</span></p>
+<p><span class="math display">\[P(\theta=2\mid w\leq 5)=\frac{1\times\frac{1}{4}}{\frac{1}{2}}=\frac{1}{2}\]</span></p>
+<div class="fragment">
+<p><strong>Step 4:</strong> <span class="math inline">\(\mathbb{E}[\theta\mid w\leq 5]=2\times\tfrac{1}{2}+4\times\tfrac{1}{2}+7\times 0=3\)</span></p>
 </div>
 </section>
 <section id="math-recap-conditional-expectation-continuous" class="slide level2">
@@ -196,6 +246,18 @@ Fangzhou Yu
 </div>
 </div>
 </div>
+</section>
+<section id="continuous-expectation-running-example" class="slide level2">
+<h2>Continuous Expectation: Running Example</h2>
+<p>Suppose productivity <span class="math inline">\(\theta\)</span> is distributed uniformly on <span class="math inline">\([1,5]\)</span>, i.e., <span class="math inline">\(f_{\theta}(x)=\tfrac{1}{4}\)</span> if <span class="math inline">\(1\leq x\leq 5\)</span>.</p>
+<p>Every worker earns salary according to their productivity: <span class="math inline">\(w=\theta\)</span>.</p>
+<div class="fragment">
+<p><strong>Question:</strong> A randomly chosen person earns less than $3. What is the expected productivity?</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\mathbb{E}[\theta\mid w\leq 3]=\mathbb{E}[\theta\mid \theta\leq 3]=\mathbb{E}[\theta\mid 1\leq\theta\leq 3]=\frac{1+3}{2}=2\]</span></p>
+<p>Note: restricting a uniform r.v. to a sub-interval gives another uniform r.v.</p>
+</div>
 </section></section>
 <section>
 <section id="adverse-selection" class="title-slide slide level1 center">
@@ -204,27 +266,87 @@ Fangzhou Yu
 </section>
 <section id="the-market-for-lemons" class="slide level2">
 <h2>The Market for Lemons</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/F5SmUNYF-c8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-</section>
-<section id="the-market-for-lemons-1" class="slide level2">
-<h2>The Market for Lemons</h2>
-<p>A buyer wants to purchase a car from a seller.</p>
+<p>A buyer wants to purchase a <strong>used car</strong> from a seller. The car is either high quality (a “<strong>peach</strong>”) or low quality (a “<strong>lemon</strong>”).</p>
 <ul>
-<li><span class="math inline">\(P(\text{peach})=\frac{1}{3}\)</span>, <span class="math inline">\(\quad P(\text{lemon})=\frac{2}{3}\)</span></li>
+<li>With probability <span class="math inline">\(\frac{1}{3}\)</span> the car is a peach; with probability <span class="math inline">\(\frac{2}{3}\)</span> it is a lemon</li>
 <li>The seller values a peach at $2,000 and a lemon at $1,000</li>
 <li>The buyer values a peach at $2,200 and a lemon at $1,200</li>
 </ul>
 <div class="fragment">
-<p><strong>If the quality is known by both parties:</strong> Will all cars be sold?</p>
+<div title="First Best: Quality Known by Both">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>First Best: Quality Known by Both</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Peach: buyer values $2,200 &gt; seller’s $2,000. Trade at any <span class="math inline">\(p\in[\$2{,}000, \$2{,}200]\)</span></li>
+<li>Lemon: buyer values $1,200 &gt; seller’s $1,000. Trade at any <span class="math inline">\(q\in[\$1{,}000, \$1{,}200]\)</span></li>
+<li><strong>All cars are sold.</strong> Gains from trade exist for both types.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="asymmetric-info-price-2000" class="slide level2">
+<h2>Asymmetric Info: Price = $2,000</h2>
+<p>Now the <strong>seller knows the quality</strong> while the <strong>buyer does not</strong>.</p>
+<p>Both types of sellers are willing to sell at $2,000. The expected value for the buyer is:</p>
+<p><span class="math display">\[\mathbb{E}[v]=\tfrac{1}{3}\times 2{,}200+\tfrac{2}{3}\times 1{,}200=1{,}533.33\]</span></p>
+<div class="fragment">
+<p>Buyer’s expected payoff: <span class="math inline">\(1{,}533.33-2{,}000=-466.67\)</span></p>
 </div>
 <div class="fragment">
-<p><strong>If the seller knows the quality while the buyer does not:</strong> Would the buyer purchase the car for $2,000?</p>
+<p>The buyer loses money on average – <strong>will not buy at this price!</strong></p>
+<p>No cars are sold.</p>
+</div>
+</section>
+<section id="asymmetric-info-price-1533.33" class="slide level2">
+<h2>Asymmetric Info: Price = $1,533.33</h2>
+<p>What kind of car would the seller agree to sell at this price?</p>
+<ul>
+<li>Peach seller: value $2,000 &gt; $1,533.33 – will <strong>not</strong> sell</li>
+<li>Lemon seller: value $1,000 &lt; $1,533.33 – <strong>will</strong> sell</li>
+</ul>
+<div class="fragment">
+<p>Only lemons are offered! The buyer’s expected value:</p>
+<p><span class="math display">\[\mathbb{E}[v\mid v\leq 1{,}200]=\$1{,}200\]</span></p>
 </div>
 <div class="fragment">
-<p>And for $1,533.33?</p>
+<p>Buyer’s expected payoff: <span class="math inline">\(1{,}200-1{,}533.33=-333.33\)</span></p>
+<p>The buyer will not buy. <strong>No cars are sold.</strong></p>
+</div>
+</section>
+<section id="asymmetric-info-price-1150" class="slide level2">
+<h2>Asymmetric Info: Price = $1,150</h2>
+<p>Again, only lemon sellers participate (peach value $2,000 &gt; $1,150).</p>
+<p>The buyer knows this: <span class="math inline">\(\mathbb{E}[v]=\$1{,}200\)</span></p>
+<div class="fragment">
+<p>Buyer’s expected payoff: <span class="math inline">\(1{,}200-1{,}150=50&gt;0\)</span></p>
+<p>The buyer will purchase. <strong>But only lemons are sold!</strong></p>
 </div>
 <div class="fragment">
-<p>For $1,150?</p>
+<div title="Key Result: Market for Lemons">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result: Market for Lemons</strong></p>
+</div>
+<div class="callout-content">
+<p>Asymmetric information causes <strong>adverse selection</strong>: high-quality cars are driven out of the market. The result is either partial market failure (only lemons trade) or complete market failure (no trade at all).</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="adverse-selection-1" class="slide level2">
@@ -257,15 +379,91 @@ Fangzhou Yu
 <h2>Takeover Game</h2>
 <ul>
 <li>The buyer can improve the value of an existing company by 50%</li>
-<li><span class="math inline">\(v\)</span> is the exact value of the company, known only to the seller (seller’s type)</li>
+<li><span class="math inline">\(v\)</span> is the exact value of the company, known only to the seller (seller’s type)
+<ul>
+<li><span class="math inline">\(v\)</span> is distributed uniformly on <span class="math inline">\((0, 100)\)</span></li>
+</ul></li>
 <li>If the seller of type <span class="math inline">\(v\)</span> accepts an offer of price <span class="math inline">\(p\)</span> to sell the company, then the buyer receives <span class="math inline">\(1.5v - p\)</span>, whereas the seller gets <span class="math inline">\(p\)</span></li>
 <li>If the seller rejects the offer, the buyer receives <span class="math inline">\(0\)</span> and the seller retains the company at its current value <span class="math inline">\(v\)</span></li>
 </ul>
+</section>
+<section id="takeover-game-first-best" class="slide level2">
+<h2>Takeover Game: First Best</h2>
+<p><strong>Suppose the buyer knows the value <span class="math inline">\(v\)</span>.</strong> Will the trade happen?</p>
 <div class="fragment">
-<p><strong>The buyer knows the value of the company.</strong> Will the trade happen?</p>
+<p>The buyer values the company at <span class="math inline">\(1.5v\)</span>, the seller at <span class="math inline">\(v\)</span>. Since <span class="math inline">\(1.5v&gt;v\)</span>, the gains from trade are <span class="math inline">\(0.5v&gt;0\)</span>.</p>
+<p>Any price <span class="math inline">\(p\)</span> such that <span class="math inline">\(v\leq p\leq 1.5v\)</span> makes both parties willing to trade.</p>
 </div>
 <div class="fragment">
-<p><strong>If the buyer does not know the value</strong>, will there be trade?</p>
+<div title="First Best">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>First Best</strong></p>
+</div>
+<div class="callout-content">
+<p>When the buyer knows <span class="math inline">\(v\)</span>, trade always occurs. Both parties benefit.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="takeover-game-asymmetric-information" class="slide level2">
+<h2>Takeover Game: Asymmetric Information</h2>
+<p><strong>The buyer does not know <span class="math inline">\(v\)</span>.</strong> On average: <span class="math inline">\(\mathbb{E}[v]=50\)</span> and <span class="math inline">\(\mathbb{E}[1.5v]=75\)</span>. Looks profitable!</p>
+<div class="fragment">
+<p>But the seller accepts only if <span class="math inline">\(v\leq p\)</span>. A seller with <span class="math inline">\(v=70\)</span> will reject <span class="math inline">\(p=60\)</span>.</p>
+</div>
+<div class="fragment">
+<p>The buyer should expect the value of the company to be no higher than <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[\mathbb{E}[1.5v\mid v\leq p]=1.5\,\mathbb{E}[v\mid 0\leq v\leq p]=1.5\times\frac{p}{2}=0.75p\]</span></p>
+</div>
+<div class="fragment">
+<p>Since <span class="math inline">\(0.75p&lt;p\)</span> for all <span class="math inline">\(p&gt;0\)</span>, the buyer <strong>always loses money!</strong></p>
+<div title="Key Result">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result</strong></p>
+</div>
+<div class="callout-content">
+<p>Trade is impossible despite gains from trade. The buyer’s expected value (<span class="math inline">\(0.75p\)</span>) is always below the price (<span class="math inline">\(p\)</span>).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="takeover-game-when-trade-survives" class="slide level2">
+<h2>Takeover Game: When Trade Survives</h2>
+<p>What if the buyer values the company at <span class="math inline">\(3v\)</span> instead of <span class="math inline">\(1.5v\)</span>?</p>
+<div class="fragment">
+<p><span class="math display">\[\mathbb{E}[3v\mid v\leq p]=3\times\frac{p}{2}=1.5p&gt;p\]</span></p>
+<p>The buyer’s expected value exceeds the price – <strong>trade occurs!</strong></p>
+</div>
+<div class="fragment">
+<div title="Takeaway">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Takeaway</strong></p>
+</div>
+<div class="callout-content">
+<p>Adverse selection does not always destroy the market. If the gains from trade are sufficiently large, the market might still result in an efficient outcome despite asymmetric information.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="labor-market" class="slide level2">
@@ -284,8 +482,82 @@ Fangzhou Yu
 <li class="fragment">Thus, it is efficient for any type of the worker to be hired</li>
 </ul>
 </div>
+</section>
+<section id="labor-market-asymmetric-information" class="slide level2">
+<h2>Labor Market: Asymmetric Information</h2>
+<p>The firm does <strong>not</strong> observe <span class="math inline">\(\theta\)</span> and believes <span class="math inline">\(\theta\sim U[0,1]\)</span>.</p>
+<p>When the firm offers wage <span class="math inline">\(w\)</span>, only workers with <span class="math inline">\(0.75\theta\leq w\)</span> accept (i.e., <span class="math inline">\(\theta\leq\tfrac{4}{3}w\)</span>).</p>
 <div class="fragment">
-<p>What happens if the productivity is <strong>not observed</strong> by the firm?</p>
+<p>The expected productivity of a worker who accepts:</p>
+<p><span class="math display">\[\mathbb{E}\!\left[\theta\mid 0.75\theta\leq w\right]=\mathbb{E}\!\left[\theta\mid 0\leq\theta\leq\tfrac{4}{3}w\right]=\frac{0+\frac{4}{3}w}{2}=\frac{2}{3}w\]</span></p>
+</div>
+<div class="fragment">
+<p>Firm’s expected profit:</p>
+<p><span class="math display">\[\mathbb{E}[\pi\mid 0.75\theta\leq w]=\frac{2}{3}w-w=-\frac{1}{3}w&lt;0\]</span></p>
+</div>
+<div class="fragment">
+<div title="Key Result: Complete Market Failure">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result: Complete Market Failure</strong></p>
+</div>
+<div class="callout-content">
+<p>No wage can make hiring profitable. The expected productivity of workers who accept (<span class="math inline">\(\frac{2}{3}w\)</span>) is always below the wage (<span class="math inline">\(w\)</span>). The labor market collapses entirely.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="adverse-selection-summary" class="slide level2">
+<h2>Adverse Selection: Summary</h2>
+<p>The same pattern appears in all three examples:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>First Best</th>
+<th>Asymmetric Info</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Lemons</strong></td>
+<td>All cars sold</td>
+<td>Only lemons trade (or no trade)</td>
+</tr>
+<tr class="even">
+<td><strong>Takeover</strong></td>
+<td>Trade always occurs</td>
+<td><span class="math inline">\(0.75p &lt; p\)</span>: no trade</td>
+</tr>
+<tr class="odd">
+<td><strong>Labor</strong></td>
+<td>All workers hired</td>
+<td><span class="math inline">\(\frac{2}{3}w &lt; w\)</span>: no hiring</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div title="The Adverse Selection Tradeoff">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The Adverse Selection Tradeoff</strong></p>
+</div>
+<div class="callout-content">
+<p>Two parties can conduct a trade that would be beneficial to both – if only they can agree on a price. But asymmetric information causes the informed party to <strong>select adversely</strong>, making the uninformed party’s expected payoff negative and potentially destroying the market.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section></section>
 <section>
@@ -295,14 +567,53 @@ Fangzhou Yu
 </section>
 <section id="signaling-as-a-cure" class="slide level2">
 <h2>Signaling as a Cure</h2>
-<p>Suppose the buyer can take the car to a mechanic.</p>
+<p>Consider the lemons market again. Suppose the buyer can take the car to a <strong>mechanic</strong> who can distinguish a lemon with probability 90%.</p>
 <ul>
-<li><span class="math inline">\(P(\text{declared as lemon} \mid \text{lemon})=0.9\)</span></li>
-<li><span class="math inline">\(P(\text{declared as peach} \mid \text{lemon})=0.1\)</span></li>
-<li><span class="math inline">\(P(\text{declared as peach} \mid \text{peach})=1\)</span></li>
+<li><span class="math inline">\(P(\text{declared lemon} \mid \text{lemon})=0.9\)</span></li>
+<li><span class="math inline">\(P(\text{declared peach} \mid \text{lemon})=0.1\)</span></li>
+<li><span class="math inline">\(P(\text{declared peach} \mid \text{peach})=1\)</span></li>
 </ul>
 <div class="fragment">
-<p>Is the trade possible now?</p>
+<p>Suppose the mechanic declares the car a <strong>peach</strong> and the seller asks <span class="math inline">\(p\geq\$2{,}000\)</span>.</p>
+<p>What is the expected value of the car to the buyer?</p>
+</div>
+</section>
+<section id="signaling-bayes-calculation" class="slide level2">
+<h2>Signaling: Bayes Calculation</h2>
+<p>We need <span class="math inline">\(P(\text{peach}\mid\text{declared peach})\)</span>:</p>
+<p><span class="math display">\[P(\text{peach}\mid\text{declared peach})=\frac{P(\text{declared peach}\mid\text{peach})\,P(\text{peach})}{P(\text{declared peach})}\]</span></p>
+<div class="fragment">
+<p>Using the law of total probability for the denominator:</p>
+<p><span class="math display">\[P(\text{declared peach})=\underbrace{1}_{P(\text{d.p.}\mid\text{peach})}\times\tfrac{1}{3}+\underbrace{0.1}_{P(\text{d.p.}\mid\text{lemon})}\times\tfrac{2}{3}=\frac{1}{3}+\frac{2}{30}=\frac{12}{30}=\frac{2}{5}\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[P(\text{peach}\mid\text{declared peach})=\frac{1\times\frac{1}{3}}{\frac{2}{5}}=\frac{5}{6}\]</span></p>
+<p><span class="math display">\[P(\text{lemon}\mid\text{declared peach})=1-\frac{5}{6}=\frac{1}{6}\]</span></p>
+</div>
+</section>
+<section id="signaling-trade-restored" class="slide level2">
+<h2>Signaling: Trade Restored</h2>
+<p>The expected value of a car declared as a peach:</p>
+<p><span class="math display">\[\mathbb{E}[v\mid\text{declared peach}]=\frac{5}{6}\times 2{,}200+\frac{1}{6}\times 1{,}200\approx 2{,}033\]</span></p>
+<div class="fragment">
+<p>Since <span class="math inline">\(\mathbb{E}[v]=2{,}033&gt;\$2{,}000\)</span>, trade is now possible for any price <span class="math inline">\(\$2{,}000\leq p\leq \$2{,}033\)</span>.</p>
+</div>
+<div class="fragment">
+<div title="Key Result: Signaling Restores Trade">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result: Signaling Restores Trade</strong></p>
+</div>
+<div class="callout-content">
+<p>The mechanic’s signal raises <span class="math inline">\(P(\text{peach}\mid\text{declared peach})\)</span> from <span class="math inline">\(\frac{1}{3}\)</span> to <span class="math inline">\(\frac{5}{6}\)</span>, making trade possible. <strong>Signaling can cure adverse selection</strong> by reducing information asymmetry.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section></section>
 <section>
@@ -324,7 +635,7 @@ Fangzhou Yu
 </ul>
 <div class="fragment">
 <ul>
-<li>The owner maximizes: <span class="math inline">\(u_{p}(\pi, s) = \mathbb{E}[\pi - w(\pi)]\)</span>, where <span class="math inline">\(w(\pi)\)</span> is wage paid to the manager</li>
+<li>The owner maximizes: <span class="math inline">\(u_{p}(\pi, w) = \mathbb{E}[\pi - w(\pi)]\)</span>, where <span class="math inline">\(w(\pi)\)</span> is wage paid to the manager</li>
 <li>The manager maximizes: <span class="math inline">\(u_{a}(w, e) = \mathbb{E}[w(\pi)] - c(e)\)</span>, where <span class="math inline">\(c(e)\)</span> is the cost of putting effort <span class="math inline">\(e\)</span>
 <ul>
 <li>Suppose <span class="math inline">\(c(e) = e^{2}\)</span></li>
@@ -347,8 +658,126 @@ Fangzhou Yu
 </div>
 </div>
 </div>
-
 </div>
+</section>
+<section id="constant-wage" class="slide level2">
+<h2>Constant Wage</h2>
+<p>Suppose the wage is constant: <span class="math inline">\(w(\pi)=w\)</span> for any <span class="math inline">\(\pi\)</span>.</p>
+<p>The agent’s utility: <span class="math inline">\(u_{a}=\mathbb{E}[w(\pi)]-e^{2}=w-e^{2}\)</span></p>
+<ul>
+<li>Does not depend on <span class="math inline">\(\pi\)</span>, and negatively depends on effort <span class="math inline">\(e\)</span></li>
+<li>The manager will choose <strong>zero effort</strong>: <span class="math inline">\(e=0\)</span></li>
+</ul>
+<div class="fragment">
+<p>With zero effort: <span class="math inline">\(\mathbb{E}[\pi]=\mathbb{E}[e+\varepsilon]=0\)</span></p>
+<p>Owner’s utility: <span class="math inline">\(u_{p}=\mathbb{E}[\pi]-w=0-w=-w&lt;0\)</span></p>
+</div>
+<div class="fragment">
+<div title="Key Insight">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Insight</strong></p>
+</div>
+<div class="callout-content">
+<p>A constant wage provides <strong>zero incentive</strong> for effort. The manager shirks completely, and the owner does not want to hire at all.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="first-best-observable-effort" class="slide level2">
+<h2>First Best (Observable Effort)</h2>
+<p>Suppose the effort is <strong>observable</strong> by the principal. The owner solves:</p>
+<p><span class="math display">\[\max_{w,e}\;\mathbb{E}[\pi]-w=e-w \qquad\text{s.t.}\quad w-e^{2}\geq 0 \;\text{(IR constraint)}\]</span></p>
+<div class="fragment">
+<p>The IR constraint ensures the agent is willing to work. With market power, the principal sets it to bind: <span class="math inline">\(w=e^{2}\)</span>.</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\max_{e}\;e-e^{2}\quad\Rightarrow\quad 1-2e=0\quad\Rightarrow\quad e^{*}=0.5,\quad w^{*}=0.25\]</span></p>
+</div>
+<div class="fragment">
+<p>The wage scheme: <span class="math inline">\(w(e)=\begin{cases}0.25&amp;\text{if }e=0.5\\0&amp;\text{otherwise}\end{cases}\)</span></p>
+<div title="First Best">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>First Best</strong></p>
+</div>
+<div class="callout-content">
+<p>With observable effort: <span class="math inline">\(e^{*}=0.5\)</span>, <span class="math inline">\(w^{*}=0.25\)</span>. Owner’s payoff <span class="math inline">\(=0.5-0.25=0.25\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="second-best-linear-contract" class="slide level2">
+<h2>Second Best: Linear Contract</h2>
+<p>Now effort is <strong>unobservable</strong>. The wage must depend on the observable outcome (profit): <span class="math inline">\(w(\pi)=a+b\pi\)</span>.</p>
+<p>The agent’s utility:</p>
+<p><span class="math display">\[u_{a}=\mathbb{E}[w(\pi)]-e^{2}=a+b\,\mathbb{E}[\pi]-e^{2}=a+be-e^{2}\]</span></p>
+<div class="fragment">
+<p><strong>Agent’s optimal effort</strong> (incentive compatibility):</p>
+<p><span class="math display">\[\text{FOC:}\quad b-2e=0\quad\Rightarrow\quad e=\frac{b}{2}\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Equilibrium wage:</strong> <span class="math inline">\(\mathbb{E}[w]=a+b\cdot\frac{b}{2}=a+\frac{b^{2}}{2}\)</span></p>
+<p><strong>IR constraint:</strong> <span class="math inline">\(u_{a}=a+\frac{b^{2}}{4}\geq 0\)</span></p>
+</div>
+</section>
+<section id="second-best-optimal-contract" class="slide level2">
+<h2>Second Best: Optimal Contract</h2>
+<p>The principal’s problem (IR binds <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(a=-\tfrac{b^{2}}{4}\)</span>):</p>
+<p><span class="math display">\[\max_{b}\;\mathbb{E}[\pi]-\mathbb{E}[w]=\frac{b}{2}-a-\frac{b^{2}}{2}=\frac{b}{2}-\frac{b^{2}}{4}\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[\text{FOC:}\quad \frac{1}{2}-\frac{b}{2}=0\quad\Rightarrow\quad b^{*}=1,\quad a^{*}=-0.25\]</span></p>
+</div>
+<div class="fragment">
+<p>The optimal linear contract:</p>
+<p><span class="math display">\[w(\pi)=-0.25+\pi\]</span></p>
+</div>
+<div class="fragment">
+<div title="Key Result: Sell the Firm!">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result: Sell the Firm!</strong></p>
+</div>
+<div class="callout-content">
+<p>The optimal contract gives the manager <strong>the entire profit</strong> minus a fixed fee of $0.25. To elicit the best effort, the owner must effectively <strong>sell the firm</strong> to the manager!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="summary" class="title-slide slide level1 center">
+<h1>Summary</h1>
+
+</section>
+<section id="week-13-key-takeaways" class="slide level2">
+<h2>Week 13: Key Takeaways</h2>
+<ol type="1">
+<li class="fragment"><strong>Adverse selection</strong> arises when a better-informed party selectively participates in trade, offering low-quality goods</li>
+<li class="fragment">In the <strong>Market for Lemons</strong>, only lemons trade (or no trade occurs) – the uninformed buyer’s expected value falls below the price</li>
+<li class="fragment">The <strong>Takeover Game</strong> and <strong>Labor Market</strong> confirm the same pattern: <span class="math inline">\(\mathbb{E}[\text{value}\mid\text{accept}]&lt;\text{price}\)</span></li>
+<li class="fragment"><strong>Signaling</strong> (e.g., mechanic inspection) can restore trade by updating beliefs via Bayes’ rule</li>
+<li class="fragment"><strong>Moral hazard</strong> arises from hidden actions; constant wages induce zero effort</li>
+<li class="fragment">The optimal solution to moral hazard is to <strong>tie compensation to profit</strong> – effectively “sell the firm” to the manager</li>
+</ol>
+
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

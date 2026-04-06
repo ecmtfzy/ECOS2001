@@ -120,10 +120,10 @@ layout:
         - param: a2
           label: b
         divs:
-          - html: $$u^A(x_1^A, x_2^A) = a \ln x_1^A + (1-a) \ln x_2^B$$ $$u^B(x_1^B, x_2^B) = b \ln x_1^B + (1-b) \ln x_2^B$$
-          - html: At allocation $X$, $MRS^A > MRS^B$, so possible Pareto improvements involve A trading some of her good 2 for some of B's good 1.
+          - html: "`$$u^A(x_1^A, x_2^A) = a \\\\ln x_1^A + (1-a) \\\\ln x_2^A$$ $$u^B(x_1^B, x_2^B) = b \\\\ln x_1^B + (1-b) \\\\ln x_2^B$$`"
+          - html: "`At allocation $X$, $MRS^A > MRS^B$, so possible Pareto improvements involve A trading some of her good 2 for some of B's good 1.`"
             show: (calcs.bundleA.mrs - calcs.bundleB.mrs > 0.1)
-          - html: At allocation $X$, $MRS^A < MRS^B$, so possible Pareto improvements involve A trading some of her good 1 for some of B's good 2.
+          - html: "`At allocation $X$, $MRS^A < MRS^B$, so possible Pareto improvements involve A trading some of her good 1 for some of B's good 2.`"
             show: (calcs.bundleB.mrs - calcs.bundleA.mrs > 0.1)
-          - html: At allocation $X$, $MRS^A = MRS^B$, so there are no possible Pareto improvements.
+          - html: "`At allocation $X$, $MRS^A = MRS^B$, so there are no possible Pareto improvements.`"
             show: ((calcs.bundleA.mrs - calcs.bundleB.mrs)^2 <= 0.01)

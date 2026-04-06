@@ -4,18 +4,17 @@ colors:
   variableCost: colors.grey
   totalCost: colors.red
 params:
-  - {name: w, value: 16, min: 10, max: 20}
+  - {name: w, value: 4, min: 1, max: 10}
   - {name: r, value: 2, min: 1, max: 5}
-  - {name: K, value: 32, min: 24, max: 48}
-  - {name: q, value: 8, min: 0, max: 40}
+  - {name: K, value: 36, min: 16, max: 64}
+  - {name: q, value: 12, min: 1, max: 50}
 calcs:
-  L: (params.q*params.q/params.K)
-  VC: (params.w*calcs.L)
-  F: (params.r*params.K)
+  L: (params.q^1.5 / sqrt(params.K))
+  VC: (params.w * calcs.L)
+  F: (params.r * params.K)
   TC: (calcs.VC + calcs.F)
-  TClabelX: (min(38, sqrt((400 - params.r*params.K)*params.K/params.w)))
-  MC: (2*params.q*params.w/params.K)
-  MPL: (params.w/calcs.MC)
+  MC: (1.5 * params.w * sqrt(params.q) / sqrt(params.K))
+  MPL: (params.w / calcs.MC)
 layout:
   TwoHorizontalGraphsPlusSidebar:
     leftGraph:
@@ -25,14 +24,14 @@ layout:
         ticks: 0
       yAxis:
         title: Output ($q$)
-        max: 40
+        max: 50
         ticks: 0
       objects:
         - Curve:
-            fn: (sqrt((x)*params.K))
+            fn: (x)^(2/3) * params.K^(1/3)
             samplePoints: 500
             label:
-              text: "`f(L)`"
+              text: "`f(L|\\\\overline{K})`"
               x: 40
               color: production
               position: tl
@@ -50,7 +49,7 @@ layout:
             color: mpl
             label:
               text: MP_L
-              y: 35
+              y: 45
               position: br
 
     rightGraph:
@@ -60,17 +59,17 @@ layout:
         ticks: 0
       xAxis:
         title: Output ($q$)
-        max: 40
+        max: 50
         ticks: 0
       objects:
 
       # Total Cost
       - Curve:
-          fn: calcs.F + (params.w/params.K)*(x)^2
+          fn: calcs.F + (params.w/sqrt(params.K))*(x)^1.5
           color: colors.totalCost
           label:
             text: c(q)
-            x: calcs.TClabelX
+            x: 45
             position: br
 
       - Point:
@@ -103,4 +102,5 @@ layout:
           - param: K
             label: \overline K
           divs:
-            - html: "The $MC$ and the $MP_L$ are inversely related: $$MC = w \\times {1 \\over MP_L}$$"
+            - html: "`Production function: $f(L,K) = L^{2/3}K^{1/3}$.`"
+            - html: "`The $MC$ and the $MP_L$ are inversely related: $$MC = w \\\\times {1 \\\\over MP_L}$$`"

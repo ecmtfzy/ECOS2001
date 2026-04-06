@@ -6,19 +6,19 @@ colors:
   totalCost: colors.red
 params:
   - name: p
-    value: 18
+    value: 15
     min: 1
     max: 25
     round: 0.5
   - name: s
-    value: 0
+    value: 1
 calcs:
-  q: (4 + sqrt(2*params.p - 16))
-  qLow: (4 - sqrt(2*params.p - 16))
-  tc: (81 + 16*calcs.q-2*(calcs.q)^2+(1/6)*(calcs.q)^3)
-  tcLow: (81 + 16*calcs.qLow-2*(calcs.qLow)^2+(1/6)*(calcs.qLow)^3)
-  mc: (16 - 4*calcs.q + 0.5*calcs.q*calcs.q)
-  vc: (calcs.tc - 81)
+  q: ((10 + sqrt(12*params.p - 68))/6)
+  qLow: ((10 - sqrt(12*params.p - 68))/6)
+  tc: (5 + 14*calcs.q - 5*(calcs.q)^2 + (calcs.q)^3)
+  tcLow: (5 + 14*calcs.qLow - 5*(calcs.qLow)^2 + (calcs.qLow)^3)
+  mc: (14 - 10*calcs.q + 3*calcs.q*calcs.q)
+  vc: (calcs.tc - 5)
   ac: (calcs.tc/calcs.q)
   avc: (calcs.vc/calcs.q)
   tr: (calcs.q * params.p)
@@ -32,58 +32,58 @@ layout:
         max: 25
       xAxis:
         title: Output ($q$)
-        max: 12
-        ticks: 12
+        max: 8
+        ticks: 8
       objects:
-        # Supply
+        # Supply (MC above min AVC)
         - Curve:
-            fn: 16 - 4*(x)+0.5*(x)*(x)
+            fn: 14 - 10*(x) + 3*(x)^2
             color: marginalCost
             strokeWidth: 4
-            min: 6
+            min: 2.5
             label:
               text: \text{Supply}
-              x: 9.83
+              x: 7
               position: bl
               bgcolor: none
 
         - Segment:
             a: [0, 0]
-            b: [0, 10]
+            b: [0, 7.75]
             strokeWidth: 6
             color: supply
 
         - Segment:
-            a: [ 6, 10 ]
-            b: [ 0, 10 ]
+            a: [ 2.5, 7.75 ]
+            b: [ 0, 7.75 ]
             lineStyle: dashed
             color: supply
 
         # Average variable cost
         - Curve:
-            fn: 16-2*(x)+(1/6)*(x)*(x)
+            fn: 14 - 5*(x) + (x)^2
             color: variableCost
-            show: params.s
+            show: true
             lineStyle: dotted
             label:
               text: AVC
-              x: 2
+              x: 1.5
               position: bl
               bgcolor: none
 
-        # Marginal cost
+        # Marginal cost (full curve)
         - Curve:
-            fn: 16 - 4*(x)+0.5*(x)*(x)
+            fn: 14 - 10*(x) + 3*(x)^2
             color: marginalCost
-            show: params.s
+            show: true
             lineStyle: dotted
             label:
               text: MC
-              x: 3
+              x: 2
               position: tr
               bgcolor: none
 
-        # Average revenue
+        # Price line
         - Line:
             yIntercept: params.p
             color: green
@@ -91,15 +91,14 @@ layout:
               - vertical: p
             label:
               text: \text{Price}
-              x: 12
+              x: 8
               position: tr
               bgcolor: none
 
-        # Supply curve
-
+        # Supply point
         - Point:
             coordinates:
-            x: "((params.p < 10) ? 0 : calcs.q)"
+            x: "((params.p < 7.75) ? 0 : calcs.q)"
             y: params.p
             color: supply
             drag:
@@ -112,9 +111,9 @@ layout:
     sidebar:
       controls:
         - title: Supply and Cost Curves
+          description: The supply curve is the portion of MC above minimum AVC, plus zero output below.
           sliders:
             - param: p
               label: p
-          checkboxes:
-            - param: s
-              label: \text{Show cost curves}
+          divs:
+            - html: "`$c(q) = 5 + 14q - 5q^2 + q^3$. Supply = MC above $\\\\min AVC = 7.75$.`"

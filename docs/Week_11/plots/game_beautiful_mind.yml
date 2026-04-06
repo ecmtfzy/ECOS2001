@@ -1,0 +1,14 @@
+schema: EconSchema
+version: 1
+layout:
+  GameMatrixLayout:
+    gameMatrix:
+      players:
+        - Player 1
+        - Player 2
+      strategies:
+        - [Blonde, Brunette]
+        - [Blonde, Brunette]
+      payoffs:
+        - [[0,0],[2,1]]
+        - [[1,2],[1,1]]

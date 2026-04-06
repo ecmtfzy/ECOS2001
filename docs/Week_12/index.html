@@ -6,7 +6,7 @@
 <script src="slides_12_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_12_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_12_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_12_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="slides_12_files/libs/quarto-html/quarto-syntax-highlighting-0407d11e67cd6f69fbc5989002fb0851.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Fangzhou Yu">
@@ -122,6 +122,64 @@
       margin-right: 0; 
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/kg.css">
+  <style>
+    /* Vertically center content below title */
+    .reveal .slides section {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .reveal .slides section > h2 {
+      flex: none;
+    }
+    .reveal .slides section > h2 + * {
+      margin-top: auto !important;
+    }
+    .reveal .slides section > *:last-child {
+      margin-bottom: auto !important;
+    }
+    /* When aside.notes is last-child (display:none), it steals
+       the :last-child selector. Apply margin-bottom to the
+       visible element just before it instead. */
+    .reveal .slides section > *:has(+ aside.notes:last-child) {
+      margin-bottom: auto !important;
+    }
+
+    /* KGJS sizing */
+    .kg-container { width: 100%; margin: 0 auto; }
+    .kg-container .sidebar {
+      font-size: 10pt;
+    }
+    .kg-container .sidebar div {
+      font-size: 10pt !important;
+    }
+    .kg-container .sidebar table {
+      font-size: 10pt;
+    }
+    /* Controls below graphs (no class — KGJS generates plain divs) */
+    .kg-container div {
+      font-size: 10pt !important;
+    }
+
+    /* Center game matrix tables within their KGJS container divs */
+    div:has(> table.gameMatrix) {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    /* Standalone GameMatrixLayout: fit container to content */
+    .game-matrix-only {
+      align-self: center !important;
+    }
+    .game-matrix-only > div {
+      height: auto !important;
+    }
+    .game-matrix-only > div > div {
+      position: relative !important;
+    }
+  </style>
+  <script src="js/kg3d.0.2.7.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -142,29 +200,72 @@ Fangzhou Yu
     </div>
 </div>
 
-  <p class="date">Mar 2026</p>
+  <p class="date">2026 S1</p>
 </section>
 <section>
-<section id="dynamic-games" class="title-slide slide level1 center">
-<h1>Dynamic Games</h1>
+<section id="part-1-dynamic-games" class="title-slide slide level1 center">
+<h1>Part 1: Dynamic Games</h1>
 
 </section>
-<section id="survivor-21-flags" class="slide level2">
-<h2>Survivor: 21 Flags</h2>
-<p>Watch the clip:</p>
-<p><a href="http://www.criticalcommons.org/Members/JJWooten/clips/survivor-21-flags/view">Survivor: 21 Flags</a></p>
-</section>
-<section id="dynamic-games-entry-into-industry" class="slide level2">
-<h2>Dynamic Games: Entry into Industry</h2>
-<p><img data-src="entry.png" style="width:35.0%"></p>
-<div class="fragment">
-<p>Normal form:</p>
-<p><img data-src="entry_m.png" style="width:28.0%"></p>
+<section id="entry-into-an-industry" class="slide level2">
+<h2>Entry into an Industry</h2>
+<p>A monopolist (I) holds a patent. After the patent expires, an entrant (E) considers entering. If E enters, I could start a price war.</p>
+<div class="kg-container" src="plots/entry_deterrence.yml" style="max-width: 750px;">
+
 </div>
 </section>
-<section id="subgame-perfection" class="slide level2">
-<h2>Subgame Perfection</h2>
-<p>Denote: <span class="math inline">\(t\)</span> – a node in the game; <span class="math inline">\(h(t)\)</span> – the information set containing <span class="math inline">\(t\)</span>; <span class="math inline">\(S(t)\)</span> – the set of all successors to the node <span class="math inline">\(t\)</span>.</p>
+<section id="entry-normal-form" class="slide level2">
+<h2>Entry: Normal Form</h2>
+<div class="kg-container game-matrix-only" src="plots/entry_normal_form.yml" style="max-width: 550px;">
+
+</div>
+<p>Strategy sets: <span class="math inline">\(S_E = \{Out, In\}\)</span>, <span class="math inline">\(S_I = \{Accommodate, Fight\}\)</span>. Best responses are underlined.</p>
+<aside class="notes">
+<p>The normal form representation of the entry game. Two NE: (Out, Fight) and (In, Accommodate).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="entry-two-nash-equilibria" class="slide level2">
+<h2>Entry: Two Nash Equilibria</h2>
+<p>There are two NE: <strong>(Out, Fight)</strong> and <strong>(In, Accommodate)</strong>.</p>
+<div class="fragment">
+<p>However, the equilibrium (Out, Fight) does not look plausible:</p>
+<ul>
+<li class="fragment">After E enters, I has <strong>no incentive</strong> to follow through on its plan to fight</li>
+<li class="fragment">Fighting gives I a payoff of <span class="math inline">\(-1\)</span>, while accommodating gives <span class="math inline">\(1\)</span></li>
+<li class="fragment">The threat to fight is <strong>not credible</strong></li>
+</ul>
+</div>
+<div class="fragment">
+<div title="Key Insight: NE Refinement">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Insight: NE Refinement</strong></p>
+</div>
+<div class="callout-content">
+<p>We would like to impose conditions to guarantee that players anticipate sensible things “off the equilibrium path.”</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="proper-subgame" class="slide level2">
+<h2>Proper Subgame</h2>
+<p>Denote: <span class="math inline">\(t\)</span> — a node in the game; <span class="math inline">\(h(t)\)</span> — the information set containing <span class="math inline">\(t\)</span>; <span class="math inline">\(S(t)\)</span> — the set of all successors to the node <span class="math inline">\(t\)</span>.</p>
 <div title="Definition: Proper Subgame">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -180,7 +281,9 @@ Fangzhou Yu
 </div>
 </div>
 </div>
-<div class="fragment">
+</section>
+<section id="subgame-perfect-nash-equilibrium" class="slide level2">
+<h2>Subgame Perfect Nash Equilibrium</h2>
 <div title="Definition: Subgame Perfect Nash Equilibrium">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -196,14 +299,13 @@ Fangzhou Yu
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="backward-induction" class="slide level2">
 <h2>Backward Induction</h2>
-<p>For finite games, one can solve for subgame perfect Nash equilibria (SPNE) by using backward induction on the subgames of the extensive form. Here is how to do it:</p>
+<p>For finite games, one can solve for subgame perfect Nash equilibria (SPNE) by using backward induction on the subgames of the extensive form:</p>
 <ol type="1">
 <li class="fragment">At every last decision node, determine the optimal action.</li>
-<li class="fragment">At every pen-ultimate decision node, determine the optimal action, assuming that the actions determined in step 1 will be taken at the last node.</li>
+<li class="fragment">At every penultimate decision node, determine the optimal action, assuming that the actions determined in step 1 will be taken at the last node.</li>
 <li class="fragment"><span class="math inline">\(\dots\)</span></li>
 </ol>
 <div class="fragment">
@@ -223,28 +325,246 @@ Fangzhou Yu
 </div>
 </div>
 </div>
+</section>
+<section id="backward-induction-entry-game" class="slide level2">
+<h2>Backward Induction: Entry Game</h2>
+<div class="kg-container" src="plots/entry_backward_induction.yml" style="max-width: 900px;">
+
+</div>
 </section></section>
 <section>
-<section id="stackelberg-model" class="title-slide slide level1 center">
-<h1>Stackelberg Model</h1>
+<section id="part-2-applications-of-backward-induction" class="title-slide slide level1 center">
+<h1>Part 2: Applications of Backward Induction</h1>
 
 </section>
-<section id="stackelberg-model-1" class="slide level2">
+<section id="stackelberg-model" class="slide level2">
 <h2>Stackelberg Model</h2>
+<p>A good example of a dynamic game with complete information and strategies in a continuum space is the <strong>Stackelberg model</strong> of sequential quantity competition.</p>
 <ul>
 <li class="fragment">The market demand is <span class="math inline">\(P = 100 - Q\)</span></li>
-<li class="fragment">Two identical firms with cost function <span class="math inline">\(c(q) = q\)</span></li>
-<li class="fragment">Firm 1 moves first and chooses its quantity <span class="math inline">\(q_1\)</span></li>
-<li class="fragment">Firm 2 observes the choice of firm 1 and then makes its production decision <span class="math inline">\(q_2\)</span></li>
+<li class="fragment">Two identical firms with cost function <span class="math inline">\(c(q) = 4q\)</span></li>
+<li class="fragment">Firm 1 (leader) moves first and chooses its quantity <span class="math inline">\(q_1\)</span></li>
+<li class="fragment">Firm 2 (follower) observes the choice of firm 1 and then makes its production decision <span class="math inline">\(q_2\)</span></li>
 </ul>
+</section>
+<section id="stackelberg-firm-2s-best-response" class="slide level2">
+<h2>Stackelberg: Firm 2’s Best Response</h2>
+<p>Backward induction suggests to start with firm 2 and derive its best response to <span class="math inline">\(q_1\)</span>:</p>
+<p><span class="math display">\[\pi_2 = (100 - q_1 - q_2)q_2 - 4q_2 \to \max_{q_2}\]</span></p>
+<div class="fragment">
+<p>FOC:</p>
+<p><span class="math display">\[100 - q_1 - 2q_2 - 4 = 0 \Rightarrow q_2 = \frac{96 - q_1}{2}\]</span></p>
+<aside class="notes">
+<p>This is firm 2’s best response function. It tells us the optimal quantity for firm 2 as a function of firm 1’s quantity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="stackelberg-firm-1s-decision" class="slide level2">
+<h2>Stackelberg: Firm 1’s Decision</h2>
+<p>Firm 1 moves first and <strong>knows</strong> what best response <span class="math inline">\(q_2\)</span> will be. It takes this into account:</p>
+<p><span class="math display">\[\pi_1 = \left(100 - q_1 - \frac{96 - q_1}{2}\right)q_1 - 4q_1 = \left(\frac{96 - q_1}{2}\right)q_1 \to \max_{q_1}\]</span></p>
+<div class="fragment">
+<p>FOC:</p>
+<p><span class="math display">\[0.5(96 - 2q_1) = 0 \Rightarrow q_1 = 48\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[q_2 = \frac{96 - 48}{2} = 24\]</span></p>
+</div>
+</section>
+<section id="stackelberg-reaction-functions" class="slide level2">
+<h2>Stackelberg: Reaction Functions</h2>
+<div class="kg-container" src="plots/stackelberg_reaction.yml" style="max-width: 900px;">
+
+</div>
+<aside class="notes">
+<p>The dotted curves are Firm 1’s iso-profit curves: all (q1, q2) combinations giving the same profit. Lower curves = higher profit (less competition). Firm 1 picks the point on BR2 that reaches the lowest iso-profit curve — the tangency point. This is analogous to utility maximization subject to a budget constraint: here Firm 1 maximizes profit subject to the constraint that Firm 2 plays its best response.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="stackelberg-spne" class="slide level2">
+<h2>Stackelberg: SPNE</h2>
+<div title="SPNE">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>SPNE</strong></p>
+</div>
+<div class="callout-content">
+<p>The unique SPNE of this game is <span class="math inline">\(\left(q_1 = 48,\; q_2 = \frac{96 - q_1}{2}\right)\)</span>.</p>
+<p>Equilibrium quantities: <span class="math inline">\(q_1^* = 48\)</span>, <span class="math inline">\(q_2^* = 24\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Are there other NE that are not SPNE? <strong>Yes.</strong></p>
+<p>In order to find a NE that is not SPNE, firm 2 has to behave irrationally “off the equilibrium path.” There is an infinite number of such NE.</p>
+</div>
+<div class="fragment">
+<p>One example: <span class="math inline">\(q_1 = 16\)</span> and <span class="math inline">\(q_2 = \begin{cases} 40, &amp; \text{if } q_1 = 16 \\ 100, &amp; \text{otherwise} \end{cases}\)</span></p>
+<aside class="notes">
+<p>Firm 2 threatens to flood the market (q2=100) if firm 1 deviates. This is not credible because firm 2 would never actually produce 100 units.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="ultimatum-game" class="slide level2">
+<h2>Ultimatum Game</h2>
+<p>Player 1 conditionally receives $100 and proposes how to divide the sum between her and Player 2. Player 2 chooses to either <strong>accept</strong> or <strong>reject</strong> the proposal.</p>
+<ul>
+<li class="fragment">If Player 2 <strong>accepts</strong>, the money is split according to the proposal</li>
+<li class="fragment">If Player 2 <strong>rejects</strong>, neither player receives any money</li>
+</ul>
+<div class="fragment">
+<p><strong>What is SPNE?</strong></p>
+</div>
+</section>
+<section id="ultimatum-game-spne" class="slide level2">
+<h2>Ultimatum Game: SPNE</h2>
+<div class="kg-container" src="plots/ultimatum_game.yml" style="max-width: 900px;">
+
+</div>
+<div class="fragment">
+<div title="SPNE">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>SPNE</strong></p>
+</div>
+<div class="callout-content">
+<p>The SPNE is <span class="math inline">\((x = 0, \text{ accept if } x \geq 0)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The ultimatum game is a classic example where experimental results diverge sharply from the SPNE prediction. In experiments, offers below 20-30% are frequently rejected.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="bank-runs" class="slide level2">
+<h2>Bank Runs</h2>
+<p>Two investors have each deposited 2k with a bank. The bank has invested these deposits in a long-term project.</p>
+<ul>
+<li class="fragment">If the bank is forced to <strong>liquidate early</strong> (date 1), a total of <strong>2k</strong> can be recovered</li>
+<li class="fragment">If the investment reaches <strong>maturity</strong> (date 2), the project pays out <strong>6k</strong> total</li>
+<li class="fragment">There are <strong>two dates</strong> at which investors can withdraw</li>
+</ul>
+</section>
+<section id="bank-runs-game-tree" class="slide level2">
+<h2>Bank Runs: Game Tree</h2>
+<div class="kg-container" src="plots/bank_runs_tree.yml" style="max-width: 900px;">
+
+</div>
+<aside class="notes">
+<p>Date 1: both investors simultaneously choose W or D. If both choose D, the game continues to date 2 where they again simultaneously choose W or D. Dashed lines indicate information sets (simultaneous moves).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bank-runs-backward-induction" class="slide level2">
+<h2>Bank Runs: Backward Induction</h2>
+<p><strong>Step 1:</strong> At date 2, W is a <strong>strictly dominant strategy</strong> for both investors. SPNE payoffs from date 2: <span class="math inline">\((3, 3)\)</span>.</p>
+<div class="fragment">
+<p><strong>Step 2:</strong> By backward induction, replacing date 2 with <span class="math inline">\((3, 3)\)</span>, date 1 reduces to:</p>
+<div class="kg-container game-matrix-only" src="plots/bank_runs_date1.yml" style="max-width: 500px;">
+
+</div>
+</div>
+<div class="fragment">
+<p>Three NE at date 1: <strong>(W,W)</strong>, <strong>(D,D)</strong>, and a mixed strategy equilibrium.</p>
+</div>
+</section>
+<section id="bank-runs-three-spne" class="slide level2">
+<h2>Bank Runs: Three SPNE</h2>
+<p>The initial game has <strong>three SPNE</strong>:</p>
+<ol type="1">
+<li class="fragment"><span class="math inline">\(((W|1, W|2),\; (W|1, W|2))\)</span> — both withdraw at both dates</li>
+<li class="fragment"><span class="math inline">\(((D|1, W|2),\; (D|1, W|2))\)</span> — both wait, then withdraw at date 2</li>
+<li class="fragment">A mixed strategy equilibrium</li>
+</ol>
+<div class="fragment">
+<div title="Key Insight: Bank Runs">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Insight: Bank Runs</strong></p>
+</div>
+<div class="callout-content">
+<p>If one investor <strong>believes</strong> the other will withdraw at date 1, then it is a best response to withdraw as well — even though both investors would be better off waiting until date 2. This is a <strong>bank run</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section>
-<section id="repeated-games" class="title-slide slide level1 center">
-<h1>Repeated Games</h1>
+<section id="part-3-repeated-games" class="title-slide slide level1 center">
+<h1>Part 3: Repeated Games</h1>
 
 </section>
-<section id="repeated-games-1" class="slide level2">
+<section id="repeated-games" class="slide level2">
 <h2>Repeated Games</h2>
+<p>How to sustain cooperation when it is a dominated strategy? Think about the Prisoner’s Dilemma: in real life, we do not always observe “Defect.” Why?</p>
+<div class="fragment">
+<p>In many strategic situations, players interact <strong>repeatedly</strong> over time. The promise of future rewards or the threat of future punishments may provide the incentives for cooperative behavior today.</p>
+</div>
+<div class="fragment">
 <div title="Definition: Repeated Game">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -260,24 +580,164 @@ Fangzhou Yu
 </div>
 </div>
 </div>
+</div>
 </section>
 <section id="time-discounting" class="slide level2">
 <h2>Time Discounting</h2>
-<ul>
-<li class="fragment"><p>Discount factor <span class="math inline">\(\beta \in [0, 1)\)</span></p></li>
-<li class="fragment"><p>Two periods: period 1 payoff is <span class="math inline">\(5\)</span> and period 2 payoff is <span class="math inline">\(3\)</span>, then the present value at period 1 is <span class="math inline">\(5 + 3\beta\)</span>.</p></li>
-<li class="fragment"><p><span class="math inline">\(T\)</span> periods: payoffs <span class="math inline">\(u_t\)</span> for all <span class="math inline">\(t \leq T\)</span>, then the present value at period 0 is <span class="math inline">\(\sum_{t=0}^{T} \beta^t u_t\)</span>. Note that if all payoffs are the same, <span class="math inline">\(u_t = u\)</span>, then <span class="math display">\[V_T = \sum_{t=0}^{T} \beta^t u_t = u \sum_{t=0}^{T} \beta^t = \frac{1 - \beta^{T+1}}{1 - \beta} u\]</span></p></li>
-<li class="fragment"><p>If <span class="math inline">\(T\)</span> is infinite, the above formula simplifies to <span class="math inline">\(V = \frac{u}{1 - \beta}\)</span>.</p></li>
-</ul>
+<p>We assume that future payoffs are <strong>discounted</strong>: money in the future is less valuable than money now (positive interest rates, time preference).</p>
+<div class="fragment">
+<p><strong>Discount factor</strong> <span class="math inline">\(\beta \in [0, 1)\)</span></p>
+</div>
+<div class="fragment">
+<p><strong>Example:</strong> If period 1 payoff is <span class="math inline">\(5\)</span> and period 2 payoff is <span class="math inline">\(3\)</span>, then the present value at period 1 is <span class="math inline">\(5 + 3\beta\)</span>.</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(T\)</span> periods with payoffs <span class="math inline">\(u_t\)</span> for all <span class="math inline">\(t \leq T\)</span>: the present value at period 0 is</p>
+<p><span class="math display">\[V_T = \sum_{t=0}^{T} \beta^t u_t\]</span></p>
+<p>If all payoffs are the same (<span class="math inline">\(u_t = u\)</span>): <span class="math inline">\(\quad V_T = \frac{1 - \beta^{T+1}}{1 - \beta} u\)</span></p>
+</div>
+<div class="fragment">
+<p>If <span class="math inline">\(T\)</span> is infinite: <span class="math inline">\(\quad V = \frac{u}{1 - \beta}\)</span></p>
+</div>
+</section>
+<section id="finitely-repeated-prisoners-dilemma" class="slide level2">
+<h2>Finitely Repeated Prisoner’s Dilemma</h2>
+<p>Consider a <strong>finitely repeated</strong> Prisoner’s Dilemma played for <span class="math inline">\(T\)</span> rounds.</p>
+<div class="fragment">
+<div class="kg-container game-matrix-only" src="plots/pd_repeated.yml" style="max-width: 500px;">
+
+</div>
+</div>
+<div class="fragment">
+<p>By backward induction: in round <span class="math inline">\(T\)</span>, both players Defect (dominant strategy). In round <span class="math inline">\(T-1\)</span>, knowing both will Defect in <span class="math inline">\(T\)</span>, both Defect again. And so on…</p>
+</div>
+<div class="fragment">
+<div title="Key Result">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result</strong></p>
+</div>
+<div class="callout-content">
+<p>The unique SPNE of a finitely repeated Prisoner’s Dilemma is to <strong>always Defect</strong> in every round.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="infinitely-repeated-games" class="slide level2">
 <h2>Infinitely Repeated Games</h2>
+<p>Some predictions of finitely repeated games do not hold in reality. Moreover, in real life, we do not usually know when the game ends.</p>
+<div class="fragment">
+<p>Now consider an <strong>infinitely repeated</strong> Prisoner’s Dilemma. The game has no end, so we cannot use backward induction.</p>
+</div>
+<div class="fragment">
 <ul>
-<li class="fragment"><p>“<strong>On equilibrium path</strong>” are the subgames that are reached in the equilibrium.</p></li>
-<li class="fragment"><p>“<strong>Off equilibrium path</strong>” are the equilibrium subgames that are never actually played.</p></li>
-<li class="fragment"><p><strong>Grim-trigger strategy</strong> is to play Cooperate until someone deviates, then play Defect forever.</p></li>
-<li class="fragment"><p><strong>The one-shot deviation principle:</strong> a strategy profile <span class="math inline">\((s_1^*, s_2^*)\)</span> is a SPNE if in every subgame no player can increase her payoffs by changing just her first action, while keeping all of her other actions (as well as her opponent’s strategy) fixed.</p></li>
+<li class="fragment">“<strong>On equilibrium path</strong>” – the subgames that are reached in the equilibrium</li>
+<li class="fragment">“<strong>Off equilibrium path</strong>” – the subgames that are never actually played</li>
 </ul>
+</div>
+</section>
+<section id="grim-trigger-strategy" class="slide level2">
+<h2>Grim-Trigger Strategy</h2>
+<div title="Definition: Grim-Trigger Strategy">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Definition: Grim-Trigger Strategy</strong></p>
+</div>
+<div class="callout-content">
+<p>Play <strong>Cooperate</strong> until someone deviates, then play <strong>Defect forever</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>To check whether grim-trigger constitutes a SPNE, we use the <strong>one-shot deviation principle</strong>.</p>
+</div>
+</section>
+<section id="one-shot-deviation-principle" class="slide level2">
+<h2>One-Shot Deviation Principle</h2>
+<div title="Theorem: One-Shot Deviation Principle">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Theorem: One-Shot Deviation Principle</strong></p>
+</div>
+<div class="callout-content">
+<p>A strategy profile <span class="math inline">\((s_1^*, s_2^*)\)</span> is a SPNE if in every subgame no player can increase her payoffs by changing just her <strong>first action</strong>, while keeping all of her other actions (as well as her opponent’s strategy) fixed.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Thus, we need to check only two deviations: <strong>on-path</strong> (from C) and <strong>off-path</strong> (from D).</p>
+</div>
+</section>
+<section id="grim-trigger-on-path-analysis" class="slide level2">
+<h2>Grim-Trigger: On-Path Analysis</h2>
+<p>Consider player 1. Does she want to deviate from C?</p>
+<p><strong>Payoff from cooperation</strong> (play C forever): <span class="math inline">\(u(s_1^*, s_2^*) = (-1) + (-1)\beta + (-1)\beta^2 + \cdots = \frac{-1}{1 - \beta}\)</span></p>
+<div class="fragment">
+<p><strong>Payoff from deviating</strong> (play D once, then stuck with (D,D) forever): <span class="math inline">\(u(s_1', s_2^*) = 0 + (-7)\beta + (-7)\beta^2 + \cdots = \frac{-7\beta}{1 - \beta}\)</span></p>
+</div>
+<div class="fragment">
+<p>She will <strong>not deviate</strong> if and only if:</p>
+<p><span class="math display">\[\frac{-1}{1 - \beta} \geq \frac{-7\beta}{1 - \beta} \iff \beta \geq \frac{1}{7}\]</span></p>
+</div>
+</section>
+<section id="grim-trigger-off-path-analysis" class="slide level2">
+<h2>Grim-Trigger: Off-Path Analysis</h2>
+<p>Does player 1 want to deviate from D if a deviation has already happened?</p>
+<p><strong>Payoff from Defect</strong> (play D forever): <span class="math inline">\(u(s_1^*, s_2^*) = (-7) + (-7)\beta + (-7)\beta^2 + \cdots = \frac{-7}{1 - \beta}\)</span></p>
+<div class="fragment">
+<p><strong>Payoff from deviating</strong> (play C once, then back to (D,D)): <span class="math inline">\(u(s_1', s_2^*) = -10 + (-7)\beta + (-7)\beta^2 + \cdots = -3 + \frac{-7}{1 - \beta}\)</span></p>
+</div>
+<div class="fragment">
+<p>Since <span class="math inline">\(\frac{-7}{1-\beta} \geq -3 + \frac{-7}{1-\beta}\)</span> always holds (i.e., <span class="math inline">\(0 \geq -3\)</span>), it is <strong>never profitable</strong> to deviate “off the path” for any <span class="math inline">\(\beta\)</span>.</p>
+</div>
+</section>
+<section id="grim-trigger-cooperation-threshold" class="slide level2">
+<h2>Grim-Trigger: Cooperation Threshold</h2>
+<div class="kg-container" src="plots/grim_trigger_threshold.yml" style="max-width: 900px;">
+
+</div>
+</section>
+<section id="grim-trigger-conclusion" class="slide level2">
+<h2>Grim-Trigger: Conclusion</h2>
+<div title="Key Result: Grim-Trigger as SPNE">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result: Grim-Trigger as SPNE</strong></p>
+</div>
+<div class="callout-content">
+<p>The grim-trigger strategy constitutes a SPNE as long as players are patient enough and value the future payoffs, i.e., <span class="math inline">\(\beta \geq \frac{1}{7}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Intuition:</strong></p>
+<ul>
+<li class="fragment">The short-run <strong>gain from deviating</strong>: get <span class="math inline">\(0\)</span> instead of <span class="math inline">\(-1\)</span> (gain of <span class="math inline">\(1\)</span>)</li>
+<li class="fragment">The long-run <strong>cost of punishment</strong>: get <span class="math inline">\(-7\)</span> instead of <span class="math inline">\(-1\)</span> forever (loss of <span class="math inline">\(6\)</span> per period)</li>
+<li class="fragment">When <span class="math inline">\(\beta\)</span> is large enough, the future cost outweighs the short-run gain</li>
+</ul>
+</div>
 </section></section>
 <section>
 <section id="summary" class="title-slide slide level1 center">
@@ -287,11 +747,12 @@ Fangzhou Yu
 <section id="week-12-key-takeaways" class="slide level2">
 <h2>Week 12: Key Takeaways</h2>
 <ol type="1">
-<li><p><strong>Dynamic games</strong> involve sequential moves; the extensive form (game tree) is the natural representation</p></li>
-<li><p><strong>Subgame perfection</strong> refines Nash equilibrium by requiring optimality in every subgame</p></li>
-<li><p><strong>Backward induction</strong> is the standard solution method for finite perfect information games</p></li>
-<li><p><strong>Stackelberg competition</strong> illustrates first-mover advantage in a sequential quantity-setting game</p></li>
-<li><p><strong>Repeated games</strong> allow for cooperation through strategies like grim-trigger; the discount factor <span class="math inline">\(\beta\)</span> determines whether cooperation is sustainable</p></li>
+<li class="fragment"><p><strong>Dynamic games</strong> involve sequential moves; the extensive form (game tree) is the natural representation</p></li>
+<li class="fragment"><p><strong>Subgame perfection</strong> refines Nash equilibrium by requiring optimality in every subgame — eliminates non-credible threats</p></li>
+<li class="fragment"><p><strong>Backward induction</strong> is the standard solution method for finite perfect information games</p></li>
+<li class="fragment"><p><strong>Stackelberg competition</strong> illustrates first-mover advantage (<span class="math inline">\(q_1^* = 48 &gt; q_2^* = 24\)</span>)</p></li>
+<li class="fragment"><p><strong>Bank runs</strong> arise when rational behavior leads to a coordination failure — a Pareto inferior equilibrium</p></li>
+<li class="fragment"><p><strong>Repeated games</strong> allow for cooperation through strategies like grim-trigger; the discount factor <span class="math inline">\(\beta\)</span> determines whether cooperation is sustainable (<span class="math inline">\(\beta \geq \frac{1}{7}\)</span>)</p></li>
 </ol>
 
 </section></section>
@@ -681,6 +1142,17 @@ Fangzhou Yu
         }
       });
       </script>
+    <script>
+    // Fix KGJS dimensions on hidden RevealJS slides
+    if (typeof Reveal !== 'undefined') {
+      Reveal.on('ready', function() {
+        window.dispatchEvent(new Event('resize'));
+      });
+      Reveal.on('slidechanged', function() {
+        window.dispatchEvent(new Event('resize'));
+      });
+    }
+    </script>
     
 
 </body></html>

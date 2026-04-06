@@ -1,0 +1,14 @@
+schema: EconSchema
+version: 1
+layout:
+  GameMatrixLayout:
+    gameMatrix:
+      players:
+        - Player 1
+        - Player 2
+      strategies:
+        - [Straight, Turn]
+        - [Straight, Turn]
+      payoffs:
+        - [[-5,-5],["'\\\\underline{5}'","'\\\\underline{0}'"]]
+        - [["'\\\\underline{0}'","'\\\\underline{5}'"],[2,2]]

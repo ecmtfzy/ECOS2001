@@ -6,7 +6,7 @@
 <script src="slides_11_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_11_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_11_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_11_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="slides_11_files/libs/quarto-html/quarto-syntax-highlighting-0407d11e67cd6f69fbc5989002fb0851.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Fangzhou Yu">
@@ -122,10 +122,26 @@
       margin-right: 0; 
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/kg.css">
   <style>
+    /* Vertically center content below title */
+    .reveal .slides section {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .reveal .slides section > h2 {
+      flex: none;
+    }
+    .reveal .slides section > h2 + * {
+      margin-top: auto !important;
+    }
+    .reveal .slides section > *:last-child {
+      margin-bottom: auto !important;
+    }
+
+    /* KGJS sizing */
     .kg-container { width: 100%; margin: 0 auto; }
-    /* Scale down KGJS sidebar text to match explanation div font size */
     .kg-container .sidebar {
       font-size: 10pt;
     }
@@ -135,8 +151,26 @@
     .kg-container .sidebar table {
       font-size: 10pt;
     }
+    /* Controls below graphs (no class — KGJS generates plain divs) */
+    .kg-container div {
+      font-size: 10pt !important;
+    }
+
+    /* Center game matrix tables within their KGJS container divs */
+    div:has(> table.gameMatrix) {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    /* Standalone GameMatrixLayout: fit container to content */
+    .game-matrix-only > div {
+      height: auto !important;
+    }
+    .game-matrix-only > div > div {
+      position: relative !important;
+    }
   </style>
-  <script src="js/kg.0.2.7.js"></script>
+  <script src="js/kg3d.0.2.7.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -157,17 +191,8 @@ Fangzhou Yu
     </div>
 </div>
 
-  <p class="date">Mar 2026</p>
+  <p class="date">2026 S1</p>
 </section>
-<section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
-</section>
-<section id="golden-ball" class="slide level2">
-<h2>Golden Ball</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/yM38mRHY150" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-</section></section>
 <section>
 <section id="simultaneous-move-games" class="title-slide slide level1 center">
 <h1>Simultaneous Move Games</h1>
@@ -201,48 +226,9 @@ Fangzhou Yu
 </section>
 <section id="prisoners-dilemma" class="slide level2">
 <h2>Prisoners’ Dilemma</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-C
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-D
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-C
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−1, −1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−10, 0
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-D
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, −10
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−7, −7
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_prisoners_dilemma.yml" style="max-width: 500px;">
+
+</div>
 <div class="fragment">
 <ul>
 <li>Players: Player 1 and Player 2</li>
@@ -296,8 +282,8 @@ D
 </div>
 </div>
 </section>
-<section id="interactive-strict-and-weak-dominance" class="slide level2">
-<h2>Interactive: Strict and Weak Dominance</h2>
+<section id="strict-and-weak-dominance" class="slide level2">
+<h2>Strict and Weak Dominance</h2>
 <p>Adjust the payoffs to explore when strategy A dominates strategy B (and vice versa).</p>
 <div class="kg-container" src="plots/strict_and_weak_dominance.yml" style="max-width: 960px;">
 
@@ -305,59 +291,9 @@ D
 </section>
 <section id="modified-prisoners-dilemma" class="slide level2">
 <h2>Modified Prisoner’s Dilemma</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-C
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-D
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="3">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-C
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−1, −1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−10, 0
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-PD
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−3, −5
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−7, −5
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-D
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, −10
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−7, −7
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_modified_pd.yml" style="max-width: 550px;">
+
+</div>
 </section></section>
 <section>
 <section id="best-response" class="title-slide slide level1 center">
@@ -404,206 +340,38 @@ D
 <p>Is the opposite statement true? I.e., if a strategy is never a best response, then it is dominated?</p>
 </div>
 </section>
-<section id="interactive-beliefs-and-expected-payoffs" class="slide level2">
-<h2>Interactive: Beliefs and Expected Payoffs</h2>
-<p>Explore how a player’s expected payoff from each strategy depends on beliefs about the opponent’s play.</p>
-<div class="kg-container" src="plots/beliefs_and_expected_payoffs.yml" style="max-width: 960px;">
-
-</div>
-</section>
 <section id="best-response-example" class="slide level2">
 <h2>Best Response: Example</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="3">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-A
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-B
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-C
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-D
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 3
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-5, 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-2, 0
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-E
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-2, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-3, 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-4, 3
-</td>
-</tr>
-</tbody></table>
-</section></section>
-<section>
-<section id="iterated-elimination" class="title-slide slide level1 center">
-<h1>Iterated Elimination</h1>
+<div class="kg-container game-matrix-only" src="plots/game_best_response_example.yml" style="max-width: 550px;">
 
+</div>
+<div class="fragment">
+<p>Player 2’s strategy B is <strong>never a best response</strong>: A is better vs D, C is better vs E.</p>
+</div>
+<div class="fragment">
+<p>But B is <strong>not strictly dominated by any PURE strategy</strong>: A gives 0 vs E (&lt; 1), and C gives 0 vs D (&lt; 1).</p>
+</div>
 </section>
 <section id="elimination-of-strictly-dominated-strategies" class="slide level2">
 <h2>Elimination of Strictly Dominated Strategies</h2>
+<p>A rational player will never play a strictly dominated strategy. Since all players know this, we can eliminate dominated strategies and repeat</p>
 <p><strong>Step 1:</strong> Full game</p>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="3">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Left
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Middle
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Right
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Up
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 2
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 1
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Down
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 3
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-2, 0
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_iesds_full.yml" style="max-width: 550px;">
+
+</div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Eliminate “Right” (dominated by “Middle” for Player 2)</p>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Left
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Middle
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Up
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Down
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 3
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 1
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_iesds_step2.yml" style="max-width: 500px;">
+
+</div>
 </div>
 </section>
 <section id="elimination-of-strictly-dominated-strategies-cont." class="slide level2">
 <h2>Elimination of Strictly Dominated Strategies (cont.)</h2>
 <p><strong>Step 3:</strong> Eliminate “Down” (dominated by “Up” for Player 1)</p>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Left
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Middle
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Up
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 2
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_iesds_step3.yml" style="max-width: 500px;">
+
+</div>
 <div class="fragment">
 <p>The solution of the game is <strong>(Up, Middle)</strong>.</p>
 </div>
@@ -669,274 +437,54 @@ Up
 <section id="nash-equilibrium-prisoners-dilemma" class="slide level2">
 <h2>Nash Equilibrium: Prisoner’s Dilemma</h2>
 <p>Prisoner’s Dilemma (best responses underlined):</p>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-C
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-D
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-C
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−1, −1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−10, <u>0</u>
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-D
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>0</u>, −10
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>−7</u>, <u>−7</u>
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_pd_best_responses.yml" style="max-width: 500px;">
+
+</div>
 <div class="fragment">
 <p>The unique Nash equilibrium is <strong>(D, D)</strong> with payoffs <span class="math inline">\((-7, -7)\)</span>.</p>
 </div>
 </section>
 <section id="examples-chicken-game" class="slide level2">
 <h2>Examples: Chicken Game</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Straight
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Turn
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Straight
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−5, −5
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>5</u>, <u>0</u>
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Turn
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>0</u>, <u>5</u>
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-2, 2
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_chicken.yml" style="max-width: 500px;">
+
+</div>
 <div class="fragment">
 <p>Two pure strategy Nash equilibria: <strong>(Straight, Turn)</strong> and <strong>(Turn, Straight)</strong>.</p>
 </div>
 </section>
 <section id="examples-battle-of-the-sexes" class="slide level2">
 <h2>Examples: Battle of the Sexes</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Husband
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Ballet
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Football
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Wife
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Ballet
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>3</u>, <u>2</u>
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 1
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Football
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>2</u>, <u>3</u>
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_battle_of_sexes.yml" style="max-width: 500px;">
+
+</div>
 <div class="fragment">
 <p>Two pure strategy Nash equilibria: <strong>(Ballet, Ballet)</strong> and <strong>(Football, Football)</strong>.</p>
 </div>
 </section>
 <section id="examples-matching-pennies" class="slide level2">
 <h2>Examples: Matching Pennies</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-H
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-T
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-H
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>1</u>, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, <u>1</u>
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-T
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, <u>1</u>
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>1</u>, 0
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_matching_pennies.yml" style="max-width: 500px;">
+
+</div>
 <div class="fragment">
 <p>No pure strategy Nash equilibrium exists in this game.</p>
 </div>
-</section>
-<section id="interactive-matching-pennies-best-responses" class="slide level2">
-<h2>Interactive: Matching Pennies — Best Responses</h2>
-<p>Each player’s best response depends on the opponent’s mixing probability. The equilibrium is where both play 50-50.</p>
-<div class="kg-container" src="plots/matching_pennies.yml">
-
-</div>
-</section>
-<section id="interactive-mixed-strategy-equilibrium" class="slide level2">
-<h2>Interactive: Mixed Strategy Equilibrium</h2>
-<p>The best response functions intersect at the mixed strategy Nash equilibrium.</p>
-<div class="kg-container" src="plots/mixed_strategy_equilibrium.yml">
-
-</div>
-</section></section>
-<section>
-<section id="applications" class="title-slide slide level1 center">
-<h1>Applications</h1>
-
-</section>
-<section id="beautiful-mind" class="slide level2">
-<h2>Beautiful Mind</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/LJS7Igvk6ZM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-<div class="fragment">
-<p>Why is the proposed behavior in the movie not a Nash equilibrium?</p>
-</div>
-<div class="fragment">
-<p>What is the pure strategy Nash equilibrium in this game?</p>
-</div>
-</section>
-<section id="beautiful-mind-the-game" class="slide level2">
-<h2>Beautiful Mind: The Game</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="2">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Blonde
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Brunette
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="2">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Blonde
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-2, 1
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-Brunette
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 2
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-1, 1
-</td>
-</tr>
-</tbody></table>
 </section></section>
 <section>
 <section id="continuous-strategy-spaces" class="title-slide slide level1 center">
 <h1>Continuous Strategy Spaces</h1>
 
+</section>
+<section id="from-discrete-to-continuous-strategies" class="slide level2">
+<h2>From Discrete to Continuous Strategies</h2>
+<p>So far we have only considered games where each player’s strategy space is a <strong>finite set</strong> of discrete actions (e.g., Confess/Defect, Heads/Tails).</p>
+<div class="fragment">
+<p>But many settings involve a <strong>continuum</strong> of possible strategies — for example, firms choosing quantities or prices.</p>
+</div>
+<div class="fragment">
+<p>The concepts are the same: we still look for <strong>mutual best responses</strong>. The main difference is that we can no longer write down the game in matrix form. Instead, we derive best response <strong>functions</strong> by maximizing payoffs with respect to the chosen strategy, conditional on opponents’ strategies.</p>
+</div>
 </section>
 <section id="cournot-oligopoly-continuous-strategy-space" class="slide level2">
 <h2>Cournot Oligopoly (Continuous Strategy Space)</h2>
@@ -951,16 +499,92 @@ Brunette
 <p><span class="math display">\[\max_{q_1} P(q_1 + q_2) \cdot q_1 - c_1(q_1)\]</span></p>
 </div>
 </section>
-<section id="golden-ball-2" class="slide level2">
-<h2>Golden Ball 2</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/S0qjK3TWZE8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<section id="running-example" class="slide level2">
+<h2>Running Example</h2>
+<p>Two identical firms with <span class="math inline">\(c_1(q) = c_2(q) = q\)</span> and market demand <span class="math inline">\(P = 100 - Q\)</span>.</p>
 <div class="fragment">
-<p>What happened here???</p>
+<p><strong>Firm 1’s problem:</strong></p>
+<p><span class="math display">\[\pi_1 = (100 - q_1 - q_2)q_1 - q_1 \to \max_{q_1}\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>FOC:</strong> <span class="math inline">\(\dfrac{\partial \pi_1}{\partial q_1} = 100 - 2q_1 - q_2 - 1 = 0\)</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[BR_1(q_2) = q_1 = \frac{99 - q_2}{2}\]</span></p>
+<p>By symmetry: <span class="math inline">\(BR_2(q_1) = q_2 = \dfrac{99 - q_1}{2}\)</span></p>
 </div>
 </section>
-<section id="princess-bride" class="slide level2">
-<h2>Princess Bride</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/rMz7JBRbmNo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<section id="cournot-equilibrium" class="slide level2">
+<h2>Cournot Equilibrium</h2>
+<p>Solving the system <span class="math inline">\(q_1 = \frac{99 - q_2}{2}\)</span> and <span class="math inline">\(q_2 = \frac{99 - q_1}{2}\)</span>:</p>
+<p><span class="math display">\[q_1^* = q_2^* = 33, \qquad Q^* = 66, \qquad P^* = 34\]</span></p>
+<div class="fragment">
+<p>Profit of each firm: <span class="math inline">\(\pi_1 = \pi_2 = 34 \times 33 - 33 = 1089\)</span></p>
+</div>
+<div class="fragment">
+<div title="Key Result: Cournot vs Perfect Competition">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Result: Cournot vs Perfect Competition</strong></p>
+</div>
+<div class="callout-content">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Cournot</th>
+<th>Perfect Competition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Price</td>
+<td><span class="math inline">\(P_O = 34\)</span></td>
+<td><span class="math inline">\(P_C = MC = 1\)</span></td>
+</tr>
+<tr class="even">
+<td>Quantity</td>
+<td><span class="math inline">\(Q_O = 66\)</span></td>
+<td><span class="math inline">\(Q_C = 99\)</span></td>
+</tr>
+<tr class="odd">
+<td>Profit</td>
+<td><span class="math inline">\(\pi = 1089\)</span> each</td>
+<td><span class="math inline">\(\pi = 0\)</span></td>
+</tr>
+<tr class="even">
+<td>Consumer surplus</td>
+<td><span class="math inline">\(CS_O = 2178\)</span></td>
+<td><span class="math inline">\(CS_C = 4900.5\)</span></td>
+</tr>
+<tr class="odd">
+<td>Total surplus</td>
+<td><span class="math inline">\(TS_O = 4356\)</span></td>
+<td><span class="math inline">\(TS_C = 4900.5\)</span></td>
+</tr>
+<tr class="even">
+<td>Deadweight loss</td>
+<td><span class="math inline">\(DWL = 544.5\)</span></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="cournot-residual-demand" class="slide level2">
+<h2>Cournot Residual Demand</h2>
+<p>Each firm faces a <strong>residual demand curve</strong> that shifts left as the rival produces more. Drag <span class="math inline">\(q_1\)</span> or <span class="math inline">\(q_2\)</span> to see.</p>
+<div class="kg-container" src="plots/cournot_residual_demand.yml" style="max-width: 960px;">
+
+</div>
 </section></section>
 <section>
 <section id="mixed-strategies" class="title-slide slide level1 center">
@@ -969,71 +593,9 @@ Brunette
 </section>
 <section id="rock-paper-scissors" class="slide level2">
 <h2>Rock, Paper, Scissors</h2>
-<table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.85em;">
-<tbody><tr>
-<td style="border: none;" colspan="2" rowspan="2">
-</td>
-<td style="border: none; font-weight: bold;" colspan="3">
-Player 2
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-R
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-P
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-S
-</td>
-</tr>
-<tr>
-<td style="border: none; font-weight: bold;" rowspan="3">
-Player 1
-</td>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-R
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−1, <u>1</u>
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>1</u>, −1
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-P
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>1</u>, −1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 0
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−1, <u>1</u>
-</td>
-</tr>
-<tr>
-<td style="border: 1px solid; padding: 10px 20px; font-weight: bold;">
-S
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-−1, <u>1</u>
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-<u>1</u>, −1
-</td>
-<td style="border: 1px solid; padding: 10px 20px;">
-0, 0
-</td>
-</tr>
-</tbody></table>
+<div class="kg-container game-matrix-only" src="plots/game_rps.yml" style="max-width: 600px;">
+
+</div>
 <div class="fragment">
 <p>There is no Nash equilibrium in pure strategies. But do you play a pure strategy in this game?</p>
 </div>
@@ -1056,6 +618,13 @@ S
 </div>
 </div>
 <div class="fragment">
+<p><strong>Example:</strong> In RPS, suppose Player 1 plays <span class="math inline">\(0.4R + 0.6S\)</span>. Player 2’s expected payoffs:</p>
+<p><span class="math display">\[u_2(R) = 0.4 \times 0 + 0.6 \times 1 = 0.6 \qquad u_2(P) = 0.4 \times 1 + 0.6 \times (-1) = -0.2\]</span></p>
+<p>So <span class="math inline">\(BR_2(0.4R + 0.6S) = R\)</span>.</p>
+</div>
+</section>
+<section id="best-responses-to-mixed-strategies" class="slide level2">
+<h2>Best Responses to Mixed Strategies</h2>
 <div title="Definition: Best Response to Mixed Strategies">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -1073,6 +642,16 @@ S
 </div>
 </div>
 </div>
+<div class="fragment">
+<p>In general, if Player 1 believes Player 2 plays <span class="math inline">\(L\)</span> with probability <span class="math inline">\(q\)</span>:</p>
+<p><span class="math display">\[\mathbb{E}[u_1(s_i)] = q \cdot u_1(s_i, L) + (1-q) \cdot u_1(s_i, R)\]</span></p>
+</div>
+</section>
+<section id="beliefs-and-expected-payoffs" class="slide level2">
+<h2>Beliefs and Expected Payoffs</h2>
+<p>Drag <span class="math inline">\(q\)</span> to see how beliefs determine which strategy is the best response.</p>
+<div class="kg-container" src="plots/beliefs_and_expected_payoffs.yml" style="max-width: 960px;">
+
 </div>
 </section>
 <section id="mixed-strategy-nash-equilibrium" class="slide level2">
@@ -1111,10 +690,45 @@ S
 </div>
 </div>
 </section>
-<section id="interactive-dominance-by-a-mixed-strategy" class="slide level2">
-<h2>Interactive: Dominance by a Mixed Strategy</h2>
-<p>A pure strategy can be dominated by a mixture of other pure strategies, even if no single pure strategy dominates it.</p>
-<div class="kg-container" src="plots/dominance_by_mixed.yml" style="max-width: 960px;">
+<section id="finding-the-msne-matching-pennies" class="slide level2">
+<h2>Finding the MSNE: Matching Pennies</h2>
+<p>Recall: no pure strategy NE exists. Let Player 1 play <span class="math inline">\(H\)</span> with probability <span class="math inline">\(q\)</span> and Player 2 play <span class="math inline">\(H\)</span> with probability <span class="math inline">\(p\)</span>.</p>
+<div class="kg-container game-matrix-only" src="plots/game_matching_pennies.yml" style="max-width: 500px;">
+
+</div>
+<div class="fragment">
+<p><strong>Player 1’s expected payoffs</strong> (wins if match):</p>
+<p><span class="math display">\[u_1(H) = p \cdot 1 + (1-p) \cdot (-1) = 2p - 1 \qquad u_1(T) = p \cdot (-1) + (1-p) \cdot 1 = 1 - 2p\]</span></p>
+<p>Player 1 is indifferent when <span class="math inline">\(2p - 1 = 1 - 2p\)</span>, i.e.&nbsp;<span class="math inline">\(p^* = \frac{1}{2}\)</span>.</p>
+</div>
+</section>
+<section id="finding-the-msne-matching-pennies-cont." class="slide level2">
+<h2>Finding the MSNE: Matching Pennies (cont.)</h2>
+<p><strong>Player 2’s expected payoffs</strong> (wins if don’t match):</p>
+<p><span class="math display">\[u_2(H) = q \cdot (-1) + (1-q) \cdot 1 = 1 - 2q \qquad u_2(T) = q \cdot 1 + (1-q) \cdot (-1) = 2q - 1\]</span></p>
+<p>Player 2 is indifferent when <span class="math inline">\(1 - 2q = 2q - 1\)</span>, i.e.&nbsp;<span class="math inline">\(q^* = \frac{1}{2}\)</span>.</p>
+<div class="fragment">
+<div title="Key Insight">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Insight</strong></p>
+</div>
+<div class="callout-content">
+<p>The unique MSNE is <span class="math inline">\(\left(\frac{1}{2}H + \frac{1}{2}T,\; \frac{1}{2}H + \frac{1}{2}T\right)\)</span>. Each player’s mixing probability is determined by making the <strong>opponent</strong> indifferent.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="matching-pennies-mixed-strategy-equilibrium" class="slide level2">
+<h2>Matching Pennies: Mixed Strategy Equilibrium</h2>
+<p>Each player’s best response depends on the opponent’s mixing probability. The BR functions intersect at the MSNE <span class="math inline">\((p^*, q^*) = (\frac{1}{2}, \frac{1}{2})\)</span>.</p>
+<div class="kg-container" src="plots/mixed_strategy_equilibrium.yml" style="max-width: 960px;">
 
 </div>
 </section></section>
@@ -1127,11 +741,10 @@ S
 <h2>Week 11: Key Takeaways</h2>
 <ol type="1">
 <li><p>A <strong>game</strong> is defined by players, strategy sets, and payoff functions</p></li>
-<li><p>A <strong>strictly dominant strategy</strong> is the best response to every possible opponent strategy</p></li>
-<li><p><strong>Iterated elimination</strong> of strictly dominated strategies can sometimes solve a game</p></li>
+<li><p>A <strong>strictly dominated</strong> strategy is never a best response and can be safely eliminated; <strong>iterated elimination</strong> can sometimes solve a game</p></li>
 <li><p>A <strong>Nash equilibrium</strong> is a strategy profile where every player is playing a best response</p></li>
-<li><p>Some games have no pure strategy NE, motivating <strong>mixed strategies</strong> – probability distributions over pure strategies</p></li>
-<li><p>A <strong>mixed strategy NE</strong> always exists (Nash’s Theorem)</p></li>
+<li><p>In <strong>continuous strategy spaces</strong> (e.g., Cournot), we derive best response <strong>functions</strong> by maximizing payoffs and find the NE by solving the system</p></li>
+<li><p>A <strong>mixed strategy</strong> is a probability distribution over pure strategies; to find the MSNE, make each player <strong>indifferent</strong> between the strategies they mix over</p></li>
 </ol>
 
 </section></section>

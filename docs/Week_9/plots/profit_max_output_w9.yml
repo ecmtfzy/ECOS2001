@@ -1,0 +1,199 @@
+schema: EconSchema
+colors:
+  marginalCost: colors.orange
+  averageCost: colors.purple
+  totalCost: colors.red
+params:
+  - { name: q, value: 25, min: 1, max: 100, round: 1 }
+  - name: p
+    value: 8
+    min: 1
+    max: 12
+    round: 0.5
+calcs:
+  tc: (72 + (2/3)*params.q^1.5)
+  mc: (sqrt(params.q))
+  ac: (calcs.tc/params.q)
+  tr: (params.q * params.p)
+  profit: (calcs.tr - calcs.tc)
+layout:
+  TwoVerticalGraphsPlusSidebar:
+    topGraph:
+      yAxis:
+        title: Dollars
+        max: 900
+        min: -200
+        ticks: 1
+      xAxis:
+        max: 100
+        ticks: 0
+      objects:
+
+        # Total Cost
+        - Curve:
+            fn: 72 + (2/3)*(x)^1.5
+            color: shortRun
+            label:
+              text: TC
+              x: 95
+              position: bl
+              bgcolor: none
+
+        - Point:
+            coordinates: [ params.q, calcs.tc ]
+            color: shortRun
+            drag:
+              - horizontal: q
+            droplines:
+              vertical:
+              horizontal: calcs.tc.toFixed(0)
+
+        - Line:
+            point: [ params.q, calcs.tc ]
+            slope: calcs.mc
+            min: params.q-8
+            max: params.q+8
+            color: marginalCost
+            label:
+              text: "`MC = ${calcs.mc.toFixed(1)}`"
+              x: params.q+8
+              position: tl
+              fontSize: 9
+
+        # Total revenue
+        - Line:
+            slope: params.p
+            color: green
+            label:
+              text: TR
+              x: 95
+              position: tl
+              bgcolor: none
+
+        - Point:
+            coordinates: [ params.q, calcs.tr ]
+            color: green
+            drag:
+              - horizontal: q
+            droplines:
+              vertical:
+              horizontal: calcs.tr.toFixed(0)
+
+        # Total profit
+        - Curve:
+            fn: params.p*(x) - 72 - (2/3)*(x)^1.5
+            color: purple
+            label:
+              text: \text{Profit/Loss}
+              x: 90
+              position: bl
+
+        - Point:
+            coordinates: [ params.q, calcs.profit ]
+            color: purple
+            drag:
+              - horizontal: q
+            droplines:
+              vertical: params.q.toFixed(0)
+              horizontal: calcs.profit.toFixed(0)
+
+
+    bottomGraph:
+      yAxis:
+        title: Dollars per Unit
+        max: 15
+        ticks: 1
+      xAxis:
+        title: Output ($q$)
+        max: 100
+        ticks: 0
+      objects:
+
+        # Average cost
+        - Curve:
+            fn: 72/(x) + (2/3)*sqrt(x)
+            color: averageCost
+            label:
+              text: AC
+              x: 95
+              position: bl
+              bgcolor: none
+
+        - Point:
+            coordinates: [ params.q, calcs.ac ]
+            color: averageCost
+            drag:
+              - horizontal: q
+            droplines:
+              vertical:
+              horizontal: calcs.ac.toFixed(1)
+
+        # Marginal cost
+        - Curve:
+            fn: sqrt(x)
+            color: marginalCost
+            label:
+              text: MC
+              x: 95
+              position: tl
+
+        - Point:
+            coordinates: [ params.q, calcs.mc ]
+            color: marginalCost
+            drag:
+              - horizontal: q
+            droplines:
+              vertical:
+              horizontal: calcs.mc.toFixed(1)
+
+        # Average revenue
+        - Line:
+            yIntercept: params.p
+            color: demand
+            label:
+              text: D = AR = MR
+              x: 95
+              position: t
+              bgcolor: none
+
+        - Point:
+            coordinates: [ params.q, params.p ]
+            color: demand
+            drag:
+              - horizontal: q
+            droplines:
+              vertical: params.q.toFixed(0)
+              horizontal: params.p.toFixed(0)
+
+        ## Profit
+        - Rectangle:
+            x1: 0
+            y1: calcs.ac
+            x2: params.q
+            y2: params.p
+            color: profit
+            show: (calcs.profit > 0)
+            label:
+              text: "`\\\\text{Profit = ${calcs.profit.toFixed(0)}}`"
+
+        - Rectangle:
+            x1: 0
+            y1: calcs.ac
+            x2: params.q
+            y2: params.p
+            color: loss
+            show: (calcs.profit < 0)
+            label:
+              text: "`\\\\text{Loss = ${(-calcs.profit).toFixed(0)}}`"
+
+
+    sidebar:
+      controls:
+        - title: Competitive Firm Profit Maximization
+          divs:
+            - html: "`From $f(L,K) = L^{2/3}K^{1/3}$ with $w=4$, $r=2$, $\\\\overline{K}=36$: $$c(q) = 72 + \\\\tfrac{2}{3}q^{3/2}, \\\\quad MC = \\\\sqrt{q}$$`"
+          sliders:
+            - param: p
+              label: p
+            - param: q
+              label: q

@@ -1,0 +1,15 @@
+schema: EconSchema
+version: 1
+layout:
+  GameMatrixLayout:
+    gameMatrix:
+      players:
+        - Player 1
+        - Player 2
+      strategies:
+        - [C, PD, D]
+        - [C, D]
+      payoffs:
+        - [[-1,-1],[-10,0]]
+        - [[-3,-5],[-7,-5]]
+        - [[0,-10],[-7,-7]]

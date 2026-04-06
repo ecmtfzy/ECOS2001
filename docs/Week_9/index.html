@@ -125,8 +125,23 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/kg.css">
   <style>
+    /* Vertically center content below title */
+    .reveal .slides section {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .reveal .slides section > h2 {
+      flex: none;
+    }
+    .reveal .slides section > h2 + * {
+      margin-top: auto !important;
+    }
+    .reveal .slides section > *:last-child {
+      margin-bottom: auto !important;
+    }
+
+    /* KGJS sizing */
     .kg-container { width: 100%; margin: 0 auto; }
-    /* Scale down KGJS sidebar text to match explanation div font size */
     .kg-container .sidebar {
       font-size: 10pt;
     }
@@ -137,7 +152,7 @@
       font-size: 10pt;
     }
   </style>
-  <script src="js/kg.0.2.7.js"></script>
+  <script src="js/kg3d.0.2.7.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -158,7 +173,7 @@ Fangzhou Yu
     </div>
 </div>
 
-  <p class="date">Mar 2026</p>
+  <p class="date">2026 S1</p>
 </section>
 <section>
 <section id="short-run-costs" class="title-slide slide level1 center">
@@ -180,7 +195,7 @@ Fangzhou Yu
 <section id="the-short-run-cost-minimisation-problem" class="slide level2">
 <h2>The Short-Run Cost Minimisation Problem</h2>
 <p>Capital is fixed at <span class="math inline">\(\bar{K}\)</span>. The firm chooses only labour <span class="math inline">\(L\)</span>.</p>
-<p><span class="math display">\[\min_{L} \; r\bar{K} + wL \quad \text{s.t.} \; F(\bar{K}, L) = q\]</span></p>
+<p><span class="math display">\[\min_{L} \; r\bar{K} + wL \quad \text{s.t.} \; f(\bar{K}, L) = q\]</span></p>
 <div class="fragment">
 <p>The constraint pins down <span class="math inline">\(L\)</span> as a function of <span class="math inline">\(q\)</span> and <span class="math inline">\(\bar{K}\)</span>: the <strong>short-run conditional demand for labour</strong> <span class="math inline">\(L^c(q \mid \bar{K})\)</span>.</p>
 </div>
@@ -189,16 +204,16 @@ Fangzhou Yu
 <p><span class="math display">\[c_{SR}(q) = \underbrace{r\bar{K}}_{\text{fixed cost}} + \underbrace{w \, L^c(q \mid \bar{K})}_{\text{variable cost}}\]</span></p>
 </div>
 </section>
-<section id="interactive-short-run-expansion-path-and-production-function" class="slide level2">
-<h2>Interactive: Short-Run Expansion Path and Production Function</h2>
+<section id="short-run-expansion-path-and-production-function" class="slide level2">
+<h2>Short-Run Expansion Path and Production Function</h2>
 <p>The top panel shows isoquants with the horizontal expansion path at <span class="math inline">\(\bar{K}\)</span>. The bottom panel shows the short-run production function <span class="math inline">\(f(L \mid \bar{K})\)</span>.</p>
 <div class="kg-container" src="plots/sr_exp_path_and_prod_fn.yml" style="max-width: 900px;">
 
 </div>
 </section>
-<section id="worked-example-cobb-douglas-sr-cost" class="slide level2">
-<h2>Worked Example — Cobb-Douglas SR Cost</h2>
-<p><span class="math inline">\(F(K, L) = K^{1/3} L^{2/3}\)</span>, <span class="math inline">\(r = 2\)</span>, <span class="math inline">\(w = 4\)</span>, <span class="math inline">\(\bar{K} = 100\)</span>.</p>
+<section id="running-example-cobb-douglas-sr-cost" class="slide level2">
+<h2>Running Example — Cobb-Douglas SR Cost</h2>
+<p><span class="math inline">\(f(K, L) = K^{1/3} L^{2/3}\)</span>, <span class="math inline">\(r = 2\)</span>, <span class="math inline">\(w = 4\)</span>, <span class="math inline">\(\bar{K} = 100\)</span>.</p>
 <div class="fragment">
 <p>From the constraint: <span class="math inline">\(\bar{K}^{1/3} L^{2/3} = q \;\Rightarrow\; L^{2/3} = q \, \bar{K}^{-1/3}\)</span></p>
 <p><span class="math display">\[L = q^{3/2} \bar{K}^{-1/2} = q^{3/2} / 10 = 0.1\, q^{3/2}\]</span></p>
@@ -208,6 +223,22 @@ Fangzhou Yu
 </div>
 <div class="fragment">
 <p>Compare with <strong>long-run cost</strong>: <span class="math inline">\(c(q) = 6q\)</span> (linear in <span class="math inline">\(q\)</span>) — a very different shape!</p>
+</div>
+</section></section>
+<section>
+<section id="types-of-costs" class="title-slide slide level1 center">
+<h1>Types of Costs</h1>
+
+</section>
+<section id="types-of-costs-definitions" class="slide level2">
+<h2>Types of Costs — Definitions</h2>
+<ul>
+<li><p><strong>Total cost (TC):</strong> <span class="math inline">\(c(q) = FC + VC(q)\)</span></p></li>
+<li><p><strong>Fixed cost (FC):</strong> costs associated with fixed inputs; does not depend on <span class="math inline">\(q\)</span>. (<span class="math inline">\(\frac{\partial FC}{\partial q} = 0\)</span>)</p></li>
+<li><p><strong>Variable cost (VC):</strong> costs associated with variable inputs; depends on <span class="math inline">\(q\)</span>. (<span class="math inline">\(\frac{\partial VC}{\partial q} &gt; 0\)</span>)</p></li>
+</ul>
+<div class="fragment">
+<p>In our Cobb-Douglas example: <span class="math inline">\(FC = r\bar{K} = 200\)</span>, <span class="math inline">\(\; VC(q) = 0.4\, q^{3/2}\)</span>.</p>
 </div>
 </section>
 <section id="visualising-short-run-total-costs" class="slide level2">
@@ -234,22 +265,6 @@ Fangzhou Yu
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
-<section id="types-of-costs" class="title-slide slide level1 center">
-<h1>Types of Costs</h1>
-
-</section>
-<section id="types-of-costs-definitions" class="slide level2">
-<h2>Types of Costs — Definitions</h2>
-<ul>
-<li><p><strong>Total cost (TC):</strong> <span class="math inline">\(c(q) = FC + VC(q)\)</span></p></li>
-<li><p><strong>Fixed cost (FC):</strong> costs associated with fixed inputs; does not depend on <span class="math inline">\(q\)</span>. (<span class="math inline">\(\frac{\partial FC}{\partial q} = 0\)</span>)</p></li>
-<li><p><strong>Variable cost (VC):</strong> costs associated with variable inputs; depends on <span class="math inline">\(q\)</span>. (<span class="math inline">\(\frac{\partial VC}{\partial q} &gt; 0\)</span>)</p></li>
-</ul>
-<div class="fragment">
-<p>In our Cobb-Douglas example: <span class="math inline">\(FC = r\bar{K} = 200\)</span>, <span class="math inline">\(\; VC(q) = 0.4\, q^{3/2}\)</span>.</p>
-</div>
 </section>
 <section id="average-costs-definitions" class="slide level2">
 <h2>Average Costs — Definitions</h2>
@@ -276,14 +291,14 @@ Fangzhou Yu
 </ul>
 </div>
 </section>
-<section id="interactive-mpl-and-mc-relationship" class="slide level2">
-<h2>Interactive: MPL and MC Relationship</h2>
+<section id="mpl-and-mc-relationship" class="slide level2">
+<h2>MPL and MC Relationship</h2>
 <div class="kg-container" src="plots/mpl_and_mc.yml" style="max-width: 960px;">
 
 </div>
 </section>
-<section id="worked-example-cost-curves-for-cobb-douglas" class="slide level2">
-<h2>Worked Example — Cost Curves for Cobb-Douglas</h2>
+<section id="running-example-cost-curves-for-cobb-douglas" class="slide level2">
+<h2>Running Example — Cost Curves for Cobb-Douglas</h2>
 <p>From <span class="math inline">\(c_{SR}(q) = 200 + 0.4\, q^{3/2}\)</span>:</p>
 <table class="caption-top">
 <thead>
@@ -331,8 +346,8 @@ Fangzhou Yu
 <h1>Cost Curve Relationships</h1>
 
 </section>
-<section id="the-gpa-analogy-mc-pulls-ac" class="slide level2">
-<h2>The GPA Analogy — MC “Pulls” AC</h2>
+<section id="mc-pulls-ac" class="slide level2">
+<h2>MC “Pulls” AC</h2>
 <p>Think of AC as your <strong>cumulative GPA</strong>, and MC as the <strong>grade in this class</strong>.</p>
 <ul>
 <li>If your grade this semester (MC) is <strong>above</strong> your GPA (AC), your GPA <strong>rises</strong>.</li>
@@ -344,22 +359,25 @@ Fangzhou Yu
 <p>So AC is increasing when <span class="math inline">\(MC &gt; AC\)</span> and decreasing when <span class="math inline">\(MC &lt; AC\)</span>.</p>
 </div>
 </section>
-<section id="key-relationships-mc-intersects-ac-and-avc-at-their-minima" class="slide level2">
-<h2>Key Relationships — MC Intersects AC and AVC at Their Minima</h2>
+<section id="mc-intersects-ac-and-avc-at-their-minima" class="slide level2">
+<h2>MC Intersects AC and AVC at Their Minima</h2>
 <p><strong>Rule 1:</strong> As <span class="math inline">\(q \to \infty\)</span>, <span class="math inline">\(AC \to AVC\)</span> (since <span class="math inline">\(AFC \to 0\)</span>).</p>
 <p><strong>Rule 2:</strong> MC intersects AVC and AC at their respective <strong>minima</strong>.</p>
 <div class="callout callout-note no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p><em>Proof for AVC:</em> <span class="math inline">\(\min_q AVC = \min_q \frac{VC}{q}\)</span>. FOC: <span class="math inline">\(\frac{MC \cdot q - VC}{q^2} = 0 \;\Rightarrow\; MC = \frac{VC}{q} = AVC\)</span>. Same logic applies to AC.</p>
+<p><em>Proof for AVC:</em> <span class="math inline">\(\min_q AVC = \min_q \frac{VC}{q}\)</span>.</p>
+<p>FOC: <span class="math inline">\(\frac{MC \cdot q - VC}{q^2} = 0 \;\Rightarrow\; MC = \frac{VC}{q} = AVC\)</span>.</p>
+<p>Same logic applies to AC.</p>
 </div>
 </div>
 </div>
 <p><strong>Rule 3:</strong> If MC is increasing, then <span class="math inline">\(q_{\min AVC} &lt; q_{\min AC}\)</span>.</p>
 <p><em>Graphical interpretation:</em> MC is the slope of the TC curve; AC is the slope of a ray from the origin. MC = AC when the ray is tangent to TC.</p>
 </section>
-<section id="interactive-marginal-and-average-costs" class="slide level2">
-<h2>Interactive: Marginal and Average Costs</h2>
+<section id="marginal-and-average-costs" class="slide level2">
+<h2>Marginal and Average Costs</h2>
+<p>This plot uses <span class="math inline">\(c(q) = 5 + 14q - 5q^2 + q^3\)</span>, which produces U-shaped cost curves. Note MC crosses AVC at its minimum (<span class="math inline">\(q = 2.5\)</span>).</p>
 <div class="kg-container" src="plots/marginal_and_average.yml" style="max-width: 900px;">
 
 </div>
@@ -388,7 +406,7 @@ Fangzhou Yu
 </section>
 <section id="sr-vs-lr-costs-leontief-technology" class="slide level2">
 <h2>SR vs LR Costs — Leontief Technology</h2>
-<p><span class="math inline">\(F(K, L) = (\min(K, 2L))^2\)</span>, <span class="math inline">\(\; r = 2\)</span>, <span class="math inline">\(w = 1\)</span>, <span class="math inline">\(\bar{K} = 10\)</span>.</p>
+<p><span class="math inline">\(f(K, L) = (\min(K, 2L))^2\)</span>, <span class="math inline">\(\; r = 2\)</span>, <span class="math inline">\(w = 1\)</span>, <span class="math inline">\(\bar{K} = 10\)</span>.</p>
 <div class="fragment">
 <p><strong>Long run:</strong> At corner of isoquant, <span class="math inline">\(K = 2L\)</span>. Then <span class="math inline">\(q = K^2\)</span>, so <span class="math inline">\(K = \sqrt{q}\)</span>, <span class="math inline">\(L = \frac{\sqrt{q}}{2}\)</span>.</p>
 <p><span class="math display">\[c(q) = 2\sqrt{q} + 0.5\sqrt{q} = 2.5\sqrt{q}\]</span></p>
@@ -401,7 +419,7 @@ Fangzhou Yu
 </section>
 <section id="sr-vs-lr-costs-perfect-substitutes-technology" class="slide level2">
 <h2>SR vs LR Costs — Perfect Substitutes Technology</h2>
-<p><span class="math inline">\(F(K, L) = (K + 2L)^{1/2}\)</span>, <span class="math inline">\(\; r = 2\)</span>, <span class="math inline">\(w = 3\)</span>, <span class="math inline">\(\bar{K} = 10\)</span>.</p>
+<p><span class="math inline">\(f(K, L) = (K + 2L)^{1/2}\)</span>, <span class="math inline">\(\; r = 2\)</span>, <span class="math inline">\(w = 3\)</span>, <span class="math inline">\(\bar{K} = 10\)</span>.</p>
 <div class="fragment">
 <p><strong>Long run:</strong> Compare cost-effectiveness: <span class="math inline">\(\frac{1}{r} = \frac{1}{2}\)</span> vs <span class="math inline">\(\frac{2}{w} = \frac{2}{3}\)</span>. Since <span class="math inline">\(\frac{1}{r} &lt; \frac{2}{w}\)</span>, labour is more productive per dollar → use only labour. <span class="math inline">\(2L = q^2\)</span>, so <span class="math inline">\(L = q^2/2\)</span>.</p>
 <p><span class="math display">\[c(q) = 1.5\, q^2 \qquad \text{DRS technology; } AC = 1.5q \text{ is increasing.}\]</span></p>
@@ -429,10 +447,10 @@ Fangzhou Yu
 <p><strong>Graphically:</strong> profit <span class="math inline">\(= (p - AC) \times q\)</span>.</p>
 </div>
 </section>
-<section id="interactive-profit-maximisation" class="slide level2">
-<h2>Interactive: Profit Maximisation</h2>
-<p>Drag the output slider to see how revenue, cost, and profit respond. The firm maximises profit where <span class="math inline">\(p = MC\)</span>.</p>
-<div class="kg-container" src="plots/profit_max_price_response.yml" style="max-width: 900px;">
+<section id="profit-maximisation" class="slide level2">
+<h2>Profit Maximisation</h2>
+<p>Drag the output slider to see how revenue, cost, and profit respond. The firm maximises profit where <span class="math inline">\(p = MC\)</span>. Uses the running example with <span class="math inline">\(\bar{K} = 36\)</span>.</p>
+<div class="kg-container" src="plots/profit_max_output_w9.yml" style="max-width: 900px;">
 
 </div>
 </section>
@@ -465,25 +483,25 @@ Fangzhou Yu
 <p><strong>Conclusion:</strong> The firm shuts down if and only if <span class="math inline">\(p &lt; AVC\)</span> at the profit-maximising quantity.</p>
 </div>
 </section>
-<section id="interactive-shut-down-condition" class="slide level2">
-<h2>Interactive: Shut-Down Condition</h2>
-<p>Lower the price to see when the firm should shut down. The top panel shows TR vs VC; the bottom panel shows MC, AVC, and the price line.</p>
-<div class="kg-container" src="plots/shutdown.yml" style="max-width: 900px;">
-
-</div>
-</section>
 <section id="the-shut-down-price" class="slide level2">
 <h2>The Shut-Down Price</h2>
 <p>The <strong>shut-down price</strong> is the borderline: <span class="math inline">\(p_{\text{shut}} = \min AVC = MC\)</span> at <span class="math inline">\(q_{\min AVC}\)</span>.</p>
 <div class="fragment">
-<p><strong>Worked example:</strong> <span class="math inline">\(c(q) = 5 + 14q - 5q^2 + q^3\)</span>.</p>
+<p><strong>Running example:</strong> <span class="math inline">\(c(q) = 5 + 14q - 5q^2 + q^3\)</span>.</p>
 <ul>
 <li><span class="math inline">\(AVC = 14 - 5q + q^2\)</span>. FOC: <span class="math inline">\(-5 + 2q = 0 \;\Rightarrow\; q = 2.5\)</span>.</li>
 <li><span class="math inline">\(p_{\text{shut}} = 14 - 5(2.5) + 2.5^2 = 7.75\)</span>.</li>
 </ul>
 </div>
 <div class="fragment">
-<p>Verify: <span class="math inline">\(MC = 14 - 10q + 3q^2\)</span>; at <span class="math inline">\(q = 2.5\)</span>: <span class="math inline">\(MC = 14 - 25 + 18.75 = 7.75\)</span>. ✓</p>
+<p>Verify: <span class="math inline">\(MC = 14 - 10q + 3q^2\)</span>; at <span class="math inline">\(q = 2.5\)</span>: <span class="math inline">\(MC = 14 - 25 + 18.75 = 7.75\)</span>.</p>
+</div>
+</section>
+<section id="shut-down-condition" class="slide level2">
+<h2>Shut-Down Condition</h2>
+<p>Using the same <span class="math inline">\(c(q) = 5 + 14q - 5q^2 + q^3\)</span>. Lower the price below <span class="math inline">\(7.75\)</span> to see the firm shut down.</p>
+<div class="kg-container" src="plots/shutdown.yml" style="max-width: 900px;">
+
 </div>
 </section>
 <section id="short-run-supply-curve" class="slide level2">
@@ -492,8 +510,9 @@ Fangzhou Yu
 <p><span class="math display">\[q^*(p) = \begin{cases} 0 &amp; \text{if } p &lt; p_{\text{shut}} \\ MC^{-1}(p) &amp; \text{if } p \geq p_{\text{shut}} \end{cases}\]</span></p>
 <p><strong>Graphically:</strong> the SR supply curve is the portion of the MC curve <strong>above</strong> <span class="math inline">\(\min AVC\)</span>.</p>
 </section>
-<section id="interactive-supply-and-cost-curves" class="slide level2">
-<h2>Interactive: Supply and Cost Curves</h2>
+<section id="supply-and-cost-curves" class="slide level2">
+<h2>Supply and Cost Curves</h2>
+<p>The supply curve is the MC curve above <span class="math inline">\(\min AVC = 7.75\)</span>, plus zero output below. Toggle “Show cost curves” to see the underlying MC and AVC.</p>
 <div class="kg-container" src="plots/supply_and_cost_curves.yml" style="max-width: 900px;">
 
 </div>
@@ -536,14 +555,14 @@ Fangzhou Yu
 <p>With <span class="math inline">\(N_F\)</span> identical firms: <span class="math inline">\(S(p) = N_F \cdot s(p)\)</span>.</p>
 <p><strong>Graphically:</strong> horizontal summation of individual supply curves.</p>
 </section>
-<section id="interactive-market-supply-with-identical-firms" class="slide level2">
-<h2>Interactive: Market Supply with Identical Firms</h2>
+<section id="market-supply-with-identical-firms" class="slide level2">
+<h2>Market Supply with Identical Firms</h2>
 <div class="kg-container" src="plots/many_identical_firms.yml" style="max-width: 960px;">
 
 </div>
 </section>
-<section id="short-run-equilibrium-worked-example" class="slide level2">
-<h2>Short-Run Equilibrium — Worked Example</h2>
+<section id="short-run-equilibrium-running-example" class="slide level2">
+<h2>Short-Run Equilibrium — Running Example</h2>
 <p><span class="math inline">\(Q^d = 100 - p\)</span>; <span class="math inline">\(\;\)</span> 10 firms with <span class="math inline">\(c(q) = 5 + 14q + 5q^2\)</span>.</p>
 <div class="fragment">
 <ul>
@@ -564,8 +583,8 @@ Fangzhou Yu
 <p><strong>Positive profits are possible in SR equilibrium!</strong></p>
 </div>
 </section>
-<section id="interactive-individual-and-market-supply-and-demand" class="slide level2">
-<h2>Interactive: Individual and Market Supply and Demand</h2>
+<section id="individual-and-market-supply-and-demand" class="slide level2">
+<h2>Individual and Market Supply and Demand</h2>
 <div class="kg-container" src="plots/individual_market_supply_demand.yml" style="max-width: 960px;">
 
 </div>
@@ -597,8 +616,8 @@ Fangzhou Yu
 <p>The number of firms <span class="math inline">\(N_F\)</span> adjusts <strong>endogenously</strong>.</p>
 </div>
 </section>
-<section id="long-run-equilibrium-worked-example" class="slide level2">
-<h2>Long-Run Equilibrium — Worked Example</h2>
+<section id="long-run-equilibrium-running-example" class="slide level2">
+<h2>Long-Run Equilibrium — Running Example</h2>
 <p><span class="math inline">\(Q^d = 100 - p\)</span>; all firms have <span class="math inline">\(c(q) = 20 + 5q^2\)</span>.</p>
 <div class="fragment">
 <p>Find LR equilibrium price: <span class="math inline">\(\min_q AC = \min_q \left(\frac{20}{q} + 5q\right)\)</span>.</p>

@@ -242,7 +242,7 @@ layout:
       controls:
       - title: Gains from Trade in the Edgeworth Box
         divs:
-        - html: In this diagram, both A (origin bottom-left) and B (origin top-right) have the utility function $u(x_1,x_2) = x_1x_2$.
+        - html: "`In this diagram, both A (origin bottom-left) and B (origin top-right) have the utility function $u(x_1,x_2) = x_1x_2$.`"
         - table:
             columns: ["Allocation", "$u^A$", "$u^B$"]
             rows:

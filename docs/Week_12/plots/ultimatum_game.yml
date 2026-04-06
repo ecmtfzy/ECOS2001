@@ -1,0 +1,90 @@
+schema: EconSchema
+version: 1
+params:
+  - name: x
+    value: 50
+    min: 0
+    max: 100
+    round: 1
+calcs:
+  p1_accept: (100 - params.x)
+layout:
+  OneTreePlusSidebar:
+    tree:
+      objects:
+        # Player labels
+        - Label:
+            coordinates: [12, 21.4]
+            text: "'P1'"
+            fontSize: 14
+            color: red
+        - Label:
+            coordinates: [12, 11.4]
+            text: "'P2'"
+            fontSize: 14
+            color: blue
+
+        # Edge label: P1's offer
+        - Label:
+            coordinates: [15, 16]
+            text: "`\\\\text{offers }x = ${params.x}`"
+            fontSize: 11
+
+        # Accept payoffs (dynamic)
+        - Label:
+            coordinates: [4, 0.8]
+            text: "`\\\\color{#d62728}{(${calcs.p1_accept}}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{${params.x}})`"
+            fontSize: 12
+
+        # Reject payoffs (fixed)
+        - Label:
+            coordinates: [20, 0.8]
+            text: "'\\\\color{#d62728}{(0}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{0})'"
+            fontSize: 12
+
+        # Backward induction: P2 prefers Accept when x >= 0
+        - Segment:
+            a: [12, 10]
+            b: [4, 2]
+            color: green
+            strokeWidth: 4
+            show: (params.x >= 0)
+        - Label:
+            coordinates: [22, 6]
+            text: "`\\\\color{#2ca02c}{${params.x} \\\\geq 0}`"
+            fontSize: 11
+            show: (params.x >= 0)
+
+      nodes:
+        - name: p1
+          x: 12
+          y: 20
+          color: red
+          children:
+            - name: p2
+              x: 12
+              y: 10
+              color: blue
+              children:
+                - name: accept
+                  x: 4
+                  y: 2
+                  color: blue
+                  edgeLabel: "'Accept'"
+                - name: reject
+                  x: 20
+                  y: 2
+                  color: blue
+                  edgeLabel: "'Reject'"
+    sidebar:
+      controls:
+        - title: Ultimatum Game
+          description: P1 has $100 and offers x to P2.
+          sliders:
+            - param: x
+              label: x
+          divs:
+            - html: "`$\\\\textcolor{#1f77b4}{\\\\text{P2}}$: Accept gives $${params.x}$, Reject gives $0$.`"
+            - html: "`Since $${params.x} \\\\geq 0$, $\\\\textcolor{#1f77b4}{\\\\text{P2}}$ accepts any offer.`"
+            - html: "`$\\\\textcolor{#d62728}{\\\\text{P1}}$'s payoff: $100 - ${params.x} = ${calcs.p1_accept}$.`"
+            - html: "`To maximize payoff, $\\\\textcolor{#d62728}{\\\\text{P1}}$ offers $x = 0$.`"

@@ -1,0 +1,71 @@
+schema: EconSchema
+version: 1
+layout:
+  OneTreePlusSidebar:
+    tree:
+      objects:
+        # Decision node labels
+        - Label:
+            coordinates: [12, 21.4]
+            text: "'E'"
+            fontSize: 14
+            color: red
+        - Label:
+            coordinates: [20, 11.4]
+            text: "'I'"
+            fontSize: 14
+            color: blue
+        # Terminal payoff labels: (Entrant, Incumbent) with D3 category10 colors
+        # red = #d62728, blue = #1f77b4
+        # Out: (0, 2)
+        - Label:
+            coordinates: [4, 8.8]
+            text: "'\\\\color{#d62728}{(0}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{2})'"
+            fontSize: 12
+        # Accommodate: (2, 1)
+        - Label:
+            coordinates: [14, 0.8]
+            text: "'\\\\color{#d62728}{(2}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{1})'"
+            fontSize: 12
+        # Fight: (-1, -1)
+        - Label:
+            coordinates: [24, 0.8]
+            text: "'\\\\color{#d62728}{(-1}\\\\color{black}{,}\\\\; \\\\color{#1f77b4}{-1})'"
+            fontSize: 12
+      nodes:
+        - name: entrant
+          x: 12
+          y: 20
+          color: red
+          childSelectParam: entrantChoice
+          children:
+            - name: out
+              x: 4
+              y: 10
+              color: red
+              edgeLabel: "'Out'"
+            - name: incumbent
+              x: 20
+              y: 10
+              color: blue
+              edgeLabel: "'In'"
+              childSelectParam: incumbentChoice
+              children:
+                - name: accommodate
+                  x: 14
+                  y: 2
+                  color: blue
+                  edgeLabel: "'Accommodate'"
+                - name: fight
+                  x: 24
+                  y: 2
+                  color: blue
+                  edgeLabel: "'Fight'"
+    sidebar:
+      controls:
+        - title: Entry Deterrence Game
+          description: Click on branches to explore different strategy paths.
+          divs:
+            - html: "`$\\\\textcolor{#d62728}{\\\\text{Entrant (E)}}$ decides whether to enter the market or stay out.`"
+            - html: "`$\\\\textcolor{#1f77b4}{\\\\text{Incumbent (I)}}$ responds by accommodating or fighting.`"
+            - html: "`Payoffs: ($\\\\textcolor{#d62728}{\\\\text{Entrant}}$, $\\\\textcolor{#1f77b4}{\\\\text{Incumbent}}$)`"

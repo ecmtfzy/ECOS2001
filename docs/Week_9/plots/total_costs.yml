@@ -4,16 +4,15 @@ colors:
   variableCost: colors.grey
   totalCost: colors.red
 params:
-  - {name: w, value: 16, min: 10, max: 20}
+  - {name: w, value: 4, min: 1, max: 10}
   - {name: r, value: 2, min: 1, max: 5}
-  - {name: K, value: 32, min: 24, max: 48}
-  - {name: q, value: 8, min: 0, max: 40}
+  - {name: K, value: 36, min: 16, max: 64}
+  - {name: q, value: 12, min: 0, max: 50}
 calcs:
-  L: (params.q*params.q/params.K)
-  VC: (params.w*calcs.L)
-  F: (params.r*params.K)
+  L: (params.q^1.5 / sqrt(params.K))
+  VC: (params.w * calcs.L)
+  F: (params.r * params.K)
   TC: (calcs.VC + calcs.F)
-  TClabelX: (min(38, sqrt((400 - params.r*params.K)*params.K/params.w)))
 layout:
   OneGraphPlusSidebar:
     graph:
@@ -23,17 +22,17 @@ layout:
         ticks: 0
       xAxis:
         title: Output ($q$)
-        max: 40
+        max: 50
         ticks: 0
       objects:
 
       # Total Cost
       - Curve:
-          fn: calcs.F + (params.w/params.K)*(x)^2
+          fn: calcs.F + (params.w/sqrt(params.K))*(x)^1.5
           color: colors.totalCost
           label:
             text: TC
-            x: calcs.TClabelX
+            x: 45
 
       - Point:
           coordinates: [ params.q, calcs.TC ]
@@ -45,13 +44,12 @@ layout:
             horizontal: calcs.TC.toFixed(0)
 
       # Variable Cost
-
       - Curve:
-          fn: (params.w/params.K)*(x)^2
+          fn: (params.w/sqrt(params.K))*(x)^1.5
           color: colors.variableCost
           label:
             text: VC
-            x: calcs.TClabelX
+            x: 45
 
       - Point:
           coordinates: [ params.q, calcs.VC ]
@@ -62,7 +60,6 @@ layout:
             horizontal: calcs.VC.toFixed(0)
 
       # Fixed Cost
-
       - Line:
           yIntercept: calcs.F
           color: colors.fixedCost
@@ -72,15 +69,10 @@ layout:
           color: colors.fixedCost
           text: calcs.F
 
-
-
-
-
-
-
     sidebar:
       controls:
         - title: Total Costs
+          description: Drag the point to see how total, variable, and fixed costs change with output.
           sliders:
           - param: w
             label: w
@@ -88,3 +80,5 @@ layout:
             label: r
           - param: K
             label: \overline K
+          divs:
+            - html: "`From $f(L,K) = L^{2/3}K^{1/3}$: $$TC = r\\\\overline{K} + w \\\\cdot q^{3/2}/\\\\sqrt{\\\\overline{K}}$$`"

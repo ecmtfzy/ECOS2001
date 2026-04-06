@@ -1,0 +1,127 @@
+schema: EconSchema
+version: 1
+params:
+  - name: q1
+    value: 48
+    min: 1
+    max: 90
+    round: 1
+calcs:
+  q2_br: ((96 - params.q1)/2)
+  profit1: ((96 - params.q1) * params.q1 / 2)
+layout:
+  OneGraphPlusSidebar:
+    graph:
+      xAxis:
+        min: 0
+        max: 100
+        title: q_1
+      yAxis:
+        min: 0
+        max: 55
+        title: q_2
+      objects:
+        # Firm 2's best response line
+        - Line:
+            yIntercept: 48
+            slope: -0.5
+            color: blue
+            min: 0
+            max: 96
+            label:
+              text: "BR_2"
+              x: 85
+
+        # Firm 1's best response line (Cournot)
+        - Line:
+            yIntercept: 96
+            slope: -2
+            color: red
+            min: 0
+            max: 48
+            label:
+              text: "BR_1"
+              x: 10
+
+        # Iso-profit curve for Firm 1 through current point
+        - Curve:
+            fn: "96 - x - (calcs.profit1)/x"
+            color: olive
+            min: 2
+            max: 94
+            lineStyle: dotted
+            label:
+              text: "`\\\\pi_1 = ${calcs.profit1.toFixed(0)}`"
+              x: 80
+              position: t
+
+        # Iso-profit curve for Firm 1 through Cournot
+        - Curve:
+            fn: "96 - x - 1024/x"
+            color: grey
+            min: 14
+            max: 82
+            lineStyle: dotted
+            label:
+              text: "\\pi_1 = 1024"
+              x: 70
+              position: t
+
+        # Arrow showing direction of higher profit
+        - Arrow:
+            begin: [75, 30]
+            end: [75, 20]
+            color: olive
+            trim: 0
+        - Label:
+            coordinates: [79, 25]
+            text: "\\text{higher } \\pi_1"
+            fontSize: 9
+            color: olive
+
+        # Cournot equilibrium
+        - Point:
+            coordinates: [32, 32]
+            color: grey
+            r: 4
+            label:
+              text: "\\text{Cournot}"
+              position: tr
+
+        # Stackelberg equilibrium (fixed marker)
+        - Point:
+            coordinates: [48, 24]
+            color: green
+            r: 4
+            show: (params.q1 != 48)
+            label:
+              text: "\\text{Stackelberg}"
+              position: br
+
+        # Current point (draggable along BR2)
+        - Point:
+            coordinates: [params.q1, calcs.q2_br]
+            color: orange
+            r: 5
+            drag:
+              - directions: x
+                param: q1
+                expression: drag.x
+            droplines:
+              vertical: "`q_1 = ${params.q1}`"
+              horizontal: "`q_2 = ${calcs.q2_br.toFixed(0)}`"
+
+    sidebar:
+      controls:
+        - title: Stackelberg Model
+          description: Drag the orange point along Firm 2's best response to find Firm 1's optimal quantity.
+          sliders:
+            - param: q1
+              label: q_1
+          divs:
+            - html: "`Firm 2's BR: $q_2 = \\\\frac{96 - q_1}{2} = ${calcs.q2_br.toFixed(0)}$`"
+            - html: "`Firm 1's profit: $\\\\pi_1 = \\\\frac{(96-q_1)q_1}{2} = ${calcs.profit1.toFixed(0)}$`"
+            - html: "`The dotted curves are Firm 1's $\\\\textbf{iso-profit curves}$. Lower curves = higher $\\\\pi_1$.`"
+            - html: "`Firm 1 picks the point on $BR_2$ that reaches the lowest iso-profit curve — the $\\\\textbf{tangency point}$.`"
+            - html: "`$\\\\textbf{SPNE:}$ $q_1^* = 48$, $q_2^* = 24$, $\\\\pi_1 = 1152$.`"
+              show: (params.q1 == 48)

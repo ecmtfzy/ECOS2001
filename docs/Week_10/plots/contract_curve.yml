@@ -106,7 +106,7 @@ layout:
 
     sidebar:
       controls:
-      - title: The âContract Curveâ
+      - title: The "Contract Curve"
         description: 'The "contract curve" is the set of pareto efficient points: that is, the set of points X for which there is no overlap between the allocations A prefers to X and the allocations B prefers to X.'
         sliders:
         - param: a1
@@ -114,9 +114,9 @@ layout:
         - param: a2
           label: b
         divs:
-          - html: When $a > b$, Alison likes good 1 more than Bob does, and along the contract curve Alison will have proportionally more good 1 than Bob.
+          - html: "`When $a > b$, Alison likes good 1 more than Bob does, and along the contract curve Alison will have proportionally more good 1 than Bob.`"
             show: (params.a1 > params.a2)
-          - html: When $a < b$, Alison likes good 1 less than Bob does, and along the contract curve Alison will have proportionally less good 1 than Bob.
+          - html: "`When $a < b$, Alison likes good 1 less than Bob does, and along the contract curve Alison will have proportionally less good 1 than Bob.`"
             show: (params.a1 < params.a2)
-          - html: When $a = b$, Alison and Bob have the same preferences over goods 1 and good 2, and along the contract curve they will each have the same proportion of good 1 and good 2.
+          - html: "`When $a = b$, Alison and Bob have the same preferences over goods 1 and good 2, and along the contract curve they will each have the same proportion of good 1 and good 2.`"
             show: (params.a1 == params.a2)

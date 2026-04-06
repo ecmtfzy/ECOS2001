@@ -4,18 +4,17 @@ colors:
   variableCost: colors.grey
   totalCost: colors.red
 params:
-  - {name: w, value: 16, min: 10, max: 20}
+  - {name: w, value: 4, min: 1, max: 10}
   - {name: r, value: 2, min: 1, max: 5}
-  - {name: K, value: 32, min: 24, max: 48}
-  - {name: q, value: 8, min: 0, max: 40}
+  - {name: K, value: 36, min: 16, max: 64}
+  - {name: q, value: 12, min: 1, max: 50}
 calcs:
-  L: (params.q*params.q/params.K)
-  VC: (params.w*calcs.L)
-  F: (params.r*params.K)
+  L: (params.q^1.5 / sqrt(params.K))
+  VC: (params.w * calcs.L)
+  F: (params.r * params.K)
   TC: (calcs.VC + calcs.F)
-  TClabelX: (min(38, sqrt((400 - params.r*params.K)*params.K/params.w)))
-  AVC: (calcs.VC/params.q)
-  AFC: (calcs.F/params.q)
+  AVC: (params.w * sqrt(params.q) / sqrt(params.K))
+  AFC: (calcs.F / params.q)
   ATC: (calcs.AVC + calcs.AFC)
 layout:
   TwoVerticalGraphsPlusSidebar:
@@ -26,17 +25,17 @@ layout:
         ticks: 0
       xAxis:
         title: Output ($q$)
-        max: 40
+        max: 50
         ticks: 0
       objects:
 
       # Total Cost
       - Curve:
-          fn: calcs.F + (params.w/params.K)*(x)^2
+          fn: calcs.F + (params.w/sqrt(params.K))*(x)^1.5
           color: colors.totalCost
           label:
             text: TC
-            x: calcs.TClabelX
+            x: 45
 
       - Point:
           coordinates: [ params.q, calcs.TC ]
@@ -48,13 +47,12 @@ layout:
             horizontal: calcs.TC.toFixed(0)
 
       # Variable Cost
-
       - Curve:
-          fn: (params.w/params.K)*(x)^2
+          fn: (params.w/sqrt(params.K))*(x)^1.5
           color: colors.variableCost
           label:
             text: VC
-            x: calcs.TClabelX
+            x: 45
 
       - Point:
           coordinates: [ params.q, calcs.VC ]
@@ -65,7 +63,6 @@ layout:
             horizontal: calcs.VC.toFixed(0)
 
       # Fixed Cost
-
       - Line:
           yIntercept: calcs.F
           color: colors.fixedCost
@@ -78,21 +75,21 @@ layout:
     bottomGraph:
       yAxis:
         title: Dollars per Unit
-        max: 40
+        max: 20
         ticks: 0
       xAxis:
         title: Output ($q$)
-        max: 40
+        max: 50
         ticks: 0
       objects:
 
         # Average Total Cost
         - Curve:
-            fn: calcs.F/(x) + (params.w/params.K)*(x)
+            fn: calcs.F/(x) + (params.w/sqrt(params.K))*sqrt(x)
             color: colors.totalCost
             label:
               text: ATC
-              x: calcs.TClabelX
+              x: 45
 
         - Point:
             coordinates: [ params.q, calcs.ATC ]
@@ -103,14 +100,13 @@ layout:
               vertical: params.q.toFixed(0)
               horizontal: calcs.ATC.toFixed(2)
 
-        # Variable Cost
-
+        # Average Variable Cost
         - Curve:
-            fn: (params.w/params.K)*(x)
+            fn: (params.w/sqrt(params.K))*sqrt(x)
             color: colors.variableCost
             label:
               text: AVC
-              x: calcs.TClabelX
+              x: 45
 
         - Point:
             coordinates: [ params.q, calcs.AVC ]
@@ -120,14 +116,13 @@ layout:
             droplines:
               horizontal: calcs.AVC.toFixed(2)
 
-        # Fixed Cost
-
+        # Average Fixed Cost
         - Curve:
             fn: calcs.F/(x)
             color: colors.fixedCost
             label:
               text: AFC
-              x: calcs.TClabelX
+              x: 45
 
         - Point:
             coordinates: [ params.q, calcs.AFC ]
@@ -148,6 +143,7 @@ layout:
           - param: K
             label: \overline K
           divs:
-            - html: "`$$\\\\textcolor{${colors.red}}{TC(${params.q}) = ${calcs.TC.toFixed(0)} \\\\Rightarrow ATC(${params.q}) = {${calcs.TC.toFixed(0)} \\\\over ${params.q}} = ${calcs.ATC.toFixed(2)}}$$`"
-            - html: "`$$\\\\textcolor{${colors.grey}}{VC(${params.q}) = ${calcs.VC.toFixed(0)} \\\\Rightarrow AVC(${params.q}) = {${calcs.VC.toFixed(0)} \\\\over ${params.q}} = ${calcs.AVC.toFixed(2)}}$$`"
-            - html: "`$$\\\\textcolor{${colors.green}}{F = ${calcs.F.toFixed(0)} \\\\Rightarrow AFC(${params.q}) = {${calcs.F.toFixed(0)} \\\\over ${params.q}} = ${calcs.AFC.toFixed(2)}}$$`"
+            - html: "`From $f(L,K) = L^{2/3}K^{1/3}$.`"
+            - html: "`$$\\\\textcolor{${colors.red}}{TC(${params.q}) = ${calcs.TC.toFixed(0)} \\\\Rightarrow ATC = ${calcs.ATC.toFixed(2)}}$$`"
+            - html: "`$$\\\\textcolor{${colors.grey}}{VC(${params.q}) = ${calcs.VC.toFixed(0)} \\\\Rightarrow AVC = ${calcs.AVC.toFixed(2)}}$$`"
+            - html: "`$$\\\\textcolor{${colors.green}}{FC = ${calcs.F.toFixed(0)} \\\\Rightarrow AFC = ${calcs.AFC.toFixed(2)}}$$`"

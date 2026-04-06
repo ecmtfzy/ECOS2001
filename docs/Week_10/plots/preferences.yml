@@ -109,4 +109,4 @@ layout:
         - param: a2
           label: b
         divs:
-          - html: The utility functions for both A and B are Cobb-Douglas, with A's utility function being $$u^A(x_1^A, x_2^A) = a \ln x_1^A + (1-a) \ln x_2^A$$ and B's being $$u^B(x_1^B, x_2^B) = b \ln x_1^B + (1-b) \ln x_2^B$$
+          - html: "`The utility functions for both A and B are Cobb-Douglas, with A's utility function being $$u^A(x_1^A, x_2^A) = a \\\\ln x_1^A + (1-a) \\\\ln x_2^A$$ and B's being $$u^B(x_1^B, x_2^B) = b \\\\ln x_1^B + (1-b) \\\\ln x_2^B$$`"

@@ -1,0 +1,115 @@
+schema: EconSchema
+version: 1
+params:
+  - name: q1
+    value: 33
+    min: 0
+    max: 99
+    round: 1
+  - name: q2
+    value: 33
+    min: 0
+    max: 99
+    round: 1
+calcs:
+  # P = 100 - Q, c(q) = q
+  # BR_1(q2) = (99 - q2)/2, BR_2(q1) = (99 - q1)/2
+  br1: (max((99 - params.q2)/2, 0))
+  br2: (max((99 - params.q1)/2, 0))
+  Q: (params.q1 + params.q2)
+  P: (max(100 - calcs.Q, 0))
+  pi1: ((calcs.P - 1) * params.q1)
+  pi2: ((calcs.P - 1) * params.q2)
+layout:
+  OneGraphPlusSidebar:
+    graph:
+      xAxis:
+        max: 100
+        title: Firm 1 Quantity ($q_1$)
+      yAxis:
+        max: 100
+        title: Firm 2 Quantity ($q_2$)
+      objects:
+
+      # Best response function for Firm 1: q1 = (99 - q2)/2, i.e. q2 = 99 - 2*q1
+      - Line:
+          point: [0, 99]
+          point2: [49.5, 0]
+          color: blue
+          strokeWidth: 2.5
+          label:
+            text: "`BR_1(q_2)`"
+            x: 44
+            position: br
+
+      # Best response function for Firm 2: q2 = (99 - q1)/2, i.e. q1 = 99 - 2*q2
+      - Line:
+          point: [99, 0]
+          point2: [0, 49.5]
+          color: red
+          strokeWidth: 2.5
+          label:
+            text: "`BR_2(q_1)`"
+            y: 44
+            position: bl
+
+      # Nash Equilibrium point
+      - Point:
+          coordinates: [33, 33]
+          color: green
+          r: 5
+          label:
+            text: NE
+            position: tr
+          droplines:
+            vertical: "`q_1^* = 33`"
+            horizontal: "`q_2^* = 33`"
+
+      # Current choice point
+      - Point:
+          coordinates: [params.q1, params.q2]
+          color: orange
+          r: 4
+          label:
+            text: Current
+            position: tr
+
+      # Firm 1's best response to current q2
+      - Point:
+          coordinates: [calcs.br1, params.q2]
+          color: blue
+          r: 3
+          show: (Math.abs(calcs.br1 - params.q1) > 0.5)
+          label:
+            text: "`BR_1`"
+            position: bl
+
+      # Firm 2's best response to current q1
+      - Point:
+          coordinates: [params.q1, calcs.br2]
+          color: red
+          r: 3
+          show: (Math.abs(calcs.br2 - params.q2) > 0.5)
+          label:
+            text: "`BR_2`"
+            position: tl
+
+    sidebar:
+      controls:
+        - title: Cournot Duopoly
+          description: Adjust each firm's quantity to explore best responses and the Nash equilibrium.
+          sliders:
+            - param: q1
+              label: "\\(q_1\\)"
+            - param: q2
+              label: "\\(q_2\\)"
+          divs:
+            - html: "`$$P(Q) = 100 - Q, \\\\quad c(q) = q$$`"
+            - html: "`$$BR_1(q_2) = \\\\frac{99 - q_2}{2}, \\\\quad BR_2(q_1) = \\\\frac{99 - q_1}{2}$$`"
+            - html: "`At current quantities: $P = ${calcs.P.toFixed(0)}$, $\\\\pi_1 = ${calcs.pi1.toFixed(0)}$, $\\\\pi_2 = ${calcs.pi2.toFixed(0)}$`"
+            - html: "`Firm 1's best response: $q_1^{BR} = ${calcs.br1.toFixed(1)}$`"
+              show: (Math.abs(calcs.br1 - params.q1) > 0.5)
+            - html: "`Firm 2's best response: $q_2^{BR} = ${calcs.br2.toFixed(1)}$`"
+              show: (Math.abs(calcs.br2 - params.q2) > 0.5)
+            - html: "Both firms are playing a best response — this is the Nash equilibrium!"
+              show: ((Math.abs(calcs.br1 - params.q1) < 0.5) && (Math.abs(calcs.br2 - params.q2) < 0.5))

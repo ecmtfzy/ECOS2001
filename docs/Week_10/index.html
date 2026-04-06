@@ -6,7 +6,7 @@
 <script src="slides_10_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_10_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_10_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_10_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="slides_10_files/libs/quarto-html/quarto-syntax-highlighting-0407d11e67cd6f69fbc5989002fb0851.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Fangzhou Yu">
@@ -125,8 +125,23 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/kg.css">
   <style>
-    .kg-container { width: 100%; margin: 40px auto 0; }
-    /* Scale down KGJS sidebar text to match explanation div font size */
+    /* Vertically center content below title */
+    .reveal .slides section {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .reveal .slides section > h2 {
+      flex: none;
+    }
+    .reveal .slides section > h2 + * {
+      margin-top: auto !important;
+    }
+    .reveal .slides section > *:last-child {
+      margin-bottom: auto !important;
+    }
+
+    /* KGJS sizing */
+    .kg-container { width: 100%; margin: 0 auto; }
     .kg-container .sidebar {
       font-size: 10pt;
     }
@@ -137,7 +152,7 @@
       font-size: 10pt;
     }
   </style>
-  <script src="js/kg.0.2.7.js"></script>
+  <script src="js/kg3d.0.2.7.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -158,177 +173,68 @@ Fangzhou Yu
     </div>
 </div>
 
-  <p class="date">Mar 2026</p>
+  <p class="date">2026 S1</p>
 </section>
 <section>
-<section id="exchange-economies" class="title-slide slide level1 center">
-<h1>Exchange Economies</h1>
+<section id="part-1-review-of-exchange-economies" class="title-slide slide level1 center">
+<h1>Part 1: Review of Exchange Economies</h1>
 
 </section>
-<section id="the-edgeworth-box" class="slide level2">
-<h2>The Edgeworth Box</h2>
-<div title="Setup: Pure Exchange Economy">
+<section id="the-edgeworth-box-review" class="slide level2">
+<h2>The Edgeworth Box (Review)</h2>
+<div title="Recall: Pure Exchange Economy">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Setup: Pure Exchange Economy</strong></p>
+<p><strong>Recall: Pure Exchange Economy</strong></p>
 </div>
 <div class="callout-content">
-<p>Two consumers, A and B, have endowments and preferences over two goods. There is <strong>no production</strong> – the total amount of each good is fixed.</p>
+<p>Two consumers, A and B, with endowments <span class="math inline">\(\omega^A\)</span> and <span class="math inline">\(\omega^B\)</span> over two goods. No production – total supply is fixed.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="fragment">
-<p>The <strong>Edgeworth box</strong> represents all feasible allocations of two goods between two consumers in a single diagram:</p>
-<ul>
-<li>A’s origin is at the bottom-left; B’s origin is at the top-right</li>
-<li>Any point in the box represents a complete allocation of both goods</li>
-</ul>
-</div>
+<p>The <strong>Edgeworth box</strong> represents all feasible allocations. A’s origin is at the bottom-left; B’s at the top-right. Any point in the box is a complete allocation of both goods.</p>
 </section>
-<section id="interactive-allocations-in-the-edgeworth-box" class="slide level2">
-<h2>Interactive: Allocations in the Edgeworth Box</h2>
+<section id="allocations-in-the-edgeworth-box-review" class="slide level2">
+<h2>Allocations in the Edgeworth Box (Review)</h2>
 <div class="kg-container" src="plots/allocations.yml" style="max-width: 960px;">
 
 </div>
 </section>
-<section id="interactive-preferences-in-the-edgeworth-box" class="slide level2">
-<h2>Interactive: Preferences in the Edgeworth Box</h2>
-<p>Indifference curves for both consumers are shown simultaneously. Drag the allocation point to explore how preferred sets overlap.</p>
-<div class="kg-container" src="plots/preferences.yml" style="max-width: 960px;">
-
-</div>
-</section></section>
-<section>
-<section id="efficiency-and-the-contract-curve" class="title-slide slide level1 center">
-<h1>Efficiency and the Contract Curve</h1>
-
-</section>
-<section id="pareto-efficiency" class="slide level2">
-<h2>Pareto Efficiency</h2>
-<div title="Definition: Pareto Efficiency">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Definition: Pareto Efficiency</strong></p>
-</div>
-<div class="callout-content">
-<p>An allocation is <strong>Pareto efficient</strong> if there is no other feasible allocation that makes at least one consumer strictly better off without making anyone worse off.</p>
-</div>
-</div>
-</div>
-</div>
+<section id="preferences-and-pareto-efficiency-review" class="slide level2">
+<h2>Preferences and Pareto Efficiency (Review)</h2>
+<p>An allocation is <strong>Pareto efficient</strong> if no feasible reallocation can make one consumer better off without making the other worse off.</p>
 <div class="fragment">
-<div title="Condition for Pareto Efficiency">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Condition for Pareto Efficiency</strong></p>
-</div>
-<div class="callout-content">
-<p>At an interior Pareto efficient allocation:</p>
+<p>At an interior Pareto efficient allocation, the indifference curves are <strong>tangent</strong>:</p>
 <p><span class="math display">\[MRS^A = MRS^B\]</span></p>
-</div>
-</div>
-</div>
-</div>
+<p>The <strong>contract curve</strong> is the set of all such Pareto efficient allocations.</p>
 </div>
 </section>
-<section id="interactive-pareto-improvements" class="slide level2">
-<h2>Interactive: Pareto Improvements</h2>
-<p>The green region shows allocations that <strong>both</strong> consumers prefer to the current allocation <span class="math inline">\(X\)</span> – these are the Pareto improvements.</p>
-<div class="kg-container" src="plots/pareto_improvements.yml" style="max-width: 960px;">
+<section id="the-contract-curve-review" class="slide level2">
+<h2>The Contract Curve (Review)</h2>
+<p>Drag the allocation point to see how the indifference curves relate. The contract curve connects all points where A’s and B’s indifference curves are tangent.</p>
+<div class="kg-container" src="plots/contract_curve.yml" style="max-width: 900px; margin-top: 20px;">
 
 </div>
 </section>
-<section id="interactive-the-contract-curve" class="slide level2">
-<h2>Interactive: The Contract Curve</h2>
-<p>The <strong>contract curve</strong> is the set of all Pareto efficient allocations – points where the indifference curves of A and B are tangent.</p>
-<div class="kg-container" src="plots/contract_curve.yml" style="max-width: 960px;">
-
-</div>
+<section id="competitive-equilibrium-in-exchange-review" class="slide level2">
+<h2>Competitive Equilibrium in Exchange (Review)</h2>
+<p>Given prices <span class="math inline">\((p_1, p_2)\)</span>, each consumer faces a <strong>budget line</strong> through their endowment:</p>
+<p><span class="math display">\[p_1 x_1^i + p_2 x_2^i = p_1 \omega_1^i + p_2 \omega_2^i\]</span></p>
+<p>Each consumer maximizes utility subject to this constraint, yielding <strong>gross demands</strong>. A <strong>Walrasian equilibrium</strong> is a price vector <span class="math inline">\(p^*\)</span> where markets clear: total demand = total supply.</p>
 </section>
-<section id="interactive-gains-from-trade" class="slide level2">
-<h2>Interactive: Gains from Trade</h2>
-<p>Starting from an endowment, both consumers can potentially gain from trade. The table compares utility levels at the endowment and at a proposed trade.</p>
-<div class="kg-container" src="plots/gains_from_trade.yml" style="max-width: 960px;">
-
-</div>
-</section></section>
-<section>
-<section id="competitive-equilibrium-in-exchange" class="title-slide slide level1 center">
-<h1>Competitive Equilibrium in Exchange</h1>
-
-</section>
-<section id="trading-at-a-price-ratio" class="slide level2">
-<h2>Trading at a Price Ratio</h2>
-<p>Given a price ratio <span class="math inline">\(p = p_1/p_2\)</span>, each consumer faces a budget line through their endowment with slope <span class="math inline">\(-p\)</span>.</p>
-<div class="fragment">
-<p>Both consumers face the <strong>same</strong> budget line – this is the key feature of competitive markets.</p>
-</div>
-<div class="fragment">
-<p>Each consumer then maximizes utility subject to this budget constraint, yielding their <strong>gross demands</strong>.</p>
-</div>
-</section>
-<section id="interactive-trading-at-a-price-ratio" class="slide level2">
-<h2>Interactive: Trading at a Price Ratio</h2>
-<div class="kg-container" src="plots/trading_at_price_ratio.yml" style="max-width: 960px;">
-
-</div>
-</section>
-<section id="interactive-gross-demands" class="slide level2">
-<h2>Interactive: Gross Demands</h2>
-<p>For a given price ratio, each consumer chooses their optimal bundle along the budget line. These optimal bundles are their <strong>gross demands</strong>.</p>
+<section id="gross-demands-in-the-edgeworth-box-review" class="slide level2">
+<h2>Gross Demands in the Edgeworth Box (Review)</h2>
 <div class="kg-container" src="plots/gross_demands.yml" style="max-width: 960px;">
 
 </div>
 </section>
-<section id="interactive-trade-and-mrs" class="slide level2">
-<h2>Interactive: Trade and MRS</h2>
-<p>The range of mutually beneficial price ratios lies between the two consumers’ marginal rates of substitution at the endowment.</p>
-<div class="kg-container" src="plots/trade_and_mrs.yml" style="max-width: 960px;">
-
-</div>
-</section>
-<section id="interactive-net-supply-and-demand" class="slide level2">
-<h2>Interactive: Net Supply and Demand</h2>
-<p>We can derive A’s net supply and B’s net demand as functions of the price ratio, then find the equilibrium where they intersect.</p>
-<div class="kg-container" src="plots/net_supply_and_demand.yml" style="max-width: 960px;">
-
-</div>
-</section>
-<section id="walrasian-equilibrium" class="slide level2">
-<h2>Walrasian Equilibrium</h2>
-<div title="Definition: Walrasian (Competitive) Equilibrium">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Definition: Walrasian (Competitive) Equilibrium</strong></p>
-</div>
-<div class="callout-content">
-<p>A <strong>Walrasian equilibrium</strong> consists of a price vector <span class="math inline">\(p^*\)</span> and an allocation <span class="math inline">\((x^{A*}, x^{B*})\)</span> such that:</p>
-<ol type="1">
-<li>Each consumer maximizes utility given prices: <span class="math inline">\(x^{i*}\)</span> solves <span class="math inline">\(\max u^i(x)\)</span> s.t. <span class="math inline">\(p^* \cdot x \leq p^* \cdot e^i\)</span></li>
-<li>Markets clear: <span class="math inline">\(x^{A*} + x^{B*} = e^A + e^B\)</span></li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
+<section id="welfare-theorems-and-walras-law-review" class="slide level2">
+<h2>Welfare Theorems and Walras’ Law (Review)</h2>
 <div title="First Welfare Theorem">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -344,124 +250,357 @@ Fangzhou Yu
 </div>
 </div>
 </div>
+<div title="Second Welfare Theorem">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Second Welfare Theorem</strong></p>
+</div>
+<div class="callout-content">
+<p>Any Pareto efficient allocation can be achieved as a competitive equilibrium, given appropriate redistribution of initial endowments.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div title="Walras' Law">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Walras’ Law</strong></p>
+</div>
+<div class="callout-content">
+<p>For any prices <span class="math inline">\((p_1, p_2)\)</span>, the total value of excess demands across all markets is zero:</p>
+<p><span class="math display">\[p_1 \underbrace{(x_1^{A*} + x_1^{B*} - \omega_1^A - \omega_1^B)}_{\text{excess demand for good 1}} + p_2 \underbrace{(x_2^{A*} + x_2^{B*} - \omega_2^A - \omega_2^B)}_{\text{excess demand for good 2}} = 0\]</span></p>
+<p><strong>Implication:</strong> If one market clears, the other must clear too.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section></section>
 <section>
-<section id="offer-curves" class="title-slide slide level1 center">
-<h1>Offer Curves</h1>
+<section id="part-2-from-exchange-to-production-economies" class="title-slide slide level1 center">
+<h1>Part 2: From Exchange to Production Economies</h1>
 
 </section>
-<section id="offer-curves-1" class="slide level2">
-<h2>Offer Curves</h2>
-<div title="Definition: Offer Curve">
+<section id="what-changes-with-production" class="slide level2">
+<h2>What Changes with Production?</h2>
+<p>In Week 5 and Part 1, we studied <strong>pure exchange</strong>: consumers trade endowments, and total supply is fixed. But all five practice problems in this lecture involve <strong>firms and production</strong>.</p>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Pure Exchange</th>
+<th>With Production</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Supply</strong></td>
+<td>Fixed (endowments)</td>
+<td>Endowments + firm output</td>
+</tr>
+<tr class="even">
+<td><strong>Income</strong></td>
+<td>Endowment value only</td>
+<td>Endowment value + profit shares</td>
+</tr>
+<tr class="odd">
+<td><strong>Agents</strong></td>
+<td>Consumers only</td>
+<td>Consumers + firms</td>
+</tr>
+<tr class="even">
+<td><strong>Markets</strong></td>
+<td>Goods only</td>
+<td>Goods + factors (labor, capital)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<div title="What Carries Over">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What Carries Over</strong></p>
+</div>
+<div class="callout-content">
+<p>The core framework is the same: each agent optimizes, and we find prices that clear all markets. <strong>Walras’ Law</strong>, the <strong>welfare theorems</strong>, and the <strong>solution method</strong> (normalize → optimize → market clearing) all still apply.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="part-3-general-equilibrium-with-production" class="title-slide slide level1 center">
+<h1>Part 3: General Equilibrium with Production</h1>
+
+</section>
+<section id="adding-firms-to-the-economy" class="slide level2">
+<h2>Adding Firms to the Economy</h2>
+<p>The key extension: firms transform inputs into outputs, and consumers <strong>own shares</strong> in firms.</p>
+<ol type="1">
+<li class="fragment"><strong>Total supply increases:</strong> goods come from endowments <em>and</em> firm output</li>
+<li class="fragment"><strong>Consumer income increases:</strong> <span class="math inline">\(m^i\)</span> now includes profit shares <span class="math inline">\(\theta^i_j \pi_j\)</span></li>
+<li class="fragment"><strong>More markets to clear:</strong> factor markets (labor, capital) in addition to goods</li>
+</ol>
+<div class="fragment">
+<p>The consumer’s income now includes profit shares:</p>
+<p><span class="math display">\[m^i = p \cdot e^i + \sum_j \theta^i_j \pi_j\]</span></p>
+<p>where <span class="math inline">\(\theta^i_j\)</span> is consumer <span class="math inline">\(i\)</span>’s ownership share in firm <span class="math inline">\(j\)</span>, and <span class="math inline">\(\pi_j\)</span> is firm <span class="math inline">\(j\)</span>’s profit.</p>
+</div>
+</section>
+<section id="the-production-possibilities-frontier-ppf" class="slide level2">
+<h2>The Production Possibilities Frontier (PPF)</h2>
+<div title="Definition: PPF">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition: Offer Curve</strong></p>
+<p><strong>Definition: PPF</strong></p>
 </div>
 <div class="callout-content">
-<p>An agent’s <strong>offer curve</strong> (or price-consumption curve) traces out their optimal bundle as the price ratio varies, holding the endowment fixed.</p>
+<p>The <strong>production possibilities frontier</strong> is the set of all maximum output combinations that can be produced given the economy’s resources and technology.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="fragment">
-<ul>
-<li>The offer curve passes through the endowment point (at the price ratio equal to MRS at the endowment)</li>
-<li>The intersection of two agents’ offer curves gives the <strong>equilibrium</strong></li>
-</ul>
+<p>With two goods <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, if the firm uses input <span class="math inline">\(z\)</span> with technology <span class="math inline">\(y = f(z)\)</span> and <span class="math inline">\(x = \bar{z} - z\)</span>, the PPF is:</p>
+<p><span class="math display">\[y = f(\bar{z} - x)\]</span></p>
+<p>The <strong>slope</strong> of the PPF is the <strong>marginal rate of transformation (MRT)</strong>: the rate at which the economy must give up good <span class="math inline">\(x\)</span> to produce one more unit of good <span class="math inline">\(y\)</span>.</p>
 </div>
 </section>
-<section id="interactive-offer-curves" class="slide level2">
-<h2>Interactive: Offer Curves</h2>
-<div class="kg-container" src="plots/offer_curves.yml" style="max-width: 960px;">
-
-</div>
-</section></section>
-<section>
-<section id="general-equilibrium-with-production" class="title-slide slide level1 center">
-<h1>General Equilibrium with Production</h1>
-
-</section>
-<section id="ge-with-production-overview" class="slide level2">
-<h2>GE with Production: Overview</h2>
-<p>When we add production to the exchange economy, we need:</p>
-<ol type="1">
-<li class="fragment"><strong>Firms</strong> that choose production plans to maximize profit</li>
-<li class="fragment"><strong>Consumers</strong> who own endowments <em>and</em> shares in firms</li>
-<li class="fragment"><strong>Market clearing</strong> in all goods and factor markets</li>
-</ol>
-<div class="fragment">
-<p>The consumer’s income now includes:</p>
-<p><span class="math display">\[m^i = p \cdot e^i + \sum_j \theta^i_j \pi_j\]</span></p>
-<p>where <span class="math inline">\(\theta^i_j\)</span> is consumer <span class="math inline">\(i\)</span>’s ownership share in firm <span class="math inline">\(j\)</span>, and <span class="math inline">\(\pi_j\)</span> is firm <span class="math inline">\(j\)</span>’s profit.</p>
-</div>
-</section>
-<section id="interactive-firm-optimization-on-the-ppf" class="slide level2">
-<h2>Interactive: Firm Optimization on the PPF</h2>
-<p>The firm chooses the production plan <span class="math inline">\(Y^*\)</span> on the PPF that maximizes profit. The resulting revenue becomes consumer income.</p>
+<section id="firm-optimization-on-the-ppf" class="slide level2">
+<h2>Firm Optimization on the PPF</h2>
+<p>The firm chooses the production plan <span class="math inline">\(Y^*\)</span> on the PPF that maximizes profit: the point where the <strong>iso-profit line</strong> (slope <span class="math inline">\(= -p_x/p_y\)</span>) is tangent to the PPF, i.e., <span class="math inline">\(MRT = p_x/p_y\)</span>.</p>
 <div class="kg-container" src="plots/supply_derivation.yml" style="max-width: 660px;">
 
 </div>
 </section>
-<section id="interactive-supply-and-demand-with-production" class="slide level2">
-<h2>Interactive: Supply and Demand with Production</h2>
+<section id="supply-and-demand-with-production" class="slide level2">
+<h2>Supply and Demand with Production</h2>
 <p>Firms maximize profits (left panel); consumers maximize utility given the resulting income (right panel). Equilibrium requires <span class="math inline">\(Y^* = X^*\)</span>.</p>
 <div class="kg-container" src="plots/prod_cons_two_graphs.yml" style="max-width: 960px;">
 
 </div>
 </section>
-<section id="interactive-general-equilibrium" class="slide level2">
-<h2>Interactive: General Equilibrium</h2>
+<section id="general-equilibrium-with-production" class="slide level2">
+<h2>General Equilibrium with Production</h2>
 <p>Adjust prices to find the equilibrium where the firm’s optimal supply <span class="math inline">\(Y^*\)</span> equals the consumer’s optimal demand <span class="math inline">\(X^*\)</span>.</p>
 <div class="kg-container" src="plots/prod_cons_one_graph.yml" style="max-width: 960px;">
 
 </div>
 </section>
-<section id="interactive-equilibrium-as-a-function-of-preferences" class="slide level2">
-<h2>Interactive: Equilibrium as a Function of Preferences</h2>
+<section id="equilibrium-as-a-function-of-preferences" class="slide level2">
+<h2>Equilibrium as a Function of Preferences</h2>
 <p>The equilibrium price ratio depends on consumer preferences (<span class="math inline">\(\alpha\)</span>). The point where <span class="math inline">\(Y^* = X^*\)</span> shifts as preferences change.</p>
 <div class="kg-container" src="plots/equilibrium_preferences.yml" style="max-width: 960px;">
 
 </div>
 </section></section>
 <section>
-<section id="practice-problems" class="title-slide slide level1 center">
-<h1>Practice Problems</h1>
+<section id="part-4-solving-general-equilibrium-problems" class="title-slide slide level1 center">
+<h1>Part 4: Solving General Equilibrium Problems</h1>
 
 </section>
-<section id="practice-1-two-consumers-and-one-producer" class="slide level2">
-<h2>Practice 1: Two Consumers and One Producer</h2>
-<ul>
-<li>Consumer 1: <span class="math inline">\(u(x,y) = x^{0.5}y^{0.5}\)</span>, owns 50 units of good <span class="math inline">\(x\)</span></li>
-<li>Consumer 2: <span class="math inline">\(u(x,y) = x^{0.25}y^{0.75}\)</span>, owns 40 units of good <span class="math inline">\(x\)</span></li>
-<li>The firm is competitive, production technology <span class="math inline">\(y = \ln x\)</span></li>
-<li>Both consumers are equal owners of the firm</li>
-</ul>
-<div class="fragment">
-<p><strong>Find the competitive equilibrium:</strong> prices, demands, supply, and profits.</p>
+<section id="solving-ge-pure-exchange" class="slide level2">
+<h2>Solving GE: Pure Exchange</h2>
+<div title="Step-by-Step Method">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Step-by-Step Method</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li><strong>Normalize</strong> one price: set <span class="math inline">\(p_2 = 1\)</span>, write <span class="math inline">\(p = p_1\)</span></li>
+<li><strong>Budget constraints:</strong> <span class="math inline">\(p \, x_1^i + x_2^i = p \, \omega_1^i + \omega_2^i\)</span> for each consumer <span class="math inline">\(i\)</span></li>
+<li><strong>Solve</strong> each consumer’s utility maximization <span class="math inline">\(\Rightarrow\)</span> demand functions <span class="math inline">\(x_1^i(p)\)</span>, <span class="math inline">\(x_2^i(p)\)</span></li>
+<li><strong>Market clearing</strong> (one market suffices by Walras’ Law):</li>
+</ol>
+<p><span class="math display">\[\sum_i x_1^i(p) = \sum_i \omega_1^i \quad \Rightarrow \quad \text{solve for } p^*\]</span></p>
+<ol start="5" type="1">
+<li><strong>Substitute</strong> <span class="math inline">\(p^*\)</span> back to get equilibrium allocation <span class="math inline">\((x^{A*}, x^{B*})\)</span></li>
+</ol>
+</div>
+</div>
+</div>
 </div>
 </section>
-<section id="practice-2-many-consumers-and-many-firms" class="slide level2">
-<h2>Practice 2: Many Consumers and Many Firms</h2>
-<p>The same types of agents as before:</p>
+<section id="solving-ge-with-production" class="slide level2">
+<h2>Solving GE: With Production</h2>
+<div title="Additional Steps for Production Economies">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Additional Steps for Production Economies</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li><strong>Firm’s problem:</strong> <span class="math inline">\(\max_y \; p \cdot y\)</span> subject to technology <span class="math inline">\(\Rightarrow\)</span> supply <span class="math inline">\(y^*(p)\)</span> and profit <span class="math inline">\(\pi(p)\)</span></li>
+<li><strong>Consumer income</strong> includes profit shares:</li>
+</ol>
+<p><span class="math display">\[m^i(p) = p \cdot e^i + \theta^i \, \pi(p)\]</span></p>
+<ol start="3" type="1">
+<li><strong>Solve</strong> consumer optimization with endogenous income <span class="math inline">\(m^i(p)\)</span></li>
+<li><strong>Market clearing</strong> for goods:</li>
+</ol>
+<p><span class="math display">\[\sum_i x_j^i(p) = \sum_i \omega_j^i + y_j^*(p)\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div title="Key Difference">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key Difference</strong></p>
+</div>
+<div class="callout-content">
+<p>In pure exchange, income is exogenous (just endowment value). With production, income <strong>depends on prices</strong> through profits.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="solving-ge-with-labor-markets" class="slide level2">
+<h2>Solving GE: With Labor Markets</h2>
+<p>When leisure and labor are goods:</p>
+<ul>
+<li class="fragment">Consumer <span class="math inline">\(i\)</span>’s endowment includes <strong>time</strong> (e.g., <span class="math inline">\(T = 24\)</span> hours)</li>
+<li class="fragment">Budget: <span class="math inline">\(p \cdot x + w \cdot l \leq w \cdot T + \text{profit income}\)</span></li>
+<li class="fragment"><strong>Labor supply:</strong> <span class="math inline">\(L^i = T - l^{i*}(p, w)\)</span></li>
+<li class="fragment">Firm’s <strong>labor demand</strong> comes from profit maximization: <span class="math inline">\(\max_{L} \; p \cdot f(K, L) - w \cdot L\)</span></li>
+<li class="fragment"><strong>Market clearing:</strong> <span class="math inline">\(\sum_i L^i(p,w) = \sum_j L_j^d(p,w)\)</span></li>
+</ul>
+<div class="fragment">
+<p>Normalize one price (e.g., <span class="math inline">\(p = 1\)</span>) and solve for the wage <span class="math inline">\(w^*\)</span>.</p>
+</div>
+</section>
+<section id="example-two-consumers-and-one-producer" class="slide level2">
+<h2>Example: Two Consumers and One Producer</h2>
+<ul>
+<li>Consumer 1: <span class="math inline">\(u = x^{0.5}y^{0.5}\)</span>, owns 50 units of <span class="math inline">\(x\)</span>. Consumer 2: <span class="math inline">\(u = x^{0.25}y^{0.75}\)</span>, owns 40 units of <span class="math inline">\(x\)</span></li>
+<li>Firm: <span class="math inline">\(y = \ln x_f\)</span> (uses <span class="math inline">\(x\)</span> as input, produces <span class="math inline">\(y\)</span>). Both consumers own 50%</li>
+</ul>
+<div class="fragment">
+<p><strong>Step 1 – Firm’s problem.</strong> Normalize <span class="math inline">\(p_y = 1\)</span>, let <span class="math inline">\(p = p_x\)</span>.</p>
+<p><span class="math display">\[\max_{x_f} \; \ln x_f - p \cdot x_f \quad \Rightarrow \quad x_f^* = \frac{1}{p}, \quad y_f^* = \ln\tfrac{1}{p}, \quad \pi^* = \ln\tfrac{1}{p} - 1\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Step 2 – Consumer demands.</strong> Each consumer’s income includes profit shares:</p>
+<ul>
+<li><span class="math inline">\(m_1 = 50p + \tfrac{1}{2}\pi^*\)</span>, demands: <span class="math inline">\(x_1 = \tfrac{m_1}{2p}\)</span>, <span class="math inline">\(y_1 = \tfrac{m_1}{2}\)</span></li>
+<li><span class="math inline">\(m_2 = 40p + \tfrac{1}{2}\pi^*\)</span>, demands: <span class="math inline">\(x_2 = \tfrac{m_2}{4p}\)</span>, <span class="math inline">\(y_2 = \tfrac{3m_2}{4}\)</span></li>
+</ul>
+</div>
+</section>
+<section id="example-equilibrium" class="slide level2">
+<h2>Example: Equilibrium</h2>
+<p><strong>Step 3 – Market clearing</strong> for good <span class="math inline">\(x\)</span>: <span class="math inline">\(\;x_1 + x_2 + x_f = 90\)</span></p>
+<p><span class="math display">\[\frac{m_1}{2p} + \frac{m_2}{4p} + \frac{1}{p} = 90\]</span></p>
+<p>Substituting <span class="math inline">\(m_1\)</span>, <span class="math inline">\(m_2\)</span>, and <span class="math inline">\(\pi^*\)</span>, this simplifies to:</p>
+<p><span class="math display">\[-3\ln p + 5 = 440p\]</span></p>
+<div class="fragment">
+<p>This is a <strong>transcendental equation</strong> — solve numerically: <span class="math inline">\(p^* \approx 0.034\)</span>.</p>
+</div>
+<div class="fragment">
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Firm</th>
+<th>Consumer 1</th>
+<th>Consumer 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Good <span class="math inline">\(x\)</span></td>
+<td><span class="math inline">\(x_f \approx 29.2\)</span> (input)</td>
+<td><span class="math inline">\(x_1 \approx 42.3\)</span></td>
+<td><span class="math inline">\(x_2 \approx 18.6\)</span></td>
+</tr>
+<tr class="even">
+<td>Good <span class="math inline">\(y\)</span></td>
+<td><span class="math inline">\(y_f \approx 3.37\)</span> (output)</td>
+<td><span class="math inline">\(y_1 \approx 1.45\)</span></td>
+<td><span class="math inline">\(y_2 \approx 1.92\)</span></td>
+</tr>
+<tr class="odd">
+<td>Profit/Income</td>
+<td><span class="math inline">\(\pi \approx 2.37\)</span></td>
+<td><span class="math inline">\(m_1 \approx 2.90\)</span></td>
+<td><span class="math inline">\(m_2 \approx 2.56\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section></section>
+<section>
+<section id="part-5-practice-problems" class="title-slide slide level1 center">
+<h1>Part 5: Practice Problems</h1>
+
+</section>
+<section id="practice-1-many-consumers-and-many-firms" class="slide level2">
+<h2>Practice 1: Many Consumers and Many Firms</h2>
+<p>The same types of agents as in the example above:</p>
 <ul>
 <li>10 consumers of type 1</li>
 <li>6 consumers of type 2</li>
 <li>8 identical firms</li>
 </ul>
 <div class="fragment">
-<p>All consumers have equal shares in each firm, so each consumer still owns half of the representative firm.</p>
-</div>
-<div class="fragment">
 <p><strong>Question:</strong> How does scaling the number of agents affect the equilibrium prices and per-capita allocations?</p>
 </div>
 </section>
-<section id="practice-3-two-consumers-one-firm-and-labor-market" class="slide level2">
-<h2>Practice 3: Two Consumers, One Firm, and Labor Market</h2>
+<section id="practice-1-solution" class="slide level2">
+<h2>Practice 1: Solution</h2>
+<p>Each consumer’s <strong>individual</strong> problem is the same as in the example (same utility, endowment, and profit share <span class="math inline">\(\pi/2\)</span>). But the <strong>aggregation</strong> changes because the ratio of consumer types shifts from 1:1 to 10:6.</p>
+<div class="fragment">
+<p><strong>Market clearing</strong> for good <span class="math inline">\(x\)</span>: <span class="math inline">\(\;10x_1 + 6x_2 + 8x_f = 740\)</span></p>
+<p><span class="math display">\[10\!\left(25 + \frac{\pi}{4p}\right) + 6\!\left(10 + \frac{\pi}{8p}\right) + \frac{8}{p} = 740\]</span></p>
+</div>
+<div class="fragment">
+<p>This simplifies to: <span class="math inline">\(\;-3.25\ln p + 4.75 = 430p\)</span></p>
+<p>Compare with the example: <span class="math inline">\(\;-3\ln p + 5 = 440p\)</span>. The price ratio <span class="math inline">\(p^*\)</span> is <strong>different</strong> because the economy has relatively more type-1 consumers (who spend a larger share on <span class="math inline">\(x\)</span>).</p>
+</div>
+</section>
+<section id="practice-2-two-consumers-one-firm-and-labor-market" class="slide level2">
+<h2>Practice 2: Two Consumers, One Firm, and Labor Market</h2>
 <ul>
 <li>Goods: consumption <span class="math inline">\(x\)</span> and leisure <span class="math inline">\(l\)</span></li>
 <li>Each consumer has 24 hours to split between leisure <span class="math inline">\(l\)</span> and labor <span class="math inline">\(L\)</span></li>
@@ -474,8 +613,20 @@ Fangzhou Yu
 <p><strong>Find the competitive equilibrium</strong> with wages, prices, labor supply, and consumption.</p>
 </div>
 </section>
-<section id="practice-4-two-consumers-and-two-firms" class="slide level2">
-<h2>Practice 4: Two Consumers and Two Firms</h2>
+<section id="practice-2-solution" class="slide level2">
+<h2>Practice 2: Solution</h2>
+<p>Normalize <span class="math inline">\(p_x = 1\)</span>, let <span class="math inline">\(w\)</span> = wage.</p>
+<p><strong>Firm:</strong> <span class="math inline">\(\max_L \; L^{0.75} - wL\)</span> <span class="math inline">\(\;\Rightarrow\;\)</span> <span class="math inline">\(L^d = (0.75/w)^4\)</span>, <span class="math inline">\(\;x_f = (0.75/w)^3\)</span>, <span class="math inline">\(\;\pi = 0.25 \cdot (0.75/w)^3\)</span></p>
+<div class="fragment">
+<p><strong>Consumer 1</strong> (Leontief <span class="math inline">\(\min(x,l)\)</span>): <span class="math inline">\(x_1 = l_1 = \frac{24w + \pi}{1 + w}\)</span>, <span class="math inline">\(\;L_1 = 24 - l_1\)</span></p>
+<p><strong>Consumer 2</strong> (Leontief <span class="math inline">\(\min(2x,l)\)</span>): <span class="math inline">\(x_2 = \frac{24w}{1 + 2w}\)</span>, <span class="math inline">\(\;l_2 = 2x_2\)</span>, <span class="math inline">\(\;L_2 = 24 - l_2\)</span></p>
+</div>
+<div class="fragment">
+<p><strong>Market clearing</strong> (labor): <span class="math inline">\(L_1 + L_2 = L^d\)</span> <span class="math inline">\(\;\Rightarrow\;\)</span> solve numerically for <span class="math inline">\(w^*\)</span>.</p>
+</div>
+</section>
+<section id="practice-3-two-consumers-and-two-firms" class="slide level2">
+<h2>Practice 3: Two Consumers and Two Firms</h2>
 <ul>
 <li>Consumer 1: <span class="math inline">\(u(x,y) = x^{0.5}y^{0.5}\)</span>, owns 50 units of capital <span class="math inline">\(K\)</span></li>
 <li>Consumer 2: <span class="math inline">\(u(x,y) = x^{0.5}y^{0.5}\)</span>, owns 30 units of good <span class="math inline">\(x\)</span></li>
@@ -486,8 +637,24 @@ Fangzhou Yu
 <p><strong>Find the competitive equilibrium:</strong> prices of <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(K\)</span>; production plans; demands; and profits.</p>
 </div>
 </section>
-<section id="practice-5-two-consumers-two-firms-and-labor-market" class="slide level2">
-<h2>Practice 5: Two Consumers, Two Firms, and Labor Market</h2>
+<section id="practice-3-solution" class="slide level2">
+<h2>Practice 3: Solution</h2>
+<p>Normalize <span class="math inline">\(p_y = 1\)</span>, let <span class="math inline">\(p = p_x\)</span>, <span class="math inline">\(r = p_K\)</span>.</p>
+<p><strong>Firm 1:</strong> <span class="math inline">\(\max_K \; p \cdot K^{0.5} - rK\)</span> <span class="math inline">\(\;\Rightarrow\;\)</span> <span class="math inline">\(K^d = (p/2r)^2\)</span>, <span class="math inline">\(\;x_1^s = p/(2r)\)</span>, <span class="math inline">\(\;\pi_1 = p^2/(4r)\)</span></p>
+<p><strong>Firm 2:</strong> <span class="math inline">\(\max_x \; 2\sqrt{x} - px\)</span> <span class="math inline">\(\;\Rightarrow\;\)</span> <span class="math inline">\(x^d = 1/p^2\)</span>, <span class="math inline">\(\;y^s = 2/p\)</span>, <span class="math inline">\(\;\pi_2 = 1/p\)</span></p>
+<div class="fragment">
+<p><strong>Incomes:</strong> <span class="math inline">\(m_1 = 50r + \pi_1\)</span>, <span class="math inline">\(\;m_2 = 30p + \pi_2\)</span></p>
+<p><strong>Demands</strong> (both Cobb-Douglas <span class="math inline">\(\alpha = 0.5\)</span>):</p>
+<ul>
+<li><span class="math inline">\(x_1 = m_1/(2p)\)</span>, <span class="math inline">\(y_1 = m_1/2\)</span>; <span class="math inline">\(\;x_2 = m_2/(2p)\)</span>, <span class="math inline">\(y_2 = m_2/2\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Market clearing</strong> for <span class="math inline">\(K\)</span>, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> (Walras’ Law: only need 2 of 3) <span class="math inline">\(\;\Rightarrow\;\)</span> solve for <span class="math inline">\(p^*\)</span>, <span class="math inline">\(r^*\)</span>.</p>
+</div>
+</section>
+<section id="practice-4-two-consumers-two-firms-and-labor-market" class="slide level2">
+<h2>Practice 4: Two Consumers, Two Firms, and Labor Market</h2>
 <ul>
 <li>Consumer 1: <span class="math inline">\(u(x,l) = x^{0.5}l^{0.5}\)</span>, owns 30 units of capital <span class="math inline">\(K\)</span></li>
 <li>Consumer 2: <span class="math inline">\(u(x,l) = \min(x,2l)\)</span>, owns 20 units of capital <span class="math inline">\(K\)</span></li>
@@ -502,6 +669,20 @@ Fangzhou Yu
 <div class="fragment">
 <p><strong>Find the competitive equilibrium</strong> with all prices, factor demands, production, consumption, and profits.</p>
 </div>
+</section>
+<section id="practice-4-solution" class="slide level2">
+<h2>Practice 4: Solution</h2>
+<p>Normalize <span class="math inline">\(p_x = 1\)</span>, let <span class="math inline">\(w\)</span> = wage, <span class="math inline">\(r = p_K\)</span>.</p>
+<p><strong>Firm 1:</strong> <span class="math inline">\(\max_{K,L} \; K^{1/3}L^{1/3} - rK - wL\)</span>. FOCs give <span class="math inline">\(L_1/K_1 = r/w\)</span>.</p>
+<p><span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(K_1 = \frac{1}{27wr^2}\)</span>, <span class="math inline">\(\;L_1 = \frac{1}{27w^2r}\)</span>, <span class="math inline">\(\;x_{f1} = \frac{1}{9wr}\)</span>, <span class="math inline">\(\;\pi_1 = \frac{1}{27wr}\)</span></p>
+<div class="fragment">
+<p><strong>Firm 2:</strong> <span class="math inline">\(\max_K \; K^{2/3} - rK\)</span> <span class="math inline">\(\;\Rightarrow\;\)</span> <span class="math inline">\(K_2 = \frac{8}{27r^3}\)</span>, <span class="math inline">\(\;x_{f2} = \frac{4}{9r^2}\)</span>, <span class="math inline">\(\;\pi_2 = \frac{4}{27r^2}\)</span></p>
+</div>
+<div class="fragment">
+<p><strong>Consumer 1</strong> (CD <span class="math inline">\(\alpha = 0.5\)</span>): <span class="math inline">\(m_1 = 30r + 24w + \pi_1\)</span>, <span class="math inline">\(\;x_1 = m_1/2\)</span>, <span class="math inline">\(\;l_1 = m_1/(2w)\)</span></p>
+<p><strong>Consumer 2</strong> (Leontief <span class="math inline">\(\min(x,2l)\)</span>): <span class="math inline">\(m_2 = 20r + 24w + \pi_2\)</span>, <span class="math inline">\(\;x_2 = 2l_2\)</span>, <span class="math inline">\(\;l_2 = m_2/(2 + w)\)</span></p>
+<p><strong>Market clearing:</strong> <span class="math inline">\(K_1 + K_2 = 50\)</span>, labor, goods (Walras’ Law: need 2 of 3) <span class="math inline">\(\;\Rightarrow\;\)</span> solve for <span class="math inline">\(w^*\)</span>, <span class="math inline">\(r^*\)</span>.</p>
+</div>
 </section></section>
 <section>
 <section id="summary" class="title-slide slide level1 center">
@@ -511,11 +692,11 @@ Fangzhou Yu
 <section id="week-10-key-takeaways" class="slide level2">
 <h2>Week 10: Key Takeaways</h2>
 <ol type="1">
-<li><p><strong>Exchange economies</strong> can be analyzed in the Edgeworth box, where all feasible allocations of two goods between two consumers are represented</p></li>
-<li><p><strong>Pareto efficiency</strong> requires <span class="math inline">\(MRS^A = MRS^B\)</span>; the set of all such points is the <strong>contract curve</strong></p></li>
-<li><p><strong>Walrasian equilibrium</strong> requires utility maximization by all consumers and market clearing; the <strong>First Welfare Theorem</strong> guarantees it is Pareto efficient</p></li>
-<li><p><strong>Offer curves</strong> trace optimal demands as prices vary; their intersection determines equilibrium</p></li>
-<li><p><strong>GE with production</strong> adds profit-maximizing firms; consumer income includes endowment value plus profit shares</p></li>
+<li><p><strong>Review:</strong> The Edgeworth box, Pareto efficiency (<span class="math inline">\(MRS^A = MRS^B\)</span>), contract curve, Walrasian equilibrium, and welfare theorems were introduced in Week 5</p></li>
+<li><p><strong>From exchange to production:</strong> the core framework (optimize → market clearing) carries over; what changes is income (adds profit shares) and supply (adds firm output)</p></li>
+<li><p><strong>GE with production:</strong> consumer income includes endowment value <strong>plus profit shares</strong>: <span class="math inline">\(m^i = p \cdot e^i + \theta^i \pi\)</span></p></li>
+<li><p><strong>Solving GE:</strong> normalize a price, derive demands, apply market clearing, solve for equilibrium prices</p></li>
+<li><p><strong>Walras’ Law</strong> means you only need to clear <span class="math inline">\(n-1\)</span> of <span class="math inline">\(n\)</span> markets</p></li>
 </ol>
 
 </section></section>

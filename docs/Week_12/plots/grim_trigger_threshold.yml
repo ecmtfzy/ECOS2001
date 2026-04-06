@@ -1,0 +1,119 @@
+schema: EconSchema
+version: 1
+params:
+  - name: beta
+    value: 0.5
+    min: 0.01
+    max: 0.95
+    round: 0.01
+calcs:
+  v_coop: (-1/(1 - params.beta))
+  v_dev: (-7*params.beta/(1 - params.beta))
+  threshold: (1/7)
+  gain: (1)
+  loss_per_period: (6)
+layout:
+  OneGraphPlusSidebar:
+    graph:
+      xAxis:
+        min: 0
+        max: 1
+        title: "\\beta"
+        ticks: 5
+      yAxis:
+        min: -20
+        max: 2
+        title: Present Value
+      objects:
+        # Shaded region: deviation profitable (beta < 1/7)
+        - Area:
+            fn1: "-1/(1-x)"
+            fn2: "-7*x/(1-x)"
+            min: 0.01
+            max: 0.142857
+            fill: red
+            opacity: 0.1
+
+        # Shaded region: cooperation sustainable (beta > 1/7)
+        - Area:
+            fn1: "-7*x/(1-x)"
+            fn2: "-1/(1-x)"
+            min: 0.142857
+            max: 0.95
+            fill: green
+            opacity: 0.1
+
+        # V_cooperate curve
+        - Curve:
+            fn: "-1/(1-x)"
+            color: blue
+            min: 0.01
+            max: 0.95
+            strokeWidth: 3
+            label:
+              text: V_{\text{cooperate}}
+              x: 0.82
+              position: tl
+
+        # V_deviate curve
+        - Curve:
+            fn: "-7*x/(1-x)"
+            color: red
+            min: 0.01
+            max: 0.95
+            strokeWidth: 3
+            label:
+              text: V_{\text{deviate}}
+              x: 0.55
+              position: br
+
+        # Threshold vertical line at beta = 1/7
+        - Segment:
+            a: [0.142857, -20]
+            b: [0.142857, 2]
+            lineStyle: dashed
+            color: grey
+            strokeWidth: 1
+        - Label:
+            coordinates: [0.19, 1]
+            text: "'\\\\beta = \\\\tfrac{1}{7}'"
+            fontSize: 10
+            color: grey
+
+        # Current beta: points on both curves
+        - Point:
+            coordinates: [params.beta, calcs.v_coop]
+            color: blue
+            r: 5
+            droplines:
+              vertical: ""
+        - Point:
+            coordinates: [params.beta, calcs.v_dev]
+            color: red
+            r: 5
+
+        # Vertical segment between the two points (shows gap)
+        - Segment:
+            a: [params.beta, calcs.v_coop]
+            b: [params.beta, calcs.v_dev]
+            lineStyle: dotted
+            color: orange
+            strokeWidth: 2
+
+    sidebar:
+      controls:
+        - title: Grim-Trigger Threshold
+          description: Does player 1 want to deviate from cooperation?
+          sliders:
+            - param: beta
+              label: \beta
+          divs:
+            - html: "`$V_{\\\\text{cooperate}} = \\\\frac{-1}{1-\\\\beta} = ${calcs.v_coop.toFixed(2)}$`"
+            - html: "`$V_{\\\\text{deviate}} = \\\\frac{-7\\\\beta}{1-\\\\beta} = ${calcs.v_dev.toFixed(2)}$`"
+            - html: "`$V_{\\\\text{cooperate}} > V_{\\\\text{deviate}}$: cooperation is sustainable.`"
+              show: (params.beta > 1/7)
+            - html: "`$V_{\\\\text{deviate}} > V_{\\\\text{cooperate}}$: deviation is profitable.`"
+              show: (params.beta < 1/7)
+            - html: "`$V_{\\\\text{cooperate}} = V_{\\\\text{deviate}}$: indifferent.`"
+              show: (params.beta == 1/7)
+            - html: "`Grim-trigger is SPNE iff $\\\\beta \\\\geq \\\\tfrac{1}{7} \\\\approx 0.14$.`"

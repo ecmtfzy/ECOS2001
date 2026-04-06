@@ -1,0 +1,183 @@
+schema: EconSchema
+version: 1
+params:
+  - name: step
+    value: 0
+    min: 0
+    max: 1
+    round: 1
+layout:
+  OneTreePlusSidebar:
+    tree:
+      objects:
+        # --- Player labels at decision nodes ---
+        # P1 date 1
+        - Label:
+            coordinates: [10, 24.2]
+            text: "'\\\\color{#d62728}{\\\\textbf{1}}'"
+            fontSize: 14
+        # P1 date 2
+        - Label:
+            coordinates: [21, 12.2]
+            text: "'\\\\color{#d62728}{\\\\textbf{1}}'"
+            fontSize: 14
+
+        # --- Information sets (dashed lines connecting P2 nodes) ---
+        # Date 1 info set
+        - Segment:
+            a: [3, 17]
+            b: [17, 17]
+            lineStyle: dashed
+            color: blue
+        - Label:
+            coordinates: [10, 17.8]
+            text: "'\\\\color{#1f77b4}{\\\\textbf{2}}'"
+            fontSize: 14
+
+        # Date 2 info set
+        - Segment:
+            a: [17, 6]
+            b: [23, 6]
+            lineStyle: dashed
+            color: blue
+        - Label:
+            coordinates: [20, 6.8]
+            text: "'\\\\color{#1f77b4}{\\\\textbf{2}}'"
+            fontSize: 14
+
+        # --- Payoff labels: date 1 terminals ---
+        # (W, W) = (1, 1)
+        - Label:
+            coordinates: [1, 9.5]
+            text: "'\\\\color{#d62728}{1}\\\\color{black}{,}\\\\;\\\\color{#1f77b4}{1}'"
+            fontSize: 11
+        # (W, D) = (2, 0)
+        - Label:
+            coordinates: [5, 9.5]
+            text: "'\\\\color{#d62728}{2}\\\\color{black}{,}\\\\;\\\\color{#1f77b4}{0}'"
+            fontSize: 11
+        # (D, W) = (0, 2)
+        - Label:
+            coordinates: [12, 9.5]
+            text: "'\\\\color{#d62728}{0}\\\\color{black}{,}\\\\;\\\\color{#1f77b4}{2}'"
+            fontSize: 11
+
+        # --- Payoff labels: date 2 terminals ---
+        # (W, W) = (3, 3)
+        - Label:
+            coordinates: [15, 0.6]
+            text: "'\\\\color{#d62728}{3}\\\\color{black}{,}\\\\;\\\\color{#1f77b4}{3}'"
+            fontSize: 11
+        # (W, D) = (4, 2)
+        - Label:
+            coordinates: [19, 0.6]
+            text: "'\\\\color{#d62728}{4}\\\\color{black}{,}\\\\;\\\\color{#1f77b4}{2}'"
+            fontSize: 11
+        # (D, W) = (2, 4)
+        - Label:
+            coordinates: [22, 0.6]
+            text: "'\\\\color{#d62728}{2}\\\\color{black}{,}\\\\;\\\\color{#1f77b4}{4}'"
+            fontSize: 11
+        # (D, D) = (3, 3)
+        - Label:
+            coordinates: [24.5, 0.6]
+            text: "'\\\\color{#d62728}{3}\\\\color{black}{,}\\\\;\\\\color{#1f77b4}{3}'"
+            fontSize: 11
+
+        # --- Step 1: Backward induction at date 2 ---
+        # W dominates D for both P2 nodes
+        - Segment:
+            a: [17, 6]
+            b: [15, 2]
+            color: green
+            strokeWidth: 4
+            show: (params.step >= 1)
+        - Segment:
+            a: [23, 6]
+            b: [22, 2]
+            color: green
+            strokeWidth: 4
+            show: (params.step >= 1)
+        # Reduced payoff label
+        - Label:
+            coordinates: [21, 9]
+            text: "'\\\\color{#2ca02c}{\\\\Rightarrow (3,\\\\!3)}'"
+            fontSize: 11
+            show: (params.step >= 1)
+
+      nodes:
+        - name: p1_d1
+          x: 10
+          y: 23
+          color: red
+          children:
+            - name: p2_d1_w
+              x: 3
+              y: 17
+              color: blue
+              edgeLabel: "'Withdraw'"
+              children:
+                - name: t_ww
+                  x: 1
+                  y: 11
+                  edgeLabel: "'W'"
+                - name: t_wd
+                  x: 5
+                  y: 11
+                  edgeLabel: "'D'"
+            - name: p2_d1_d
+              x: 17
+              y: 17
+              color: blue
+              edgeLabel: "'Don't'"
+              children:
+                - name: t_dw
+                  x: 12
+                  y: 11
+                  edgeLabel: "'W'"
+                - name: p1_d2
+                  x: 21
+                  y: 11
+                  color: red
+                  edgeLabel: "'D'"
+                  children:
+                    - name: p2_d2_w
+                      x: 17
+                      y: 6
+                      color: blue
+                      edgeLabel: "'W'"
+                      children:
+                        - name: t_ddww
+                          x: 15
+                          y: 2
+                          edgeLabel: "'W'"
+                        - name: t_ddwd
+                          x: 19
+                          y: 2
+                          edgeLabel: "'D'"
+                    - name: p2_d2_d
+                      x: 23
+                      y: 6
+                      color: blue
+                      edgeLabel: "'D'"
+                      children:
+                        - name: t_dddw
+                          x: 22
+                          y: 2
+                          edgeLabel: "'W'"
+                        - name: t_dddd
+                          x: 24.5
+                          y: 2
+                          edgeLabel: "'D'"
+    sidebar:
+      controls:
+        - title: Bank Runs
+          sliders:
+            - param: step
+              label: Step
+          divs:
+            - html: "`Two investors choose to $\\\\textbf{W}$ithdraw or $\\\\textbf{D}$on't at each date.`"
+            - html: "`Dashed lines = information sets (simultaneous moves).`"
+            - html: "`Payoffs: ($\\\\textcolor{#d62728}{\\\\text{P1}}$, $\\\\textcolor{#1f77b4}{\\\\text{P2}}$)`"
+            - html: "`$\\\\textbf{Step 1:}$ At date 2, W strictly dominates D. SPNE payoffs from date 2: $(3, 3)$.`"
+              show: (params.step >= 1)
