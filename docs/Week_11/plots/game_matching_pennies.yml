@@ -10,5 +10,5 @@ layout:
         - [H, T]
         - [H, T]
       payoffs:
-        - [["'\\\\underline{1}'",0],[0,"'\\\\underline{1}'"]]
-        - [[0,"'\\\\underline{1}'"],["'\\\\underline{1}'",0]]
+        - [["'\\\\underline{1}'",-1],[-1,"'\\\\underline{1}'"]]
+        - [[-1,"'\\\\underline{1}'"],["'\\\\underline{1}'",-1]]
